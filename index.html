@@ -1,205 +1,199 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>MentorLoop Premiere</title>
+<title>MentorLoop Core</title>
+
 <style>
 body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  background: #0f172a;
-  color: white;
+  margin:0;
+  font-family:Segoe UI;
+  background:#0f172a;
+  color:white;
 }
 header {
-  padding: 20px;
-  text-align: center;
-  font-size: 24px;
-  background: #020617;
-}
-.container {
-  display: flex;
-}
-.sidebar {
-  width: 220px;
-  background: #020617;
-  padding: 20px;
-}
-.sidebar button {
-  width: 100%;
-  margin: 10px 0;
-  padding: 10px;
-  border: none;
-  background: #1e293b;
-  color: white;
-  cursor: pointer;
+  text-align:center;
+  padding:15px;
+  font-size:22px;
+  background:#020617;
 }
 .main {
-  flex: 1;
-  padding: 20px;
+  max-width:800px;
+  margin:auto;
+  padding:20px;
 }
 .card {
-  background: #1e293b;
-  padding: 20px;
-  border-radius: 10px;
+  background:#1e293b;
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:20px;
 }
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  background: #020617;
-  color: white;
-  border: 1px solid #334155;
+textarea, input {
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  background:#020617;
+  color:white;
+  border:1px solid #334155;
 }
-button.action {
-  margin-top: 10px;
-  padding: 10px;
-  background: #38bdf8;
-  border: none;
-  cursor: pointer;
+button {
+  margin-top:10px;
+  padding:10px;
+  background:#38bdf8;
+  border:none;
+  cursor:pointer;
+}
+pre {
+  background:#020617;
+  padding:10px;
+  overflow:auto;
+}
+.small {
+  font-size:13px;
+  opacity:0.7;
 }
 </style>
 </head>
 
 <body>
 
-<header>🚀 MentorLoop Premiere</header>
+<header>🚀 MentorLoop — Fix • Build • Learn</header>
 
-<div class="container">
-  <div class="sidebar">
-    <button onclick="show('mentor')">AI Mentor</button>
-    <button onclick="show('build')">Build Mode</button>
-    <button onclick="show('solver')">Problem Solver</button>
-    <button onclick="show('dashboard')">Dashboard</button>
-  </div>
+<div class="main">
 
-  <div class="main">
+<div class="card">
+<h2>⚡ Fix / Build Anything</h2>
+<textarea id="input" placeholder="Paste error OR describe what you want to build..."></textarea>
+<button onclick="process()">Solve</button>
+</div>
 
-    <!-- AI Mentor -->
-    <div id="mentor" class="card">
-      <h2>🧠 AI Mentor</h2>
-      <input id="question" placeholder="Ask anything...">
-      <button class="action" onclick="askAI()">Ask</button>
-      <p id="answer"></p>
-    </div>
+<div class="card">
+<h3>🧠 Result</h3>
+<pre id="output"></pre>
+</div>
 
-    <!-- Build Mode -->
-    <div id="build" class="card" style="display:none">
-      <h2>🛠 Build Mode</h2>
-      <input id="idea" placeholder="What do you want to build?">
-      <button class="action" onclick="buildPlan()">Generate Plan</button>
-      <div id="plan"></div>
+<div class="card">
+<h3>📊 Progress</h3>
+<p>XP: <span id="xp">0</span></p>
+<p>Level: <span id="lvl">1</span></p>
+</div>
 
-      <textarea id="code" placeholder="Paste code (optional)"></textarea>
-      <button class="action" onclick="analyzeCode()">Analyze</button>
-      <p id="analysis"></p>
-    </div>
+<div class="card">
+<h3>📜 History</h3>
+<div id="history" class="small"></div>
+</div>
 
-    <!-- Problem Solver -->
-    <div id="solver" class="card" style="display:none">
-      <h2>⚡ Problem Solver</h2>
-      <textarea id="problem" placeholder="Paste error or doubt"></textarea>
-      <button class="action" onclick="solve()">Solve</button>
-      <div id="solution"></div>
-    </div>
-
-    <!-- Dashboard -->
-    <div id="dashboard" class="card" style="display:none">
-      <h2>📊 Growth Dashboard</h2>
-      <p>XP: <span id="xp">0</span></p>
-      <p>Streak 🔥: <span id="streak">1</span></p>
-      <progress id="progress" value="0" max="100"></progress>
-    </div>
-
-  </div>
 </div>
 
 <script>
-let xp = localStorage.getItem("xp") || 0;
-let streak = localStorage.getItem("streak") || 1;
-let last = localStorage.getItem("last") || new Date().toDateString();
+// ---------------- STATE ----------------
+let xp = parseInt(localStorage.getItem("xp") || 0);
+let history = JSON.parse(localStorage.getItem("history") || "[]");
 
-document.getElementById("xp").innerText = xp;
-document.getElementById("streak").innerText = streak;
+updateUI();
 
-function addXP(val){
-  xp = parseInt(xp) + val;
+// ---------------- PROCESS ----------------
+function process(){
+  let input = document.getElementById("input").value.toLowerCase();
+  let result = "";
+
+  // ---- CODE FIX DETECTION ----
+  if(input.includes("error") || input.includes("undefined") || input.includes("not defined")){
+    result = `🔧 FIX:
+
+Problem: Variable or logic issue detected.
+
+Solution:
+- Check variable declarations
+- Ensure correct spelling
+- Verify scope
+
+Example Fix:
+let x = 10;
+console.log(x);
+
+Why:
+Undefined errors happen when variables aren't declared properly.`;
+  }
+
+  // ---- BUILD WEBSITE ----
+  else if(input.includes("website") || input.includes("page")){
+    result = `🛠 BUILD:
+
+Here’s a starter website:
+
+<html>
+<head>
+<title>My Site</title>
+<style>
+body { font-family:Arial; text-align:center; }
+</style>
+</head>
+<body>
+
+<h1>Hello World</h1>
+<p>Your site is live 🚀</p>
+
+</body>
+</html>
+
+Why:
+This gives structure + styling + content in one go.`;
+  }
+
+  // ---- LOGIN SYSTEM ----
+  else if(input.includes("login")){
+    result = `🛠 BUILD LOGIN:
+
+<input placeholder="Username">
+<input type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+
+<script>
+function login(){
+ alert("Logged in (demo)");
+}
+</script>
+<script>
+
+Why:
+Basic input + function = working prototype.`;
+  }
+
+  // ---- GENERAL ----
+  else{
+    result = `🧠 THINK:
+
+1. Break problem into steps
+2. Solve one step at a time
+3. Test output
+
+Tip:
+Clear thinking > complex code`;
+  }
+
+  // OUTPUT
+  document.getElementById("output").innerText = result;
+
+  // XP
+  xp += 10;
   localStorage.setItem("xp", xp);
+
+  // HISTORY
+  history.unshift(input);
+  history = history.slice(0,5);
+  localStorage.setItem("history", JSON.stringify(history));
+
+  updateUI();
+}
+
+// ---------------- UI ----------------
+function updateUI(){
   document.getElementById("xp").innerText = xp;
-  document.getElementById("progress").value = xp % 100;
-}
+  document.getElementById("lvl").innerText = Math.floor(xp/100)+1;
 
-function show(id){
-  ["mentor","build","solver","dashboard"].forEach(x=>{
-    document.getElementById(x).style.display="none";
-  });
-  document.getElementById(id).style.display="block";
-}
-
-// AI Mentor
-function askAI(){
-  let q = document.getElementById("question").value.toLowerCase();
-  let res = "";
-
-  if(q.includes("gravity")){
-    res = "Gravity pulls objects toward each other. On Earth, it keeps us grounded.";
-  } else if(q.includes("python")){
-    res = "Python is a powerful programming language used for AI, apps, and automation.";
-  } else if(q.includes("html")){
-    res = "HTML structures web pages using elements like headings, paragraphs, and links.";
-  } else {
-    res = "Break it into smaller parts. Understand the core idea first, then apply step-by-step.";
-  }
-
-  document.getElementById("answer").innerText = res;
-  addXP(10);
-}
-
-// Build Mode
-function buildPlan(){
-  let idea = document.getElementById("idea").value;
-  document.getElementById("plan").innerHTML = `
-  <ol>
-    <li>Define goal → ${idea}</li>
-    <li>Break into features</li>
-    <li>Design UI</li>
-    <li>Code basic version</li>
-    <li>Test & fix errors</li>
-    <li>Improve & launch 🚀</li>
-  </ol>`;
-  addXP(15);
-}
-
-function analyzeCode(){
-  let code = document.getElementById("code").value;
-
-  if(code.includes("error") || code.length < 10){
-    document.getElementById("analysis").innerText = "Check syntax or missing logic.";
-  } else {
-    document.getElementById("analysis").innerText = "Code looks structurally okay.";
-  }
-}
-
-// Solver
-function solve(){
-  let p = document.getElementById("problem").value;
-
-  document.getElementById("solution").innerHTML = `
-  <h4>Explanation</h4>
-  <p>This issue may be due to incorrect syntax or logic.</p>
-  <h4>Solution</h4>
-  <p>Check indentation, variables, and imports.</p>
-  <h4>Why it works</h4>
-  <p>Fixing structure ensures correct execution.</p>
-  `;
-  addXP(20);
-}
-
-// Streak system
-let today = new Date().toDateString();
-if(last !== today){
-  streak++;
-  localStorage.setItem("streak", streak);
-  localStorage.setItem("last", today);
+  document.getElementById("history").innerHTML =
+    history.map(h => "• " + h).join("<br>");
 }
 </script>
 
