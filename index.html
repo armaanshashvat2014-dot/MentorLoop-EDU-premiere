@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MentorLoop Core</title>
+<title>MentorLoop EDU-The premiere</title>
 
 <style>
 body {
@@ -57,144 +57,227 @@ pre {
 
 <body>
 
-<header>🚀 MentorLoop — Fix • Build • Learn</header>
+<header>🚀 MentorLoop EDU(Beta) — Fix • Build • Learn</header>
+ <div class="card" id="loginBox">
+      <button class="login-btn" onclick="loginWithGoogle()">
+        🔐 Continue with Google
+      </button>
+    </div>
 
-<div class="main">
+    <div id="appBox" style="display:none;">
+      <h3 id="welcomeText"></h3>
 
-<div class="card">
-<h2>⚡ Fix / Build Anything</h2>
-<textarea id="input" placeholder="Paste error OR describe what you want to build..."></textarea>
-<button onclick="process()">Solve</button>
+      <a href="dashboard-v2.html" class="portal">Dashboard</a>
+      <a href="games.html" class="portal">Quizzes</a>
+      <a href="profile.html" class="portal">Profile</a>
+      <a href="teacher.html" class="portal">Teacher Zone</a>
+<a href="https://mentorloop-edu-answer-and-question-4v4.caffeine.xyz" class="portal">Ask a doubt</a>
+      <button onclick="logout()">Logout</button>
+    </div>
+
+  </div>
 </div>
 
-<div class="card">
-<h3>🧠 Result</h3>
-<pre id="output"></pre>
-</div>
+<script type="module">
 
-<div class="card">
-<h3>📊 Progress</h3>
-<p>XP: <span id="xp">0</span></p>
-<p>Level: <span id="lvl">1</span></p>
-</div>
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-<div class="card">
-<h3>📜 History</h3>
-<div id="history" class="small"></div>
-</div>
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-</div>
 
-<script>
-// ---------------- STATE ----------------
-let xp = parseInt(localStorage.getItem("xp") || 0);
-let history = JSON.parse(localStorage.getItem("history") || "[]");
+// ================= FIREBASE =================
+const firebaseConfig = {
+  apiKey: "AIzaSyBOP356DMuNyWQyHDbksw0i_dWXfXsbQvI",
+  authDomain: "mentorloop-55a37.firebaseapp.com",
+  projectId: "mentorloop-55a37",
+};
 
-updateUI();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
-// ---------------- PROCESS ----------------
-function process(){
-  let input = document.getElementById("input").value.toLowerCase();
-  let result = "";
 
-  // ---- CODE FIX DETECTION ----
-  if(input.includes("error") || input.includes("undefined") || input.includes("not defined")){
-    result = `🔧 FIX:
-
-Problem: Variable or logic issue detected.
-
-Solution:
-- Check variable declarations
-- Ensure correct spelling
-- Verify scope
-
-Example Fix:
-let x = 10;
-console.log(x);
-
-Why:
-Undefined errors happen when variables aren't declared properly.`;
-  }
-
-  // ---- BUILD WEBSITE ----
-  else if(input.includes("website") || input.includes("page")){
-    result = `🛠 BUILD:
-
-Here’s a starter website:
-
-<html>
-<head>
-<title>My Site</title>
-<style>
-body { font-family:Arial; text-align:center; }
-</style>
-</head>
-<body>
-
-<h1>Hello World</h1>
-<p>Your site is live 🚀</p>
-
-</body>
-</html>
-
-Why:
-This gives structure + styling + content in one go.`;
-  }
-
-  // ---- LOGIN SYSTEM ----
-  else if(input.includes("login")){
-    result = `🛠 BUILD LOGIN:
-
-<input placeholder="Username">
-<input type="password" placeholder="Password">
-<button onclick="login()">Login</button>
-
-<script>
-function login(){
- alert("Logged in (demo)");
-}
-</script>
-<script>
-
-Why:
-Basic input + function = working prototype.`;
-  }
-
-  // ---- GENERAL ----
-  else{
-    result = `🧠 THINK:
-
-1. Break problem into steps
-2. Solve one step at a time
-3. Test output
-
-Tip:
-Clear thinking > complex code`;
-  }
-
-  // OUTPUT
-  document.getElementById("output").innerText = result;
-
-  // XP
-  xp += 10;
-  localStorage.setItem("xp", xp);
-
-  // HISTORY
-  history.unshift(input);
-  history = history.slice(0,5);
-  localStorage.setItem("history", JSON.stringify(history));
-
-  updateUI();
+// ================= PUBLIC ID =================
+function generateUserId() {
+  return "user_" + Math.random().toString(36).substring(2, 10);
 }
 
-// ---------------- UI ----------------
-function updateUI(){
-  document.getElementById("xp").innerText = xp;
-  document.getElementById("lvl").innerText = Math.floor(xp/100)+1;
+async function getOrCreatePublicId(user) {
+  const ref = doc(db, "user_map", user.uid);
+  const snap = await getDoc(ref);
 
-  document.getElementById("history").innerHTML =
-    history.map(h => "• " + h).join("<br>");
+  if (snap.exists()) return snap.data().publicId;
+
+  const newId = generateUserId();
+
+  await setDoc(ref, {
+    authUID: user.uid,
+    publicId: newId
+  });
+
+  return newId;
 }
+
+
+// ================= BAN CHECK =================
+async function checkBan(publicId) {
+
+  const snap = await getDoc(doc(db, "leaderboard", publicId));
+
+  if (snap.exists() && snap.data().banned === true) {
+
+    document.body.innerHTML = `
+      <div style="display:flex;justify-content:center;align-items:center;height:100vh;">
+        <div>
+          <h1>🚫 BANNED</h1>
+          <p>Your account is banned</p>
+          <p>ID: ${publicId}</p>
+        </div>
+      </div>
+    `;
+
+    return true;
+  }
+
+  return false;
+}
+
+
+// ================= REAL-TIME BAN =================
+function watchBan(publicId) {
+
+  const ref = doc(db, "leaderboard", publicId);
+
+  onSnapshot(ref, (snap) => {
+
+    if (snap.exists() && snap.data().banned === true) {
+
+      document.body.innerHTML = `
+        <div style="display:flex;justify-content:center;align-items:center;height:100vh;">
+          <div>
+            <h1>🚫 BANNED (LIVE)</h1>
+            <p>ID: ${publicId}</p>
+          </div>
+        </div>
+      `;
+    }
+
+  });
+}
+
+
+// ================= HANDLE USER =================
+async function handleUser(user) {
+
+  const publicId = await getOrCreatePublicId(user);
+
+  // USERS
+  await setDoc(doc(db, "users", publicId), {
+    name: user.displayName,
+    email: user.email,
+    publicId: publicId
+  }, { merge: true });
+
+  // LEADERBOARD (SAFE)
+  const lbRef = doc(db, "leaderboard", publicId);
+  const lbSnap = await getDoc(lbRef);
+
+  if (!lbSnap.exists()) {
+    await setDoc(lbRef, {
+      name: user.displayName,
+      points: 0,
+      banned: false,
+      publicId: publicId
+    });
+  } else {
+    await setDoc(lbRef, {
+      name: user.displayName
+    }, { merge: true });
+  }
+
+  return publicId;
+}
+
+
+// ================= START APP =================
+async function startApp(name, publicId) {
+
+  if (await checkBan(publicId)) return;
+
+  watchBan(publicId);
+
+  document.getElementById("loginBox").style.display = "none";
+  document.getElementById("appBox").style.display = "block";
+
+  document.getElementById("welcomeText").innerHTML =
+    `Welcome, ${name}<br><small>ID: ${publicId}</small>`;
+}
+
+
+// ================= LOGIN =================
+window.loginWithGoogle = async function () {
+
+  try {
+    const result = await signInWithPopup(auth, provider);
+
+    const pid = await handleUser(result.user);
+
+    startApp(result.user.displayName, pid);
+
+  } catch (err) {
+    console.error("LOGIN ERROR:", err);
+    alert(err.message);
+
+    // fallback (mobile / popup blocked)
+    await signInWithRedirect(auth, provider);
+  }
+
+};
+
+
+// ================= REDIRECT =================
+getRedirectResult(auth).then(async (result) => {
+
+  if (result?.user) {
+    const pid = await handleUser(result.user);
+    startApp(result.user.displayName, pid);
+  }
+
+});
+
+
+// ================= AUTO LOGIN =================
+onAuthStateChanged(auth, async (user) => {
+
+  if (!user) return;
+
+  const pid = await handleUser(user);
+  startApp(user.displayName, pid);
+});
+
+
+// ================= LOGOUT =================
+window.logout = async function () {
+  await signOut(auth);
+  location.reload();
+};
+
 </script>
 
 </body>
