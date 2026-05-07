@@ -29,10 +29,6 @@ rel="stylesheet"
 
 :root{
   --bg:#020617;
-  --card:rgba(255,255,255,0.05);
-  --border:rgba(255,255,255,0.08);
-  --text:#ffffff;
-  --muted:#94a3b8;
   --cyan:#22d3ee;
   --purple:#8b5cf6;
 }
@@ -860,8 +856,7 @@ import {
   getFirestore,
   doc,
   getDoc,
-  setDoc,
-  onSnapshot
+  setDoc
 
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
@@ -882,7 +877,7 @@ from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
 
- apiKey: "AIzaSyAltyInwHSCxX3Mi9LjjPUs1767uo70gDQ",
+  apiKey: "AIzaSyAltyInwHSCxX3Mi9LjjPUs1767uo70gDQ",
   authDomain: "mentorloop-premiere.firebaseapp.com",
   projectId: "mentorloop-premiere",
   storageBucket: "mentorloop-premiere.firebasestorage.app",
@@ -942,6 +937,10 @@ function generateUserId(){
 
 async function getOrCreatePublicId(user){
 
+  console.log(
+    "GET OR CREATE PUBLIC ID"
+  );
+
   const ref =
   doc(db,"user_map",user.uid);
 
@@ -969,106 +968,16 @@ async function getOrCreatePublicId(user){
 
 }
 
-/* BAN CHECK */
-
-async function checkBan(publicId){
-
-  const snap =
-  await getDoc(
-    doc(
-      db,
-      "leaderboard",
-      publicId
-    )
-  );
-
-  if(
-
-    snap.exists() &&
-
-    snap.data().banned === true
-
-  ){
-
-    document.body.innerHTML = `
-
-    <div style="
-      min-height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      background:#020617;
-      color:white;
-      font-family:Inter;
-    ">
-
-      <div style="
-        background:rgba(255,255,255,0.05);
-        padding:40px;
-        border-radius:30px;
-        text-align:center;
-      ">
-
-        <h1 style="font-size:60px;">
-          🚫
-        </h1>
-
-        <h2>Banned Account</h2>
-
-        <p style="
-          margin-top:10px;
-          color:#94a3b8;
-        ">
-          ID: ${publicId}
-        </p>
-
-      </div>
-
-    </div>
-
-    `;
-
-    return true;
-
-  }
-
-  return false;
-
-}
-
-/* LIVE BAN */
-
-function watchBan(publicId){
-
-  const ref =
-  doc(db,"leaderboard",publicId);
-
-  onSnapshot(ref,(snap)=>{
-
-    if(
-
-      snap.exists() &&
-
-      snap.data().banned === true
-
-    ){
-
-      location.reload();
-
-    }
-
-  });
-
-}
-
 /* HANDLE USER */
 
 async function handleUser(user){
 
+  console.log(
+    "HANDLE USER RUNNING"
+  );
+
   const publicId =
   await getOrCreatePublicId(user);
-
-  /* USERS */
 
   await setDoc(
 
@@ -1090,8 +999,6 @@ async function handleUser(user){
 
   );
 
-  /* LEADERBOARD */
-
   const lbRef =
   doc(db,"leaderboard",publicId);
 
@@ -1110,8 +1017,6 @@ async function handleUser(user){
 
       streak:0,
 
-      banned:false,
-
       publicId:publicId
 
     });
@@ -1129,11 +1034,9 @@ async function startApp(
   publicId
 ){
 
-  if(
-    await checkBan(publicId)
-  ) return;
-
-  watchBan(publicId);
+  console.log(
+    "START APP RUNNING"
+  );
 
   document
   .getElementById("loginBox")
@@ -1190,16 +1093,25 @@ document
   loginWithGoogle
 );
 
-/* REDIRECT RESULT FIRST */
+/* REDIRECT RESULT */
 
 getRedirectResult(auth)
 
 .then(async(result)=>{
 
+  console.log(
+    "REDIRECT RESULT:",
+    result
+  );
+
   if(result && result.user){
 
     const pid =
     await handleUser(result.user);
+
+    console.log(
+      "ABOUT TO START APP"
+    );
 
     await startApp(
       result.user.displayName,
@@ -1212,10 +1124,13 @@ getRedirectResult(auth)
 
 .catch((err)=>{
 
-  console.error(err);
+  console.error(
+    "REDIRECT ERROR:",
+    err
+  );
 
   showToast(
-    "Login failed"
+    "❌ Redirect login failed"
   );
 
 });
@@ -1226,15 +1141,41 @@ onAuthStateChanged(
   auth,
   async(user)=>{
 
+    console.log(
+      "AUTH STATE:",
+      user
+    );
+
     if(!user) return;
 
-    const pid =
-    await handleUser(user);
+    try{
 
-    await startApp(
-      user.displayName,
-      pid
-    );
+      const pid =
+      await handleUser(user);
+
+      console.log(
+        "AUTO LOGIN SUCCESS"
+      );
+
+      await startApp(
+        user.displayName,
+        pid
+      );
+
+    }
+
+    catch(err){
+
+      console.error(
+        "AUTO LOGIN ERROR:",
+        err
+      );
+
+      showToast(
+        "❌ Firestore permission error"
+      );
+
+    }
 
 });
 
