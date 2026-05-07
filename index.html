@@ -1,89 +1,595 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>MentorLoop EDU-The premiere</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>MentorLoop EDU — AI Learning Platform</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: radial-gradient(circle at top, #0f172a, #020617);
-  color: white;
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-.hero {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+:root{
+  --bg:#020617;
+  --card:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.08);
+  --text:#ffffff;
+  --muted:#94a3b8;
+  --cyan:#22d3ee;
+  --purple:#8b5cf6;
+  --green:#10b981;
 }
 
-.card {
-  background: rgba(255,255,255,0.05);
-  padding: 30px;
-  border-radius: 20px;
-  text-align: center;
+html{
+  scroll-behavior:smooth;
 }
 
-button {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  margin-top: 10px;
-  cursor: pointer;
+body{
+  font-family:'Inter',sans-serif;
+  background:
+  radial-gradient(circle at top left,#0ea5e9 0%,transparent 30%),
+  radial-gradient(circle at bottom right,#8b5cf6 0%,transparent 30%),
+  var(--bg);
+
+  min-height:100vh;
+  color:white;
+  overflow-x:hidden;
+  position:relative;
 }
 
-.login-btn {
-  background: linear-gradient(90deg,#22d3ee,#10b981);
-  color: white;
+/* GRID */
+
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+
+  background-image:
+  linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
+  background-size:40px 40px;
+
+  z-index:-2;
 }
 
-.portal {
-  display:block;
-  margin:10px 0;
-  padding:12px;
-  background: rgba(255,255,255,0.08);
-  border-radius:10px;
+/* GLOW ORBS */
+
+.orb{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(80px);
+  opacity:0.35;
+  z-index:-1;
+  animation:float 8s infinite ease-in-out;
+}
+
+.orb1{
+  width:300px;
+  height:300px;
+  background:#06b6d4;
+  top:-50px;
+  left:-50px;
+}
+
+.orb2{
+  width:300px;
+  height:300px;
+  background:#8b5cf6;
+  bottom:-50px;
+  right:-50px;
+  animation-delay:2s;
+}
+
+@keyframes float{
+  0%{transform:translateY(0px);}
+  50%{transform:translateY(30px);}
+  100%{transform:translateY(0px);}
+}
+
+/* NAVBAR */
+
+.nav{
+  width:100%;
+  position:fixed;
+  top:0;
+  left:0;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:20px 40px;
+
+  backdrop-filter:blur(20px);
+
+  background:rgba(2,6,23,0.5);
+
+  border-bottom:1px solid rgba(255,255,255,0.05);
+
+  z-index:1000;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:800;
+}
+
+.logo span{
+  background:linear-gradient(90deg,var(--cyan),var(--purple));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.nav-links{
+  display:flex;
+  gap:25px;
+}
+
+.nav-links a{
+  color:#cbd5e1;
   text-decoration:none;
+  transition:0.3s;
+  font-size:15px;
+}
+
+.nav-links a:hover{
   color:white;
 }
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:120px 20px 50px;
+}
+
+.hero-card{
+  width:100%;
+  max-width:720px;
+
+  background:rgba(255,255,255,0.05);
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter:blur(20px);
+
+  border-radius:32px;
+
+  padding:50px;
+
+  text-align:center;
+
+  box-shadow:
+  0 0 60px rgba(34,211,238,0.12);
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  padding:10px 18px;
+
+  border-radius:999px;
+
+  background:rgba(34,211,238,0.1);
+
+  border:1px solid rgba(34,211,238,0.25);
+
+  color:#7dd3fc;
+
+  font-size:14px;
+  font-weight:600;
+
+  margin-bottom:25px;
+}
+
+.hero-title{
+  font-size:72px;
+  font-weight:900;
+  line-height:1;
+  letter-spacing:-3px;
+}
+
+.hero-title span{
+  background:linear-gradient(90deg,var(--cyan),var(--purple));
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero-sub{
+  margin-top:24px;
+  color:#cbd5e1;
+  font-size:20px;
+  line-height:1.6;
+}
+
+/* STATS */
+
+.stats{
+  margin-top:35px;
+
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+
+  gap:16px;
+}
+
+.stat{
+  background:rgba(255,255,255,0.04);
+
+  border:1px solid rgba(255,255,255,0.05);
+
+  border-radius:20px;
+
+  padding:20px;
+}
+
+.stat h3{
+  font-size:28px;
+}
+
+.stat p{
+  color:#94a3b8;
+  margin-top:6px;
+  font-size:14px;
+}
+
+/* BUTTONS */
+
+.actions{
+  margin-top:35px;
+}
+
+.login-btn{
+  width:100%;
+
+  padding:18px;
+
+  border:none;
+
+  border-radius:18px;
+
+  font-size:18px;
+  font-weight:700;
+
+  color:white;
+
+  cursor:pointer;
+
+  background:
+  linear-gradient(
+  90deg,
+  #06b6d4,
+  #8b5cf6
+  );
+
+  transition:0.35s;
+}
+
+.login-btn:hover{
+  transform:translateY(-4px) scale(1.02);
+
+  box-shadow:
+  0 15px 50px rgba(139,92,246,0.45);
+}
+
+/* APP BOX */
+
+#appBox{
+  margin-top:35px;
+}
+
+.welcome{
+  margin-bottom:20px;
+}
+
+.welcome h2{
+  font-size:30px;
+}
+
+.welcome p{
+  color:#94a3b8;
+  margin-top:8px;
+}
+
+/* PORTALS */
+
+.portal-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+
+.portal{
+  position:relative;
+
+  overflow:hidden;
+
+  text-decoration:none;
+  color:white;
+
+  background:rgba(255,255,255,0.05);
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  border-radius:24px;
+
+  padding:25px;
+
+  transition:0.35s;
+}
+
+.portal:hover{
+  transform:translateY(-6px);
+
+  border-color:rgba(34,211,238,0.5);
+
+  box-shadow:
+  0 15px 40px rgba(34,211,238,0.15);
+}
+
+.portal::before{
+  content:'';
+  position:absolute;
+  width:100px;
+  height:100px;
+  background:rgba(255,255,255,0.05);
+  border-radius:50%;
+  top:-20px;
+  right:-20px;
+}
+
+.portal-icon{
+  font-size:36px;
+}
+
+.portal h3{
+  margin-top:18px;
+  font-size:22px;
+}
+
+.portal p{
+  margin-top:10px;
+  color:#94a3b8;
+  line-height:1.5;
+  font-size:14px;
+}
+
+/* LOGOUT */
+
+.logout-btn{
+  margin-top:25px;
+
+  width:100%;
+
+  padding:16px;
+
+  border:none;
+
+  border-radius:18px;
+
+  background:rgba(255,255,255,0.07);
+
+  color:white;
+
+  cursor:pointer;
+
+  transition:0.3s;
+}
+
+.logout-btn:hover{
+  background:rgba(255,255,255,0.12);
+}
+
+/* FOOTER */
+
+.footer{
+  text-align:center;
+  padding:40px 20px;
+  color:#64748b;
+  font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .nav{
+    padding:18px 20px;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .hero-title{
+    font-size:52px;
+  }
+
+  .hero-card{
+    padding:30px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+}
+
 </style>
+</head>
 
 <body>
 
-<header>🚀 MentorLoop EDU(Beta) — Fix • Build • Learn</header>
- <div class="card" id="loginBox">
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<!-- NAV -->
+
+<nav class="nav">
+
+  <div class="logo">
+    MentorLoop <span>EDU</span>
+  </div>
+
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#">Features</a>
+    <a href="#">Leaderboard</a>
+    <a href="#">Community</a>
+  </div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-card">
+
+    <div class="badge">
+      🚀 AI Powered Education Platform
+    </div>
+
+    <h1 class="hero-title">
+      Learn.<br>
+      Build.<br>
+      <span>Dominate.</span>
+    </h1>
+
+    <p class="hero-sub">
+      MentorLoop EDU helps students learn smarter,
+      solve doubts instantly, compete globally,
+      and become future-ready with AI.
+    </p>
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+      <div class="stat">
+        <h3>24/7</h3>
+        <p>AI Support</p>
+      </div>
+
+      <div class="stat">
+        <h3>∞</h3>
+        <p>Learning Possibilities</p>
+      </div>
+
+      <div class="stat">
+        <h3>100%</h3>
+        <p>Future Ready</p>
+      </div>
+
+    </div>
+
+    <!-- LOGIN -->
+
+    <div class="actions" id="loginBox">
+
       <button class="login-btn" onclick="loginWithGoogle()">
         🔐 Continue with Google
       </button>
+
     </div>
 
-    <div id="appBox" style="display:none;">
-      <h3 id="welcomeText"></h3>
+    <!-- APP -->
 
-      <a href="dashboard-v2.html" class="portal">Dashboard</a>
-      <a href="games.html" class="portal">Quizzes</a>
-      <a href="profile.html" class="portal">Profile</a>
-      <a href="teacher.html" class="portal">Teacher Zone</a>
-<a href="https://mentorloop-edu-answer-and-question-4v4.caffeine.xyz" class="portal">Ask a doubt</a>
-      <button onclick="logout()">Logout</button>
+    <div id="appBox" style="display:none;">
+
+      <div class="welcome">
+        <h2 id="welcomeText"></h2>
+        <p>Ready to continue your journey?</p>
+      </div>
+
+      <div class="portal-grid">
+
+        <a href="dashboard-v2.html" class="portal">
+          <div class="portal-icon">📊</div>
+          <h3>Dashboard</h3>
+          <p>Track XP, streaks, scores, and progress.</p>
+        </a>
+
+        <a href="games.html" class="portal">
+          <div class="portal-icon">🧠</div>
+          <h3>Quizzes</h3>
+          <p>Challenge yourself with interactive quizzes.</p>
+        </a>
+
+        <a href="profile.html" class="portal">
+          <div class="portal-icon">👤</div>
+          <h3>Profile</h3>
+          <p>Customize your learning identity.</p>
+        </a>
+
+        <a href="teacher.html" class="portal">
+          <div class="portal-icon">🎓</div>
+          <h3>Teacher Zone</h3>
+          <p>Manage students and classrooms efficiently.</p>
+        </a>
+
+        <a href="https://mentorloop-edu-answer-and-question-4v4.caffeine.xyz"
+           class="portal">
+
+          <div class="portal-icon">🤖</div>
+
+          <h3>AI Doubt Solver</h3>
+
+          <p>
+            Ask any question and get instant AI help.
+          </p>
+
+        </a>
+
+      </div>
+
+      <button onclick="logout()" class="logout-btn">
+        Logout
+      </button>
+
     </div>
 
   </div>
+
+</section>
+
+<div class="footer">
+  MentorLoop EDU © 2026 — Built for the next generation.
 </div>
+
+<!-- TOAST -->
+
+<div id="toast"></div>
+
+<!-- FIREBASE -->
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
 import {
   getFirestore,
   doc,
   getDoc,
   setDoc,
   onSnapshot
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 import {
   getAuth,
@@ -93,185 +599,319 @@ import {
   getRedirectResult,
   onAuthStateChanged,
   signOut
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
+/* FIREBASE */
 
-// ================= FIREBASE =================
 const firebaseConfig = {
-  apiKey: "AIzaSyAltyInwHSCxX3Mi9LjjPUs1767uo70gDQ",
-  authDomain: "mentorloop-premiere.firebaseapp.com",
-  projectId: "mentorloop-premiere",
+
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_PROJECT_ID"
+
 };
 
 const app = initializeApp(firebaseConfig);
+
 const db = getFirestore(app);
+
 const auth = getAuth(app);
+
 const provider = new GoogleAuthProvider();
 
+/* TOAST */
 
-// ================= PUBLIC ID =================
-function generateUserId() {
-  return "user_" + Math.random().toString(36).substring(2, 10);
+function showToast(message){
+
+  const toast = document.createElement("div");
+
+  toast.innerHTML = message;
+
+  toast.style.position = "fixed";
+  toast.style.bottom = "30px";
+  toast.style.left = "50%";
+  toast.style.transform = "translateX(-50%)";
+
+  toast.style.padding = "16px 24px";
+
+  toast.style.background = "rgba(15,23,42,0.9)";
+
+  toast.style.border = "1px solid rgba(255,255,255,0.08)";
+
+  toast.style.backdropFilter = "blur(10px)";
+
+  toast.style.borderRadius = "16px";
+
+  toast.style.color = "white";
+
+  toast.style.zIndex = "9999";
+
+  toast.style.animation = "fadeIn 0.3s";
+
+  document.body.appendChild(toast);
+
+  setTimeout(()=>{
+    toast.remove();
+  },3000);
+
 }
 
-async function getOrCreatePublicId(user) {
-  const ref = doc(db, "user_map", user.uid);
+/* USER ID */
+
+function generateUserId(){
+
+  return "user_" +
+  Math.random().toString(36).substring(2,10);
+
+}
+
+/* PUBLIC ID */
+
+async function getOrCreatePublicId(user){
+
+  const ref = doc(db,"user_map",user.uid);
+
   const snap = await getDoc(ref);
 
-  if (snap.exists()) return snap.data().publicId;
+  if(snap.exists()){
+
+    return snap.data().publicId;
+
+  }
 
   const newId = generateUserId();
 
-  await setDoc(ref, {
-    authUID: user.uid,
-    publicId: newId
+  await setDoc(ref,{
+    authUID:user.uid,
+    publicId:newId
   });
 
   return newId;
+
 }
 
+/* BAN CHECK */
 
-// ================= BAN CHECK =================
-async function checkBan(publicId) {
+async function checkBan(publicId){
 
-  const snap = await getDoc(doc(db, "leaderboard", publicId));
+  const snap = await getDoc(
+    doc(db,"leaderboard",publicId)
+  );
 
-  if (snap.exists() && snap.data().banned === true) {
+  if(
+    snap.exists() &&
+    snap.data().banned === true
+  ){
 
     document.body.innerHTML = `
-      <div style="display:flex;justify-content:center;align-items:center;height:100vh;">
-        <div>
-          <h1>🚫 BANNED</h1>
-          <p>Your account is banned</p>
-          <p>ID: ${publicId}</p>
-        </div>
+
+    <div style="
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:#020617;
+      color:white;
+      font-family:Inter;
+    ">
+
+      <div style="
+        background:rgba(255,255,255,0.05);
+        padding:40px;
+        border-radius:30px;
+        text-align:center;
+      ">
+
+        <h1 style="font-size:50px;">🚫</h1>
+
+        <h2>Banned Account</h2>
+
+        <p style="margin-top:10px;color:#94a3b8;">
+          ID: ${publicId}
+        </p>
+
       </div>
+
+    </div>
+
     `;
 
     return true;
+
   }
 
   return false;
+
 }
 
+/* WATCH BAN */
 
-// ================= REAL-TIME BAN =================
-function watchBan(publicId) {
+function watchBan(publicId){
 
-  const ref = doc(db, "leaderboard", publicId);
+  const ref = doc(db,"leaderboard",publicId);
 
-  onSnapshot(ref, (snap) => {
+  onSnapshot(ref,(snap)=>{
 
-    if (snap.exists() && snap.data().banned === true) {
+    if(
+      snap.exists() &&
+      snap.data().banned === true
+    ){
 
-      document.body.innerHTML = `
-        <div style="display:flex;justify-content:center;align-items:center;height:100vh;">
-          <div>
-            <h1>🚫 BANNED (LIVE)</h1>
-            <p>ID: ${publicId}</p>
-          </div>
-        </div>
-      `;
+      location.reload();
+
     }
 
   });
+
 }
 
+/* HANDLE USER */
 
-// ================= HANDLE USER =================
-async function handleUser(user) {
+async function handleUser(user){
 
-  const publicId = await getOrCreatePublicId(user);
+  const publicId =
+  await getOrCreatePublicId(user);
 
-  // USERS
-  await setDoc(doc(db, "users", publicId), {
-    name: user.displayName,
-    email: user.email,
-    publicId: publicId
-  }, { merge: true });
+  await setDoc(
+    doc(db,"users",publicId),
+    {
 
-  // LEADERBOARD (SAFE)
-  const lbRef = doc(db, "leaderboard", publicId);
+      name:user.displayName,
+      email:user.email,
+      publicId:publicId,
+      photo:user.photoURL
+
+    },
+    {merge:true}
+  );
+
+  const lbRef =
+  doc(db,"leaderboard",publicId);
+
   const lbSnap = await getDoc(lbRef);
 
-  if (!lbSnap.exists()) {
-    await setDoc(lbRef, {
-      name: user.displayName,
-      points: 0,
-      banned: false,
-      publicId: publicId
+  if(!lbSnap.exists()){
+
+    await setDoc(lbRef,{
+
+      name:user.displayName,
+      points:0,
+      level:1,
+      streak:0,
+      banned:false,
+      publicId:publicId
+
     });
-  } else {
-    await setDoc(lbRef, {
-      name: user.displayName
-    }, { merge: true });
+
   }
 
   return publicId;
+
 }
 
+/* START APP */
 
-// ================= START APP =================
-async function startApp(name, publicId) {
+async function startApp(name,publicId){
 
-  if (await checkBan(publicId)) return;
+  if(await checkBan(publicId)) return;
 
   watchBan(publicId);
 
-  document.getElementById("loginBox").style.display = "none";
-  document.getElementById("appBox").style.display = "block";
+  document
+  .getElementById("loginBox")
+  .style.display = "none";
 
-  document.getElementById("welcomeText").innerHTML =
-    `Welcome, ${name}<br><small>ID: ${publicId}</small>`;
+  document
+  .getElementById("appBox")
+  .style.display = "block";
+
+  document
+  .getElementById("welcomeText")
+  .innerHTML = `Welcome back, ${name}`;
+
+  showToast("✅ Successfully logged in");
+
 }
 
+/* LOGIN */
 
-// ================= LOGIN =================
-window.loginWithGoogle = async function () {
+window.loginWithGoogle = async function(){
 
-  try {
-    const result = await signInWithPopup(auth, provider);
+  try{
 
-    const pid = await handleUser(result.user);
+    const result =
+    await signInWithPopup(auth,provider);
 
-    startApp(result.user.displayName, pid);
+    const pid =
+    await handleUser(result.user);
 
-  } catch (err) {
-    console.error("LOGIN ERROR:", err);
-    alert(err.message);
+    startApp(
+      result.user.displayName,
+      pid
+    );
 
-    // fallback (mobile / popup blocked)
-    await signInWithRedirect(auth, provider);
+  }
+
+  catch(err){
+
+    console.error(err);
+
+    showToast("⚠ Popup blocked. Redirecting...");
+
+    await signInWithRedirect(auth,provider);
+
   }
 
 };
 
+/* REDIRECT */
 
-// ================= REDIRECT =================
-getRedirectResult(auth).then(async (result) => {
+getRedirectResult(auth)
+.then(async(result)=>{
 
-  if (result?.user) {
-    const pid = await handleUser(result.user);
-    startApp(result.user.displayName, pid);
+  if(result?.user){
+
+    const pid =
+    await handleUser(result.user);
+
+    startApp(
+      result.user.displayName,
+      pid
+    );
+
   }
 
 });
 
+/* AUTO LOGIN */
 
-// ================= AUTO LOGIN =================
-onAuthStateChanged(auth, async (user) => {
+onAuthStateChanged(auth,async(user)=>{
 
-  if (!user) return;
+  if(!user) return;
 
-  const pid = await handleUser(user);
-  startApp(user.displayName, pid);
+  const pid =
+  await handleUser(user);
+
+  startApp(
+    user.displayName,
+    pid
+  );
+
 });
 
+/* LOGOUT */
 
-// ================= LOGOUT =================
-window.logout = async function () {
+window.logout = async function(){
+
   await signOut(auth);
-  location.reload();
+
+  showToast("👋 Logged out");
+
+  setTimeout(()=>{
+    location.reload();
+  },1000);
+
 };
 
 </script>
