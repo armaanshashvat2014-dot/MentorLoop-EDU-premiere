@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>MentorLoop EDU — AI Learning Platform</title>
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+/>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>MentorLoop EDU</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+rel="stylesheet"
+/>
 
 <style>
+
+/* RESET */
 
 *{
   margin:0;
@@ -18,7 +29,7 @@
 
 :root{
   --bg:#020617;
-  --card:rgba(255,255,255,0.06);
+  --card:rgba(255,255,255,0.05);
   --border:rgba(255,255,255,0.08);
   --text:#ffffff;
   --muted:#94a3b8;
@@ -27,20 +38,22 @@
   --green:#10b981;
 }
 
-html{
-  scroll-behavior:smooth;
-}
+/* BODY */
 
 body{
   font-family:'Inter',sans-serif;
+
+  min-height:100vh;
+
+  color:white;
+
+  overflow-x:hidden;
+
   background:
   radial-gradient(circle at top left,#0ea5e9 0%,transparent 30%),
   radial-gradient(circle at bottom right,#8b5cf6 0%,transparent 30%),
   var(--bg);
 
-  min-height:100vh;
-  color:white;
-  overflow-x:hidden;
   position:relative;
 }
 
@@ -48,7 +61,9 @@ body{
 
 body::before{
   content:'';
+
   position:fixed;
+
   inset:0;
 
   background-image:
@@ -60,70 +75,84 @@ body::before{
   z-index:-2;
 }
 
-/* GLOW ORBS */
+/* GLOW */
 
 .orb{
   position:fixed;
+
+  width:300px;
+  height:300px;
+
   border-radius:50%;
+
   filter:blur(80px);
+
   opacity:0.35;
+
   z-index:-1;
+
   animation:float 8s infinite ease-in-out;
 }
 
 .orb1{
-  width:300px;
-  height:300px;
+  top:-80px;
+  left:-80px;
   background:#06b6d4;
-  top:-50px;
-  left:-50px;
 }
 
 .orb2{
-  width:300px;
-  height:300px;
+  bottom:-80px;
+  right:-80px;
   background:#8b5cf6;
-  bottom:-50px;
-  right:-50px;
   animation-delay:2s;
 }
 
 @keyframes float{
-  0%{transform:translateY(0px);}
-  50%{transform:translateY(30px);}
-  100%{transform:translateY(0px);}
+  0%{
+    transform:translateY(0px);
+  }
+  50%{
+    transform:translateY(30px);
+  }
+  100%{
+    transform:translateY(0px);
+  }
 }
 
-/* NAVBAR */
+/* NAV */
 
 .nav{
-  width:100%;
   position:fixed;
+
   top:0;
   left:0;
+
+  width:100%;
 
   display:flex;
   justify-content:space-between;
   align-items:center;
 
-  padding:20px 40px;
+  padding:22px 40px;
+
+  background:rgba(2,6,23,0.6);
 
   backdrop-filter:blur(20px);
 
-  background:rgba(2,6,23,0.5);
-
   border-bottom:1px solid rgba(255,255,255,0.05);
 
-  z-index:1000;
+  z-index:999;
 }
 
 .logo{
-  font-size:24px;
-  font-weight:800;
+  font-size:26px;
+  font-weight:900;
 }
 
 .logo span{
-  background:linear-gradient(90deg,var(--cyan),var(--purple));
+  background:
+  linear-gradient(90deg,var(--cyan),var(--purple));
+
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
@@ -135,9 +164,10 @@ body::before{
 
 .nav-links a{
   color:#cbd5e1;
+
   text-decoration:none;
+
   transition:0.3s;
-  font-size:15px;
 }
 
 .nav-links a:hover{
@@ -148,15 +178,18 @@ body::before{
 
 .hero{
   min-height:100vh;
+
   display:flex;
   justify-content:center;
   align-items:center;
+
   padding:120px 20px 50px;
 }
 
 .hero-card{
+
   width:100%;
-  max-width:720px;
+  max-width:760px;
 
   background:rgba(255,255,255,0.05);
 
@@ -166,13 +199,16 @@ body::before{
 
   border-radius:32px;
 
-  padding:50px;
+  padding:55px;
 
   text-align:center;
 
   box-shadow:
   0 0 60px rgba(34,211,238,0.12);
+
 }
+
+/* BADGE */
 
 .badge{
   display:inline-flex;
@@ -195,25 +231,37 @@ body::before{
   margin-bottom:25px;
 }
 
+/* TITLE */
+
 .hero-title{
-  font-size:72px;
-  font-weight:900;
+  font-size:74px;
+
   line-height:1;
+
+  font-weight:900;
+
   letter-spacing:-3px;
 }
 
 .hero-title span{
-  background:linear-gradient(90deg,var(--cyan),var(--purple));
+
+  background:
+  linear-gradient(90deg,var(--cyan),var(--purple));
 
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
+/* SUBTEXT */
+
 .hero-sub{
-  margin-top:24px;
-  color:#cbd5e1;
+  margin-top:25px;
+
   font-size:20px;
-  line-height:1.6;
+
+  color:#cbd5e1;
+
+  line-height:1.7;
 }
 
 /* STATS */
@@ -222,12 +270,14 @@ body::before{
   margin-top:35px;
 
   display:grid;
+
   grid-template-columns:repeat(3,1fr);
 
   gap:16px;
 }
 
 .stat{
+
   background:rgba(255,255,255,0.04);
 
   border:1px solid rgba(255,255,255,0.05);
@@ -242,19 +292,20 @@ body::before{
 }
 
 .stat p{
+  margin-top:8px;
+
   color:#94a3b8;
-  margin-top:6px;
+
   font-size:14px;
 }
 
-/* BUTTONS */
-
-.actions{
-  margin-top:35px;
-}
+/* BUTTON */
 
 .login-btn{
+
   width:100%;
+
+  margin-top:35px;
 
   padding:18px;
 
@@ -263,6 +314,7 @@ body::before{
   border-radius:18px;
 
   font-size:18px;
+
   font-weight:700;
 
   color:white;
@@ -271,54 +323,59 @@ body::before{
 
   background:
   linear-gradient(
-  90deg,
-  #06b6d4,
-  #8b5cf6
+    90deg,
+    #06b6d4,
+    #8b5cf6
   );
 
   transition:0.35s;
 }
 
 .login-btn:hover{
-  transform:translateY(-4px) scale(1.02);
+
+  transform:
+  translateY(-4px)
+  scale(1.02);
 
   box-shadow:
   0 15px 50px rgba(139,92,246,0.45);
 }
 
-/* APP BOX */
+/* APP */
 
 #appBox{
   margin-top:35px;
 }
 
 .welcome{
-  margin-bottom:20px;
+  margin-bottom:25px;
 }
 
 .welcome h2{
-  font-size:30px;
+  font-size:32px;
 }
 
 .welcome p{
   color:#94a3b8;
-  margin-top:8px;
+  margin-top:10px;
 }
 
 /* PORTALS */
 
 .portal-grid{
+
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(220px,1fr));
+
   gap:18px;
 }
 
 .portal{
-  position:relative;
-
-  overflow:hidden;
 
   text-decoration:none;
+
   color:white;
 
   background:rgba(255,255,255,0.05);
@@ -330,50 +387,66 @@ body::before{
   padding:25px;
 
   transition:0.35s;
+
+  position:relative;
+
+  overflow:hidden;
 }
 
 .portal:hover{
+
   transform:translateY(-6px);
 
-  border-color:rgba(34,211,238,0.5);
+  border-color:
+  rgba(34,211,238,0.4);
 
   box-shadow:
   0 15px 40px rgba(34,211,238,0.15);
 }
 
 .portal::before{
+
   content:'';
+
   position:absolute;
-  width:100px;
-  height:100px;
-  background:rgba(255,255,255,0.05);
+
+  width:120px;
+  height:120px;
+
+  background:rgba(255,255,255,0.04);
+
   border-radius:50%;
-  top:-20px;
-  right:-20px;
+
+  top:-40px;
+  right:-40px;
 }
 
 .portal-icon{
-  font-size:36px;
+  font-size:38px;
 }
 
 .portal h3{
-  margin-top:18px;
+  margin-top:16px;
   font-size:22px;
 }
 
 .portal p{
   margin-top:10px;
+
   color:#94a3b8;
-  line-height:1.5;
+
+  line-height:1.6;
+
   font-size:14px;
 }
 
 /* LOGOUT */
 
 .logout-btn{
-  margin-top:25px;
 
   width:100%;
+
+  margin-top:24px;
 
   padding:16px;
 
@@ -381,7 +454,7 @@ body::before{
 
   border-radius:18px;
 
-  background:rgba(255,255,255,0.07);
+  background:rgba(255,255,255,0.08);
 
   color:white;
 
@@ -391,16 +464,61 @@ body::before{
 }
 
 .logout-btn:hover{
-  background:rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.13);
+}
+
+/* TOAST */
+
+.toast{
+
+  position:fixed;
+
+  bottom:30px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  background:rgba(15,23,42,0.92);
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  padding:16px 24px;
+
+  border-radius:18px;
+
+  backdrop-filter:blur(10px);
+
+  z-index:9999;
+
+  animation:fadeUp 0.3s ease;
+}
+
+@keyframes fadeUp{
+
+  from{
+    opacity:0;
+    transform:
+    translateX(-50%)
+    translateY(20px);
+  }
+
+  to{
+    opacity:1;
+    transform:
+    translateX(-50%)
+    translateY(0);
+  }
+
 }
 
 /* FOOTER */
 
 .footer{
   text-align:center;
+
   padding:40px 20px;
+
   color:#64748b;
-  font-size:14px;
 }
 
 /* MOBILE */
@@ -408,7 +526,7 @@ body::before{
 @media(max-width:768px){
 
   .nav{
-    padding:18px 20px;
+    padding:20px;
   }
 
   .nav-links{
@@ -420,7 +538,7 @@ body::before{
   }
 
   .hero-card{
-    padding:30px;
+    padding:35px;
   }
 
   .stats{
@@ -461,7 +579,7 @@ body::before{
   <div class="hero-card">
 
     <div class="badge">
-      🚀 AI Powered Education Platform
+      🚀 AI Powered Learning Platform
     </div>
 
     <h1 class="hero-title">
@@ -471,9 +589,12 @@ body::before{
     </h1>
 
     <p class="hero-sub">
-      MentorLoop EDU helps students learn smarter,
-      solve doubts instantly, compete globally,
-      and become future-ready with AI.
+
+      MentorLoop EDU helps students
+      learn smarter, solve doubts instantly,
+      compete globally, and become future-ready
+      with AI.
+
     </p>
 
     <!-- STATS -->
@@ -487,7 +608,7 @@ body::before{
 
       <div class="stat">
         <h3>∞</h3>
-        <p>Learning Possibilities</p>
+        <p>Possibilities</p>
       </div>
 
       <div class="stat">
@@ -499,9 +620,12 @@ body::before{
 
     <!-- LOGIN -->
 
-    <div class="actions" id="loginBox">
+    <div id="loginBox">
 
-      <button class="login-btn" onclick="loginWithGoogle()">
+      <button
+        id="googleBtn"
+        class="login-btn"
+      >
         🔐 Continue with Google
       </button>
 
@@ -512,52 +636,113 @@ body::before{
     <div id="appBox" style="display:none;">
 
       <div class="welcome">
+
         <h2 id="welcomeText"></h2>
-        <p>Ready to continue your journey?</p>
+
+        <p>
+          Ready to continue your journey?
+        </p>
+
       </div>
 
       <div class="portal-grid">
 
-        <a href="dashboard-v2.html" class="portal">
-          <div class="portal-icon">📊</div>
+        <a
+          href="dashboard-v2.html"
+          class="portal"
+        >
+
+          <div class="portal-icon">
+            📊
+          </div>
+
           <h3>Dashboard</h3>
-          <p>Track XP, streaks, scores, and progress.</p>
+
+          <p>
+            Track XP, streaks, scores,
+            and performance.
+          </p>
+
         </a>
 
-        <a href="games.html" class="portal">
-          <div class="portal-icon">🧠</div>
+        <a
+          href="games.html"
+          class="portal"
+        >
+
+          <div class="portal-icon">
+            🧠
+          </div>
+
           <h3>Quizzes</h3>
-          <p>Challenge yourself with interactive quizzes.</p>
+
+          <p>
+            Challenge yourself with
+            interactive learning games.
+          </p>
+
         </a>
 
-        <a href="profile.html" class="portal">
-          <div class="portal-icon">👤</div>
+        <a
+          href="profile.html"
+          class="portal"
+        >
+
+          <div class="portal-icon">
+            👤
+          </div>
+
           <h3>Profile</h3>
-          <p>Customize your learning identity.</p>
+
+          <p>
+            Customize your learning
+            identity and achievements.
+          </p>
+
         </a>
 
-        <a href="teacher.html" class="portal">
-          <div class="portal-icon">🎓</div>
+        <a
+          href="teacher.html"
+          class="portal"
+        >
+
+          <div class="portal-icon">
+            🎓
+          </div>
+
           <h3>Teacher Zone</h3>
-          <p>Manage students and classrooms efficiently.</p>
+
+          <p>
+            Powerful tools for teachers
+            and classrooms.
+          </p>
+
         </a>
 
-        <a href="https://mentorloop-edu-answer-and-question-4v4.caffeine.xyz"
-           class="portal">
+        <a
+          href="https://mentorloop-edu-answer-and-question-4v4.caffeine.xyz"
+          class="portal"
+        >
 
-          <div class="portal-icon">🤖</div>
+          <div class="portal-icon">
+            🤖
+          </div>
 
           <h3>AI Doubt Solver</h3>
 
           <p>
-            Ask any question and get instant AI help.
+            Ask anything and get
+            instant AI help.
           </p>
 
         </a>
 
       </div>
 
-      <button onclick="logout()" class="logout-btn">
+      <button
+        onclick="logout()"
+        class="logout-btn"
+      >
         Logout
       </button>
 
@@ -568,12 +753,8 @@ body::before{
 </section>
 
 <div class="footer">
-  MentorLoop EDU © 2026 — Built for the next generation.
+  MentorLoop EDU © 2026
 </div>
-
-<!-- TOAST -->
-
-<div id="toast"></div>
 
 <!-- FIREBASE -->
 
@@ -583,15 +764,18 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
 import {
+
   getFirestore,
   doc,
   getDoc,
   setDoc,
   onSnapshot
+
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 import {
+
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
@@ -599,6 +783,7 @@ import {
   getRedirectResult,
   onAuthStateChanged,
   signOut
+
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
@@ -606,9 +791,11 @@ from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
 
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_DOMAIN",
-  projectId: "YOUR_PROJECT_ID"
+  apiKey:"YOUR_API_KEY",
+
+  authDomain:"YOUR_DOMAIN",
+
+  projectId:"YOUR_PROJECT_ID"
 
 };
 
@@ -624,30 +811,12 @@ const provider = new GoogleAuthProvider();
 
 function showToast(message){
 
-  const toast = document.createElement("div");
+  const toast =
+  document.createElement("div");
+
+  toast.className = "toast";
 
   toast.innerHTML = message;
-
-  toast.style.position = "fixed";
-  toast.style.bottom = "30px";
-  toast.style.left = "50%";
-  toast.style.transform = "translateX(-50%)";
-
-  toast.style.padding = "16px 24px";
-
-  toast.style.background = "rgba(15,23,42,0.9)";
-
-  toast.style.border = "1px solid rgba(255,255,255,0.08)";
-
-  toast.style.backdropFilter = "blur(10px)";
-
-  toast.style.borderRadius = "16px";
-
-  toast.style.color = "white";
-
-  toast.style.zIndex = "9999";
-
-  toast.style.animation = "fadeIn 0.3s";
 
   document.body.appendChild(toast);
 
@@ -662,7 +831,9 @@ function showToast(message){
 function generateUserId(){
 
   return "user_" +
-  Math.random().toString(36).substring(2,10);
+  Math.random()
+  .toString(36)
+  .substring(2,10);
 
 }
 
@@ -670,9 +841,11 @@ function generateUserId(){
 
 async function getOrCreatePublicId(user){
 
-  const ref = doc(db,"user_map",user.uid);
+  const ref =
+  doc(db,"user_map",user.uid);
 
-  const snap = await getDoc(ref);
+  const snap =
+  await getDoc(ref);
 
   if(snap.exists()){
 
@@ -680,11 +853,15 @@ async function getOrCreatePublicId(user){
 
   }
 
-  const newId = generateUserId();
+  const newId =
+  generateUserId();
 
   await setDoc(ref,{
+
     authUID:user.uid,
+
     publicId:newId
+
   });
 
   return newId;
@@ -712,8 +889,8 @@ async function checkBan(publicId){
       justify-content:center;
       align-items:center;
       background:#020617;
-      color:white;
       font-family:Inter;
+      color:white;
     ">
 
       <div style="
@@ -723,11 +900,16 @@ async function checkBan(publicId){
         text-align:center;
       ">
 
-        <h1 style="font-size:50px;">🚫</h1>
+        <h1 style="font-size:60px;">
+          🚫
+        </h1>
 
         <h2>Banned Account</h2>
 
-        <p style="margin-top:10px;color:#94a3b8;">
+        <p style="
+          margin-top:10px;
+          color:#94a3b8;
+        ">
           ID: ${publicId}
         </p>
 
@@ -745,11 +927,12 @@ async function checkBan(publicId){
 
 }
 
-/* WATCH BAN */
+/* LIVE BAN */
 
 function watchBan(publicId){
 
-  const ref = doc(db,"leaderboard",publicId);
+  const ref =
+  doc(db,"leaderboard",publicId);
 
   onSnapshot(ref,(snap)=>{
 
@@ -773,33 +956,50 @@ async function handleUser(user){
   const publicId =
   await getOrCreatePublicId(user);
 
+  /* USERS */
+
   await setDoc(
+
     doc(db,"users",publicId),
+
     {
 
       name:user.displayName,
+
       email:user.email,
-      publicId:publicId,
-      photo:user.photoURL
+
+      photo:user.photoURL,
+
+      publicId:publicId
 
     },
+
     {merge:true}
+
   );
+
+  /* LEADERBOARD */
 
   const lbRef =
   doc(db,"leaderboard",publicId);
 
-  const lbSnap = await getDoc(lbRef);
+  const lbSnap =
+  await getDoc(lbRef);
 
   if(!lbSnap.exists()){
 
     await setDoc(lbRef,{
 
       name:user.displayName,
+
       points:0,
+
       level:1,
+
       streak:0,
+
       banned:false,
+
       publicId:publicId
 
     });
@@ -828,25 +1028,39 @@ async function startApp(name,publicId){
 
   document
   .getElementById("welcomeText")
-  .innerHTML = `Welcome back, ${name}`;
+  .innerHTML =
+  `Welcome back, ${name}`;
 
-  showToast("✅ Successfully logged in");
+  showToast("✅ Logged in successfully");
 
 }
 
 /* LOGIN */
 
-window.loginWithGoogle = async function(){
+async function loginWithGoogle(){
 
   try{
 
+    showToast("Opening Google login...");
+
     const result =
-    await signInWithPopup(auth,provider);
+    await signInWithPopup(
+      auth,
+      provider
+    );
+
+    if(!result.user){
+
+      throw new Error(
+        "No user returned"
+      );
+
+    }
 
     const pid =
     await handleUser(result.user);
 
-    startApp(
+    await startApp(
       result.user.displayName,
       pid
     );
@@ -855,48 +1069,102 @@ window.loginWithGoogle = async function(){
 
   catch(err){
 
-    console.error(err);
+    console.error(
+      "LOGIN ERROR:",
+      err
+    );
 
-    showToast("⚠ Popup blocked. Redirecting...");
+    /* ONLY redirect for REAL popup issues */
 
-    await signInWithRedirect(auth,provider);
+    if(
+
+      err.code === "auth/popup-blocked" ||
+
+      err.code ===
+      "auth/cancelled-popup-request" ||
+
+      err.code ===
+      "auth/popup-closed-by-user"
+
+    ){
+
+      showToast(
+        "Redirecting login..."
+      );
+
+      await signInWithRedirect(
+        auth,
+        provider
+      );
+
+    }
+
+    else{
+
+      showToast(
+        "❌ " + err.message
+      );
+
+    }
 
   }
 
-};
+}
 
-/* REDIRECT */
+/* BUTTON LISTENER */
+
+document
+.getElementById("googleBtn")
+.addEventListener(
+  "click",
+  loginWithGoogle
+);
+
+/* REDIRECT RESULT */
 
 getRedirectResult(auth)
+
 .then(async(result)=>{
 
-  if(result?.user){
+  if(result && result.user){
 
     const pid =
     await handleUser(result.user);
 
-    startApp(
+    await startApp(
       result.user.displayName,
       pid
     );
 
   }
 
+})
+
+.catch((err)=>{
+
+  console.error(err);
+
+  showToast(
+    "Redirect login failed"
+  );
+
 });
 
 /* AUTO LOGIN */
 
-onAuthStateChanged(auth,async(user)=>{
+onAuthStateChanged(
+  auth,
+  async(user)=>{
 
-  if(!user) return;
+    if(!user) return;
 
-  const pid =
-  await handleUser(user);
+    const pid =
+    await handleUser(user);
 
-  startApp(
-    user.displayName,
-    pid
-  );
+    await startApp(
+      user.displayName,
+      pid
+    );
 
 });
 
@@ -909,7 +1177,9 @@ window.logout = async function(){
   showToast("👋 Logged out");
 
   setTimeout(()=>{
+
     location.reload();
+
   },1000);
 
 };
