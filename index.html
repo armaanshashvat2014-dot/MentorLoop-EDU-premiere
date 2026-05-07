@@ -74,7 +74,7 @@ body::before{
 
 }
 
-/* ORBS */
+/* GLOW */
 
 .orb{
 
@@ -557,35 +557,7 @@ body::before{
 
   z-index:9999;
 
-  animation:fadeUp 0.3s ease;
-
 }
-
-@keyframes fadeUp{
-
-  from{
-
-    opacity:0;
-
-    transform:
-    translateX(-50%)
-    translateY(20px);
-
-  }
-
-  to{
-
-    opacity:1;
-
-    transform:
-    translateX(-50%)
-    translateY(0);
-
-  }
-
-}
-
-/* FOOTER */
 
 .footer{
 
@@ -807,24 +779,6 @@ body::before{
 
         </a>
 
-        <a
-          href="https://mentorloop-edu-answer-and-question-4v4.caffeine.xyz"
-          class="portal"
-        >
-
-          <div class="portal-icon">
-            🤖
-          </div>
-
-          <h3>AI Doubt Solver</h3>
-
-          <p>
-            Ask anything and get
-            instant AI help.
-          </p>
-
-        </a>
-
       </div>
 
       <button
@@ -841,7 +795,7 @@ body::before{
 </section>
 
 <div class="footer">
-  MentorLoop EDU © 2026
+  MentorLoop EDU- The premiere, since 2026
 </div>
 
 <!-- FIREBASE -->
@@ -853,27 +807,16 @@ from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
 import {
 
-  getFirestore,
-  doc,
-  getDoc,
-  setDoc
-
-}
-from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-import {
-
   getAuth,
   GoogleAuthProvider,
-  signInWithRedirect,
-  getRedirectResult,
+  signInWithPopup,
   onAuthStateChanged,
   signOut
 
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-/* FIREBASE CONFIG */
+/* FIREBASE */
 
 const firebaseConfig = {
 
@@ -882,20 +825,15 @@ const firebaseConfig = {
   projectId: "mentorloop-premiere",
   storageBucket: "mentorloop-premiere.firebasestorage.app",
   messagingSenderId: "55345483492",
-  appId: "1:55345483492:web:47407fdbd92a2278aea6f1",
+  appId: "1:55345483492:web:47407fdbd92a2278aea6f1"
 
 };
 
 const app =
 initializeApp(firebaseConfig);
 
-const db =
-getFirestore(app);
-
 const auth =
 getAuth(app);
-
-auth.useDeviceLanguage();
 
 const provider =
 new GoogleAuthProvider();
@@ -921,122 +859,9 @@ function showToast(message){
 
 }
 
-/* USER ID */
-
-function generateUserId(){
-
-  return "user_" +
-
-  Math.random()
-  .toString(36)
-  .substring(2,10);
-
-}
-
-/* PUBLIC ID */
-
-async function getOrCreatePublicId(user){
-
-  console.log(
-    "GET OR CREATE PUBLIC ID"
-  );
-
-  const ref =
-  doc(db,"user_map",user.uid);
-
-  const snap =
-  await getDoc(ref);
-
-  if(snap.exists()){
-
-    return snap.data().publicId;
-
-  }
-
-  const newId =
-  generateUserId();
-
-  await setDoc(ref,{
-
-    authUID:user.uid,
-
-    publicId:newId
-
-  });
-
-  return newId;
-
-}
-
-/* HANDLE USER */
-
-async function handleUser(user){
-
-  console.log(
-    "HANDLE USER RUNNING"
-  );
-
-  const publicId =
-  await getOrCreatePublicId(user);
-
-  await setDoc(
-
-    doc(db,"users",publicId),
-
-    {
-
-      name:user.displayName,
-
-      email:user.email,
-
-      photo:user.photoURL,
-
-      publicId:publicId
-
-    },
-
-    {merge:true}
-
-  );
-
-  const lbRef =
-  doc(db,"leaderboard",publicId);
-
-  const lbSnap =
-  await getDoc(lbRef);
-
-  if(!lbSnap.exists()){
-
-    await setDoc(lbRef,{
-
-      name:user.displayName,
-
-      points:0,
-
-      level:1,
-
-      streak:0,
-
-      publicId:publicId
-
-    });
-
-  }
-
-  return publicId;
-
-}
-
 /* START APP */
 
-async function startApp(
-  name,
-  publicId
-){
-
-  console.log(
-    "START APP RUNNING"
-  );
+function startApp(user){
 
   document
   .getElementById("loginBox")
@@ -1049,7 +874,7 @@ async function startApp(
   document
   .getElementById("welcomeText")
   .innerHTML =
-  `Welcome back, ${name}`;
+  `Welcome back, ${user.displayName}`;
 
   showToast(
     "✅ Logged in successfully"
@@ -1064,21 +889,44 @@ async function loginWithGoogle(){
   try{
 
     showToast(
-      "Redirecting to Google..."
+      "Opening Google login..."
     );
 
-    await signInWithRedirect(
+    const result =
+    await signInWithPopup(
       auth,
       provider
     );
+
+    if(!result.user){
+
+      showToast(
+        "Login failed"
+      );
+
+      return;
+
+    }
+
+    console.log(
+      "LOGIN SUCCESS:",
+      result.user
+    );
+
+    startApp(result.user);
 
   }
 
   catch(err){
 
-    console.error(err);
+    console.error(
+      "LOGIN ERROR:",
+      err
+    );
 
-    showToast(err.message);
+    showToast(
+      err.message
+    );
 
   }
 
@@ -1093,87 +941,20 @@ document
   loginWithGoogle
 );
 
-/* REDIRECT RESULT */
-
-getRedirectResult(auth)
-
-.then(async(result)=>{
-
-  console.log(
-    "REDIRECT RESULT:",
-    result
-  );
-
-  if(result && result.user){
-
-    const pid =
-    await handleUser(result.user);
-
-    console.log(
-      "ABOUT TO START APP"
-    );
-
-    await startApp(
-      result.user.displayName,
-      pid
-    );
-
-  }
-
-})
-
-.catch((err)=>{
-
-  console.error(
-    "REDIRECT ERROR:",
-    err
-  );
-
-  showToast(
-    "❌ Redirect login failed"
-  );
-
-});
-
 /* AUTO LOGIN */
 
 onAuthStateChanged(
   auth,
-  async(user)=>{
+  (user)=>{
 
     console.log(
       "AUTH STATE:",
       user
     );
 
-    if(!user) return;
+    if(user){
 
-    try{
-
-      const pid =
-      await handleUser(user);
-
-      console.log(
-        "AUTO LOGIN SUCCESS"
-      );
-
-      await startApp(
-        user.displayName,
-        pid
-      );
-
-    }
-
-    catch(err){
-
-      console.error(
-        "AUTO LOGIN ERROR:",
-        err
-      );
-
-      showToast(
-        "❌ Firestore permission error"
-      );
+      startApp(user);
 
     }
 
@@ -1186,7 +967,9 @@ async function(){
 
   await signOut(auth);
 
-  showToast("👋 Logged out");
+  showToast(
+    "👋 Logged out"
+  );
 
   setTimeout(()=>{
 
