@@ -3,7 +3,7 @@
 
 <head>
 
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 
 <meta
   name="viewport"
@@ -35,19 +35,19 @@ rel="stylesheet"
   --muted:#94a3b8;
   --cyan:#22d3ee;
   --purple:#8b5cf6;
-  --green:#10b981;
 }
 
 /* BODY */
 
 body{
+
   font-family:'Inter',sans-serif;
 
   min-height:100vh;
 
-  color:white;
-
   overflow-x:hidden;
+
+  color:white;
 
   background:
   radial-gradient(circle at top left,#0ea5e9 0%,transparent 30%),
@@ -55,11 +55,13 @@ body{
   var(--bg);
 
   position:relative;
+
 }
 
 /* GRID */
 
 body::before{
+
   content:'';
 
   position:fixed;
@@ -73,55 +75,63 @@ body::before{
   background-size:40px 40px;
 
   z-index:-2;
+
 }
 
-/* GLOW */
+/* ORBS */
 
 .orb{
+
   position:fixed;
 
-  width:300px;
-  height:300px;
+  width:320px;
+  height:320px;
 
   border-radius:50%;
 
-  filter:blur(80px);
+  filter:blur(90px);
 
   opacity:0.35;
 
   z-index:-1;
 
-  animation:float 8s infinite ease-in-out;
+  animation:float 8s ease-in-out infinite;
+
 }
 
 .orb1{
-  top:-80px;
-  left:-80px;
+  top:-100px;
+  left:-100px;
   background:#06b6d4;
 }
 
 .orb2{
-  bottom:-80px;
-  right:-80px;
+  bottom:-100px;
+  right:-100px;
   background:#8b5cf6;
   animation-delay:2s;
 }
 
 @keyframes float{
+
   0%{
     transform:translateY(0px);
   }
+
   50%{
     transform:translateY(30px);
   }
+
   100%{
     transform:translateY(0px);
   }
+
 }
 
 /* NAV */
 
 .nav{
+
   position:fixed;
 
   top:0;
@@ -135,39 +145,55 @@ body::before{
 
   padding:22px 40px;
 
-  background:rgba(2,6,23,0.6);
-
   backdrop-filter:blur(20px);
 
-  border-bottom:1px solid rgba(255,255,255,0.05);
+  background:rgba(2,6,23,0.6);
+
+  border-bottom:
+  1px solid rgba(255,255,255,0.05);
 
   z-index:999;
+
 }
 
 .logo{
+
   font-size:26px;
+
   font-weight:900;
+
 }
 
 .logo span{
+
   background:
-  linear-gradient(90deg,var(--cyan),var(--purple));
+  linear-gradient(
+    90deg,
+    var(--cyan),
+    var(--purple)
+  );
 
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+
 }
 
 .nav-links{
+
   display:flex;
-  gap:25px;
+
+  gap:24px;
+
 }
 
 .nav-links a{
-  color:#cbd5e1;
 
   text-decoration:none;
 
+  color:#cbd5e1;
+
   transition:0.3s;
+
 }
 
 .nav-links a:hover{
@@ -177,13 +203,16 @@ body::before{
 /* HERO */
 
 .hero{
+
   min-height:100vh;
 
   display:flex;
   justify-content:center;
   align-items:center;
 
-  padding:120px 20px 50px;
+  padding:
+  120px 20px 50px;
+
 }
 
 .hero-card{
@@ -193,7 +222,8 @@ body::before{
 
   background:rgba(255,255,255,0.05);
 
-  border:1px solid rgba(255,255,255,0.08);
+  border:
+  1px solid rgba(255,255,255,0.08);
 
   backdrop-filter:blur(20px);
 
@@ -211,6 +241,7 @@ body::before{
 /* BADGE */
 
 .badge{
+
   display:inline-flex;
   align-items:center;
   gap:10px;
@@ -221,7 +252,8 @@ body::before{
 
   background:rgba(34,211,238,0.1);
 
-  border:1px solid rgba(34,211,238,0.25);
+  border:
+  1px solid rgba(34,211,238,0.25);
 
   color:#7dd3fc;
 
@@ -229,62 +261,77 @@ body::before{
   font-weight:600;
 
   margin-bottom:25px;
+
 }
 
 /* TITLE */
 
 .hero-title{
-  font-size:74px;
 
-  line-height:1;
+  font-size:74px;
 
   font-weight:900;
 
+  line-height:1;
+
   letter-spacing:-3px;
+
 }
 
 .hero-title span{
 
   background:
-  linear-gradient(90deg,var(--cyan),var(--purple));
+  linear-gradient(
+    90deg,
+    var(--cyan),
+    var(--purple)
+  );
 
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+
 }
 
 /* SUBTEXT */
 
 .hero-sub{
+
   margin-top:25px;
 
   font-size:20px;
 
+  line-height:1.7;
+
   color:#cbd5e1;
 
-  line-height:1.7;
 }
 
 /* STATS */
 
 .stats{
+
   margin-top:35px;
 
   display:grid;
 
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:
+  repeat(3,1fr);
 
   gap:16px;
+
 }
 
 .stat{
 
   background:rgba(255,255,255,0.04);
 
-  border:1px solid rgba(255,255,255,0.05);
+  border:
+  1px solid rgba(255,255,255,0.05);
 
   border-radius:20px;
 
   padding:20px;
+
 }
 
 .stat h3{
@@ -292,14 +339,16 @@ body::before{
 }
 
 .stat p{
+
   margin-top:8px;
 
   color:#94a3b8;
 
   font-size:14px;
+
 }
 
-/* BUTTON */
+/* LOGIN BUTTON */
 
 .login-btn{
 
@@ -313,14 +362,6 @@ body::before{
 
   border-radius:18px;
 
-  font-size:18px;
-
-  font-weight:700;
-
-  color:white;
-
-  cursor:pointer;
-
   background:
   linear-gradient(
     90deg,
@@ -328,7 +369,16 @@ body::before{
     #8b5cf6
   );
 
+  color:white;
+
+  font-size:18px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
   transition:0.35s;
+
 }
 
 .login-btn:hover{
@@ -339,6 +389,7 @@ body::before{
 
   box-shadow:
   0 15px 50px rgba(139,92,246,0.45);
+
 }
 
 /* APP */
@@ -346,6 +397,8 @@ body::before{
 #appBox{
   margin-top:35px;
 }
+
+/* WELCOME */
 
 .welcome{
   margin-bottom:25px;
@@ -356,8 +409,11 @@ body::before{
 }
 
 .welcome p{
-  color:#94a3b8;
+
   margin-top:10px;
+
+  color:#94a3b8;
+
 }
 
 /* PORTALS */
@@ -370,6 +426,7 @@ body::before{
   repeat(auto-fit,minmax(220px,1fr));
 
   gap:18px;
+
 }
 
 .portal{
@@ -380,7 +437,8 @@ body::before{
 
   background:rgba(255,255,255,0.05);
 
-  border:1px solid rgba(255,255,255,0.08);
+  border:
+  1px solid rgba(255,255,255,0.08);
 
   border-radius:24px;
 
@@ -391,6 +449,7 @@ body::before{
   position:relative;
 
   overflow:hidden;
+
 }
 
 .portal:hover{
@@ -402,6 +461,7 @@ body::before{
 
   box-shadow:
   0 15px 40px rgba(34,211,238,0.15);
+
 }
 
 .portal::before{
@@ -413,12 +473,14 @@ body::before{
   width:120px;
   height:120px;
 
-  background:rgba(255,255,255,0.04);
-
   border-radius:50%;
+
+  background:
+  rgba(255,255,255,0.04);
 
   top:-40px;
   right:-40px;
+
 }
 
 .portal-icon{
@@ -426,11 +488,15 @@ body::before{
 }
 
 .portal h3{
+
   margin-top:16px;
+
   font-size:22px;
+
 }
 
 .portal p{
+
   margin-top:10px;
 
   color:#94a3b8;
@@ -438,6 +504,7 @@ body::before{
   line-height:1.6;
 
   font-size:14px;
+
 }
 
 /* LOGOUT */
@@ -454,17 +521,19 @@ body::before{
 
   border-radius:18px;
 
-  background:rgba(255,255,255,0.08);
+  background:
+  rgba(255,255,255,0.08);
 
   color:white;
 
   cursor:pointer;
 
   transition:0.3s;
+
 }
 
 .logout-btn:hover{
-  background:rgba(255,255,255,0.13);
+  background:rgba(255,255,255,0.14);
 }
 
 /* TOAST */
@@ -478,9 +547,11 @@ body::before{
 
   transform:translateX(-50%);
 
-  background:rgba(15,23,42,0.92);
+  background:
+  rgba(15,23,42,0.92);
 
-  border:1px solid rgba(255,255,255,0.08);
+  border:
+  1px solid rgba(255,255,255,0.08);
 
   padding:16px 24px;
 
@@ -491,22 +562,29 @@ body::before{
   z-index:9999;
 
   animation:fadeUp 0.3s ease;
+
 }
 
 @keyframes fadeUp{
 
   from{
+
     opacity:0;
+
     transform:
     translateX(-50%)
     translateY(20px);
+
   }
 
   to{
+
     opacity:1;
+
     transform:
     translateX(-50%)
     translateY(0);
+
   }
 
 }
@@ -514,11 +592,13 @@ body::before{
 /* FOOTER */
 
 .footer{
+
   text-align:center;
 
   padding:40px 20px;
 
   color:#64748b;
+
 }
 
 /* MOBILE */
@@ -560,14 +640,19 @@ body::before{
 <nav class="nav">
 
   <div class="logo">
-    MentorLoop <span>EDU- Premiere</span>
+    MentorLoop <span>EDU</span>
   </div>
 
   <div class="nav-links">
+
     <a href="#">Home</a>
+
     <a href="#">Features</a>
+
     <a href="#">Leaderboard</a>
+
     <a href="#">Community</a>
+
   </div>
 
 </nav>
@@ -583,9 +668,13 @@ body::before{
     </div>
 
     <h1 class="hero-title">
+
       Learn.<br>
+
       Build.<br>
+
       <span>Dominate.</span>
+
     </h1>
 
     <p class="hero-sub">
@@ -633,7 +722,10 @@ body::before{
 
     <!-- APP -->
 
-    <div id="appBox" style="display:none;">
+    <div
+      id="appBox"
+      style="display:none;"
+    >
 
       <div class="welcome">
 
@@ -778,7 +870,6 @@ import {
 
   getAuth,
   GoogleAuthProvider,
-  signInWithPopup,
   signInWithRedirect,
   getRedirectResult,
   onAuthStateChanged,
@@ -787,22 +878,32 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-/* FIREBASE */
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
 
  apiKey: "AIzaSyAltyInwHSCxX3Mi9LjjPUs1767uo70gDQ",
   authDomain: "mentorloop-premiere.firebaseapp.com",
   projectId: "mentorloop-premiere",
+  storageBucket: "mentorloop-premiere.firebasestorage.app",
+  messagingSenderId: "55345483492",
+  appId: "1:55345483492:web:47407fdbd92a2278aea6f1",
+
 };
 
-const app = initializeApp(firebaseConfig);
+const app =
+initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+const db =
+getFirestore(app);
 
-const auth = getAuth(app);
+const auth =
+getAuth(app);
 
-const provider = new GoogleAuthProvider();
+auth.useDeviceLanguage();
+
+const provider =
+new GoogleAuthProvider();
 
 /* TOAST */
 
@@ -818,7 +919,9 @@ function showToast(message){
   document.body.appendChild(toast);
 
   setTimeout(()=>{
+
     toast.remove();
+
   },3000);
 
 }
@@ -828,6 +931,7 @@ function showToast(message){
 function generateUserId(){
 
   return "user_" +
+
   Math.random()
   .toString(36)
   .substring(2,10);
@@ -869,13 +973,21 @@ async function getOrCreatePublicId(user){
 
 async function checkBan(publicId){
 
-  const snap = await getDoc(
-    doc(db,"leaderboard",publicId)
+  const snap =
+  await getDoc(
+    doc(
+      db,
+      "leaderboard",
+      publicId
+    )
   );
 
   if(
+
     snap.exists() &&
+
     snap.data().banned === true
+
   ){
 
     document.body.innerHTML = `
@@ -886,8 +998,8 @@ async function checkBan(publicId){
       justify-content:center;
       align-items:center;
       background:#020617;
-      font-family:Inter;
       color:white;
+      font-family:Inter;
     ">
 
       <div style="
@@ -934,8 +1046,11 @@ function watchBan(publicId){
   onSnapshot(ref,(snap)=>{
 
     if(
+
       snap.exists() &&
+
       snap.data().banned === true
+
     ){
 
       location.reload();
@@ -1009,9 +1124,14 @@ async function handleUser(user){
 
 /* START APP */
 
-async function startApp(name,publicId){
+async function startApp(
+  name,
+  publicId
+){
 
-  if(await checkBan(publicId)) return;
+  if(
+    await checkBan(publicId)
+  ) return;
 
   watchBan(publicId);
 
@@ -1028,7 +1148,9 @@ async function startApp(name,publicId){
   .innerHTML =
   `Welcome back, ${name}`;
 
-  showToast("✅ Logged in successfully");
+  showToast(
+    "✅ Logged in successfully"
+  );
 
 }
 
@@ -1038,77 +1160,28 @@ async function loginWithGoogle(){
 
   try{
 
-    showToast("Opening Google login...");
-
-    const result =
-    await signInWithPopup(
-      auth,
-      provider
+    showToast(
+      "Redirecting to Google..."
     );
 
-    if(!result.user){
-
-      throw new Error(
-        "No user returned"
-      );
-
-    }
-
-    const pid =
-    await handleUser(result.user);
-
-    await startApp(
-      result.user.displayName,
-      pid
+    await signInWithRedirect(
+      auth,
+      provider
     );
 
   }
 
   catch(err){
 
-    console.error(
-      "LOGIN ERROR:",
-      err
-    );
+    console.error(err);
 
-    /* ONLY redirect for REAL popup issues */
-
-    if(
-
-      err.code === "auth/popup-blocked" ||
-
-      err.code ===
-      "auth/cancelled-popup-request" ||
-
-      err.code ===
-      "auth/popup-closed-by-user"
-
-    ){
-
-      showToast(
-        "Redirecting login..."
-      );
-
-      await signInWithRedirect(
-        auth,
-        provider
-      );
-
-    }
-
-    else{
-
-      showToast(
-        "❌ " + err.message
-      );
-
-    }
+    showToast(err.message);
 
   }
 
 }
 
-/* BUTTON LISTENER */
+/* BUTTON */
 
 document
 .getElementById("googleBtn")
@@ -1117,7 +1190,7 @@ document
   loginWithGoogle
 );
 
-/* REDIRECT RESULT */
+/* REDIRECT RESULT FIRST */
 
 getRedirectResult(auth)
 
@@ -1142,7 +1215,7 @@ getRedirectResult(auth)
   console.error(err);
 
   showToast(
-    "Redirect login failed"
+    "Login failed"
   );
 
 });
@@ -1167,7 +1240,8 @@ onAuthStateChanged(
 
 /* LOGOUT */
 
-window.logout = async function(){
+window.logout =
+async function(){
 
   await signOut(auth);
 
