@@ -62,6 +62,64 @@ z-index:-2;
 
 }
 
+/* GLOW */
+
+.orb{
+
+position:fixed;
+
+border-radius:50%;
+
+filter:blur(90px);
+
+opacity:0.22;
+
+z-index:-1;
+
+animation:float 10s ease-in-out infinite;
+
+}
+
+.orb1{
+
+width:320px;
+height:320px;
+
+background:#22d3ee;
+
+top:-120px;
+left:-120px;
+
+}
+
+.orb2{
+
+width:320px;
+height:320px;
+
+background:#8b5cf6;
+
+bottom:-120px;
+right:-120px;
+
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(30px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
 /* NAVBAR */
 
 .navbar{
@@ -134,10 +192,40 @@ font-weight:600;
 
 transition:0.3s;
 
+position:relative;
+
 }
 
 .nav-links a:hover{
 color:white;
+}
+
+.nav-links a::after{
+
+content:'';
+
+position:absolute;
+
+left:0;
+bottom:-8px;
+
+width:0%;
+
+height:2px;
+
+background:
+linear-gradient(
+90deg,
+#22d3ee,
+#8b5cf6
+);
+
+transition:0.3s;
+
+}
+
+.nav-links a:hover::after{
+width:100%;
 }
 
 /* PROFILE */
@@ -162,7 +250,7 @@ border-radius:50%;
 object-fit:cover;
 
 border:
-2px solid rgba(255,255,255,0.1);
+2px solid rgba(255,255,255,0.08);
 
 }
 
@@ -191,9 +279,9 @@ border:
 
 backdrop-filter:blur(20px);
 
-border-radius:34px;
+border-radius:36px;
 
-padding:40px;
+padding:42px;
 
 position:relative;
 
@@ -220,9 +308,35 @@ right:-120px;
 
 }
 
+.hero-badge{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:10px;
+
+padding:12px 18px;
+
+border-radius:999px;
+
+background:
+rgba(34,211,238,0.08);
+
+border:
+1px solid rgba(34,211,238,0.16);
+
+color:#7dd3fc;
+
+font-weight:700;
+
+margin-bottom:26px;
+
+}
+
 .hero h1{
 
-font-size:58px;
+font-size:62px;
 
 font-weight:900;
 
@@ -232,13 +346,13 @@ line-height:1;
 
 .hero p{
 
-margin-top:16px;
+margin-top:18px;
 
 font-size:18px;
 
-color:#94a3b8;
+line-height:1.8;
 
-line-height:1.7;
+color:#94a3b8;
 
 }
 
@@ -246,7 +360,7 @@ line-height:1.7;
 
 #myPublicId{
 
-margin-top:20px;
+margin-top:22px;
 
 display:inline-block;
 
@@ -266,8 +380,6 @@ font-weight:700;
 
 font-size:15px;
 
-letter-spacing:0.4px;
-
 }
 
 /* STATS */
@@ -281,7 +393,7 @@ repeat(auto-fit,minmax(220px,1fr));
 
 gap:18px;
 
-margin-top:30px;
+margin-top:34px;
 
 }
 
@@ -293,9 +405,9 @@ rgba(255,255,255,0.05);
 border:
 1px solid rgba(255,255,255,0.08);
 
-border-radius:24px;
+border-radius:26px;
 
-padding:26px;
+padding:28px;
 
 transition:0.3s;
 
@@ -313,7 +425,7 @@ box-shadow:
 
 .stat h2{
 
-font-size:46px;
+font-size:48px;
 
 font-weight:900;
 
@@ -334,7 +446,7 @@ display:grid;
 grid-template-columns:
 repeat(auto-fit,minmax(340px,1fr));
 
-gap:22px;
+gap:24px;
 
 margin-top:26px;
 
@@ -352,17 +464,34 @@ border:
 
 backdrop-filter:blur(20px);
 
-border-radius:30px;
+border-radius:32px;
 
-padding:28px;
+padding:30px;
+
+position:relative;
+
+overflow:hidden;
+
+isolation:isolate;
 
 }
 
-.card h2{
+.card::before{
 
-margin-bottom:20px;
+content:'';
 
-font-size:28px;
+position:absolute;
+
+inset:0;
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,0.05),
+transparent
+);
+
+z-index:-1;
 
 }
 
@@ -389,9 +518,9 @@ rgba(255,255,255,0.05);
 border:
 1px solid rgba(255,255,255,0.08);
 
-border-radius:22px;
+border-radius:24px;
 
-padding:24px;
+padding:26px;
 
 color:white;
 
@@ -433,28 +562,30 @@ margin-bottom:20px;
 
 flex:1;
 
-padding:14px;
+padding:15px;
 
 border:none;
 
 outline:none;
 
-border-radius:16px;
+border-radius:18px;
 
 background:
 rgba(255,255,255,0.06);
 
 color:white;
 
+font-size:15px;
+
 }
 
 .add-friend-box button{
 
-padding:14px 18px;
+padding:15px 18px;
 
 border:none;
 
-border-radius:16px;
+border-radius:18px;
 
 background:
 linear-gradient(
@@ -468,6 +599,15 @@ color:white;
 font-weight:700;
 
 cursor:pointer;
+
+transition:0.3s;
+
+}
+
+.add-friend-box button:hover{
+
+transform:
+translateY(-4px);
 
 }
 
@@ -566,36 +706,25 @@ color:#cbd5e1;
 @media(max-width:768px){
 
 .navbar{
-
 padding:18px 20px;
-
 }
 
 .nav-links{
-
 gap:18px;
-
 font-size:14px;
-
 }
 
 .main{
-
 padding:
 120px 18px 18px;
-
 }
 
 .hero h1{
-
 font-size:42px;
-
 }
 
 .nav-grid{
-
 grid-template-columns:1fr;
-
 }
 
 }
@@ -604,6 +733,11 @@ grid-template-columns:1fr;
 </head>
 
 <body>
+
+<!-- GLOW -->
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
 
 <!-- NAVBAR -->
 
@@ -615,7 +749,7 @@ MentorLoop <span>EDU</span>
 
 <div class="nav-links">
 
-<a href="index.html">
+<a href="home.html">
 Home
 </a>
 
@@ -638,7 +772,7 @@ Community
 <img
 id="userPhoto"
 class="user-photo"
-src="https://ui-avatars.com/api/?name=User"
+src="https://ui-avatars.com/api/?name=MentorLoop"
 >
 
 </div>
@@ -653,6 +787,10 @@ src="https://ui-avatars.com/api/?name=User"
 
 <div class="hero">
 
+<div class="hero-badge">
+🔥 ACTIVE LEARNER
+</div>
+
 <h1 id="welcomeName">
 Welcome back 👋
 </h1>
@@ -662,7 +800,7 @@ Loading ID...
 </p>
 
 <p>
-Stay consistent. Small progress every day becomes huge results.
+Stay consistent. Small progress every day becomes massive results.
 </p>
 
 <div class="stats">
@@ -947,21 +1085,37 @@ async(user)=>{
 
 if(!user) return;
 
+/* LOCAL DATA */
+
+const localPhoto =
+
+localStorage.getItem(
+"mentorloop_photo"
+);
+
+const localName =
+
+localStorage.getItem(
+"mentorloop_name"
+);
+
 /* PHOTO */
 
-const photo =
+document
+.getElementById("userPhoto")
+.src =
+
+localPhoto ||
 
 user.photoURL ||
 
 "https://ui-avatars.com/api/?name=" +
 
 encodeURIComponent(
-user.displayName || "User"
+localName ||
+user.displayName ||
+"MentorLoop"
 );
-
-document
-.getElementById("userPhoto")
-.src = photo;
 
 /* WELCOME */
 
@@ -970,9 +1124,21 @@ document
 .innerHTML =
 
 `Welcome back,
-${user.displayName} 👋`;
+${localName ||
+user.displayName ||
+"User"} 👋`;
 
-/* PUBLIC ID */
+/* FAST LOCAL ID */
+
+currentPublicId =
+
+localStorage.getItem(
+"mentorloop_public_id"
+);
+
+/* FALLBACK */
+
+if(!currentPublicId){
 
 const mapSnap =
 
@@ -989,6 +1155,13 @@ if(!mapSnap.exists()) return;
 currentPublicId =
 
 mapSnap.data().publicId;
+
+localStorage.setItem(
+"mentorloop_public_id",
+currentPublicId
+);
+
+}
 
 /* SHOW ID */
 
@@ -1033,7 +1206,7 @@ data.streak || 0;
 
 }
 
-/* FRIENDS */
+/* LOAD FRIENDS */
 
 loadFriends();
 
