@@ -3,66 +3,42 @@
 
 <head>
 
-<meta charset="UTF-8"/>
+<meta charset="UTF-8">
 
 <meta
 name="viewport"
 content="width=device-width, initial-scale=1.0"
-/>
+>
 
 <title>MentorLoop Dashboard</title>
 
 <link
 href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
 rel="stylesheet"
-/>
+>
 
 <style>
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
-
-:root{
-
-  --bg:#020617;
-
-  --card:
-  rgba(15,23,42,0.72);
-
-  --border:
-  rgba(255,255,255,0.08);
-
-  --cyan:#22d3ee;
-
-  --purple:#8b5cf6;
-
-  --green:#10b981;
-
-  --text:#ffffff;
-
-  --muted:#94a3b8;
-
-}
-
-/* BODY */
 
 body{
 
-  font-family:'Inter',sans-serif;
+font-family:'Inter',sans-serif;
 
-  background:
-  radial-gradient(circle at top left,#0891b2 0%,transparent 30%),
-  radial-gradient(circle at bottom right,#8b5cf6 0%,transparent 30%),
-  var(--bg);
+background:
+radial-gradient(circle at top left,#0891b2 0%,transparent 30%),
+radial-gradient(circle at bottom right,#8b5cf6 0%,transparent 30%),
+#020617;
 
-  color:white;
+color:white;
 
-  min-height:100vh;
+min-height:100vh;
 
-  overflow-x:hidden;
+overflow-x:hidden;
 
 }
 
@@ -70,77 +46,19 @@ body{
 
 body::before{
 
-  content:'';
+content:'';
 
-  position:fixed;
+position:fixed;
 
-  inset:0;
+inset:0;
 
-  background-image:
-  linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-  linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+background-image:
+linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
 
-  background-size:40px 40px;
+background-size:40px 40px;
 
-  z-index:-2;
-
-}
-
-/* ORBS */
-
-.orb{
-
-  position:fixed;
-
-  border-radius:50%;
-
-  filter:blur(90px);
-
-  opacity:0.25;
-
-  z-index:-1;
-
-  animation:float 10s infinite ease-in-out;
-
-}
-
-.orb1{
-
-  width:300px;
-  height:300px;
-
-  background:#22d3ee;
-
-  top:-100px;
-  left:-100px;
-
-}
-
-.orb2{
-
-  width:300px;
-  height:300px;
-
-  background:#8b5cf6;
-
-  bottom:-100px;
-  right:-100px;
-
-}
-
-@keyframes float{
-
-  0%{
-    transform:translateY(0px);
-  }
-
-  50%{
-    transform:translateY(30px);
-  }
-
-  100%{
-    transform:translateY(0px);
-  }
+z-index:-2;
 
 }
 
@@ -148,129 +66,103 @@ body::before{
 
 .navbar{
 
-  position:fixed;
+position:fixed;
 
-  top:0;
-  left:0;
+top:0;
+left:0;
 
-  width:100%;
+width:100%;
 
-  display:flex;
+display:flex;
 
-  justify-content:space-between;
+justify-content:space-between;
 
-  align-items:center;
+align-items:center;
 
-  padding:18px 40px;
+padding:20px 40px;
 
-  background:
-  rgba(15,23,42,0.75);
+background:
+rgba(15,23,42,0.72);
 
-  backdrop-filter:blur(20px);
+backdrop-filter:blur(20px);
 
-  border-bottom:
-  1px solid rgba(255,255,255,0.06);
+border-bottom:
+1px solid rgba(255,255,255,0.06);
 
-  z-index:9999;
+z-index:999;
 
 }
 
-/* LOGO */
-
 .logo{
 
-  font-size:28px;
+font-size:28px;
 
-  font-weight:900;
+font-weight:900;
 
 }
 
 .logo span{
 
-  background:
-  linear-gradient(
-    90deg,
-    #22d3ee,
-    #8b5cf6
-  );
+background:
+linear-gradient(
+90deg,
+#22d3ee,
+#8b5cf6
+);
 
-  -webkit-background-clip:text;
+-webkit-background-clip:text;
 
-  -webkit-text-fill-color:transparent;
-
-}
-
-/* NAV LINKS */
-
-.nav-center{
-
-  display:flex;
-
-  gap:34px;
+-webkit-text-fill-color:transparent;
 
 }
 
-.nav-center a{
+.nav-links{
 
-  text-decoration:none;
+display:flex;
 
-  color:#cbd5e1;
-
-  font-weight:600;
-
-  transition:0.3s;
-
-  position:relative;
+gap:32px;
 
 }
 
-.nav-center a:hover{
+.nav-links a{
 
-  color:white;
+text-decoration:none;
 
-}
+color:#cbd5e1;
 
-.nav-center a::after{
+font-weight:600;
 
-  content:'';
-
-  position:absolute;
-
-  left:0;
-  bottom:-8px;
-
-  width:0%;
-
-  height:2px;
-
-  background:
-  linear-gradient(
-    90deg,
-    #22d3ee,
-    #8b5cf6
-  );
-
-  transition:0.3s;
+transition:0.3s;
 
 }
 
-.nav-center a:hover::after{
-
-  width:100%;
-
+.nav-links a:hover{
+color:white;
 }
 
-/* USER PHOTO */
+/* PROFILE */
+
+.profile{
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+}
 
 .user-photo{
 
-  width:46px;
-  height:46px;
+width:48px;
+height:48px;
 
-  border-radius:50%;
+border-radius:50%;
 
-  border:
-  2px solid rgba(255,255,255,0.15);
+object-fit:cover;
+
+border:
+2px solid rgba(255,255,255,0.1);
 
 }
 
@@ -278,10 +170,12 @@ body::before{
 
 .main{
 
-  width:100%;
+padding:
+130px 30px 40px;
 
-  padding:
-  120px 30px 30px;
+max-width:1500px;
+
+margin:auto;
 
 }
 
@@ -289,142 +183,145 @@ body::before{
 
 .hero{
 
-  background:var(--card);
+background:
+rgba(15,23,42,0.72);
 
-  border:
-  1px solid var(--border);
+border:
+1px solid rgba(255,255,255,0.08);
 
-  backdrop-filter:blur(20px);
+backdrop-filter:blur(20px);
 
-  border-radius:32px;
+border-radius:34px;
 
-  padding:35px;
+padding:40px;
 
-  position:relative;
+position:relative;
 
-  overflow:hidden;
+overflow:hidden;
 
 }
 
 .hero::before{
 
-  content:'';
+content:'';
 
-  position:absolute;
+position:absolute;
 
-  width:320px;
-  height:320px;
+width:260px;
+height:260px;
 
-  border-radius:50%;
+border-radius:50%;
 
-  background:
-  rgba(255,255,255,0.03);
+background:
+rgba(255,255,255,0.03);
 
-  top:-140px;
-  right:-140px;
-
-}
-
-.live-tag{
-
-  display:inline-flex;
-
-  align-items:center;
-
-  gap:10px;
-
-  padding:10px 16px;
-
-  border-radius:999px;
-
-  background:
-  rgba(34,211,238,0.1);
-
-  border:
-  1px solid rgba(34,211,238,0.2);
-
-  color:#7dd3fc;
-
-  font-size:14px;
-
-  font-weight:700;
-
-  margin-bottom:20px;
+top:-120px;
+right:-120px;
 
 }
 
 .hero h1{
 
-  font-size:52px;
+font-size:58px;
 
-  font-weight:900;
+font-weight:900;
 
-  line-height:1.1;
+line-height:1;
 
 }
 
 .hero p{
 
-  margin-top:14px;
+margin-top:16px;
 
-  color:#94a3b8;
+font-size:18px;
 
-  font-size:18px;
+color:#94a3b8;
+
+line-height:1.7;
+
+}
+
+/* USER ID */
+
+#myPublicId{
+
+margin-top:20px;
+
+display:inline-block;
+
+padding:12px 18px;
+
+border-radius:18px;
+
+background:
+rgba(34,211,238,0.08);
+
+border:
+1px solid rgba(34,211,238,0.14);
+
+color:#7dd3fc;
+
+font-weight:700;
+
+font-size:15px;
+
+letter-spacing:0.4px;
 
 }
 
 /* STATS */
 
-.quick-stats{
+.stats{
 
-  margin-top:28px;
+display:grid;
 
-  display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
 
-  grid-template-columns:
-  repeat(auto-fit,minmax(180px,1fr));
+gap:18px;
 
-  gap:18px;
-
-}
-
-.quick-card{
-
-  background:
-  rgba(255,255,255,0.05);
-
-  border:
-  1px solid rgba(255,255,255,0.08);
-
-  border-radius:24px;
-
-  padding:24px;
-
-  transition:0.3s;
+margin-top:30px;
 
 }
 
-.quick-card:hover{
+.stat{
 
-  transform:
-  translateY(-6px);
+background:
+rgba(255,255,255,0.05);
 
-  box-shadow:
-  0 18px 50px rgba(34,211,238,0.12);
+border:
+1px solid rgba(255,255,255,0.08);
 
-}
+border-radius:24px;
 
-.quick-card h2{
+padding:26px;
 
-  font-size:42px;
-
-  font-weight:900;
+transition:0.3s;
 
 }
 
-.quick-card span{
+.stat:hover{
 
-  color:#94a3b8;
+transform:
+translateY(-6px);
+
+box-shadow:
+0 20px 60px rgba(34,211,238,0.12);
+
+}
+
+.stat h2{
+
+font-size:46px;
+
+font-weight:900;
+
+}
+
+.stat span{
+
+color:#94a3b8;
 
 }
 
@@ -432,14 +329,14 @@ body::before{
 
 .grid{
 
-  margin-top:24px;
+display:grid;
 
-  display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(340px,1fr));
 
-  grid-template-columns:
-  repeat(auto-fit,minmax(300px,1fr));
+gap:22px;
 
-  gap:20px;
+margin-top:26px;
 
 }
 
@@ -447,146 +344,220 @@ body::before{
 
 .card{
 
-  background:var(--card);
+background:
+rgba(15,23,42,0.72);
 
-  border:
-  1px solid var(--border);
+border:
+1px solid rgba(255,255,255,0.08);
 
-  backdrop-filter:blur(20px);
+backdrop-filter:blur(20px);
 
-  border-radius:28px;
+border-radius:30px;
 
-  padding:26px;
-
-  transition:0.35s;
-
-}
-
-.card:hover{
-
-  transform:
-  translateY(-8px);
-
-  box-shadow:
-  0 20px 60px rgba(34,211,238,0.12);
+padding:28px;
 
 }
 
 .card h2{
 
-  margin-bottom:18px;
+margin-bottom:20px;
 
-  font-size:24px;
+font-size:28px;
 
 }
 
-/* NAV BUTTONS */
+/* NAVIGATION */
 
 .nav-grid{
 
-  display:grid;
+display:grid;
 
-  grid-template-columns:
-  repeat(2,1fr);
+grid-template-columns:
+repeat(2,1fr);
 
-  gap:14px;
+gap:16px;
 
 }
 
 .nav-btn{
 
-  text-decoration:none;
+text-decoration:none;
 
-  background:
-  rgba(255,255,255,0.05);
+background:
+rgba(255,255,255,0.05);
 
-  border:
-  1px solid rgba(255,255,255,0.08);
+border:
+1px solid rgba(255,255,255,0.08);
 
-  border-radius:22px;
+border-radius:22px;
 
-  padding:20px;
+padding:24px;
 
-  color:white;
+color:white;
 
-  transition:0.3s;
+transition:0.3s;
 
 }
 
 .nav-btn:hover{
 
-  transform:
-  scale(1.04);
+transform:
+translateY(-6px);
 
-  background:
-  rgba(34,211,238,0.12);
+background:
+rgba(34,211,238,0.1);
 
 }
 
 .nav-btn h3{
 
-  margin-top:12px;
+margin-top:14px;
+
+font-size:22px;
 
 }
 
 /* FRIENDS */
 
+.add-friend-box{
+
+display:flex;
+
+gap:12px;
+
+margin-bottom:20px;
+
+}
+
+.add-friend-box input{
+
+flex:1;
+
+padding:14px;
+
+border:none;
+
+outline:none;
+
+border-radius:16px;
+
+background:
+rgba(255,255,255,0.06);
+
+color:white;
+
+}
+
+.add-friend-box button{
+
+padding:14px 18px;
+
+border:none;
+
+border-radius:16px;
+
+background:
+linear-gradient(
+90deg,
+#22d3ee,
+#8b5cf6
+);
+
+color:white;
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
 .friend{
 
-  display:flex;
+display:flex;
 
-  justify-content:space-between;
+justify-content:space-between;
 
-  align-items:center;
+align-items:center;
 
-  padding:14px;
+padding:16px;
 
-  border-radius:18px;
+border-radius:20px;
 
-  background:
-  rgba(255,255,255,0.04);
+background:
+rgba(255,255,255,0.04);
 
-  margin-top:12px;
+margin-top:14px;
+
+border:
+1px solid rgba(255,255,255,0.05);
+
+}
+
+.friend-left{
+
+display:flex;
+
+flex-direction:column;
+
+gap:4px;
+
+}
+
+.friend-name{
+
+font-weight:700;
+
+font-size:16px;
+
+}
+
+.friend-id{
+
+font-size:13px;
+
+color:#94a3b8;
 
 }
 
 .online{
 
-  color:#10b981;
+color:#10b981;
 
-  font-size:14px;
+font-size:14px;
 
-  font-weight:700;
+font-weight:700;
 
 }
 
-/* QUOTE */
+/* MOTIVATION */
 
 .quote{
 
-  font-size:20px;
+font-size:22px;
 
-  line-height:1.7;
+line-height:1.7;
 
-  color:#e2e8f0;
+color:#e2e8f0;
 
 }
 
 .fact{
 
-  margin-top:18px;
+margin-top:20px;
 
-  padding:18px;
+padding:18px;
 
-  border-radius:18px;
+border-radius:18px;
 
-  background:
-  rgba(34,211,238,0.08);
+background:
+rgba(34,211,238,0.08);
 
-  border:
-  1px solid rgba(34,211,238,0.12);
+border:
+1px solid rgba(34,211,238,0.12);
 
-  line-height:1.6;
+line-height:1.7;
+
+color:#cbd5e1;
 
 }
 
@@ -594,38 +565,38 @@ body::before{
 
 @media(max-width:768px){
 
-  .navbar{
+.navbar{
 
-    padding:18px 20px;
+padding:18px 20px;
 
-  }
+}
 
-  .nav-center{
+.nav-links{
 
-    gap:18px;
+gap:18px;
 
-    font-size:14px;
+font-size:14px;
 
-  }
+}
 
-  .logo{
+.main{
 
-    font-size:22px;
+padding:
+120px 18px 18px;
 
-  }
+}
 
-  .hero h1{
-    font-size:38px;
-  }
+.hero h1{
 
-  .main{
-    padding:
-    110px 18px 18px;
-  }
+font-size:42px;
 
-  .nav-grid{
-    grid-template-columns:1fr;
-  }
+}
+
+.nav-grid{
+
+grid-template-columns:1fr;
+
+}
 
 }
 
@@ -634,46 +605,43 @@ body::before{
 
 <body>
 
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-
 <!-- NAVBAR -->
 
 <nav class="navbar">
 
-  <div class="logo">
-    MentorLoop <span>EDU</span>
-  </div>
+<div class="logo">
+MentorLoop <span>EDU</span>
+</div>
 
-  <div class="nav-center">
+<div class="nav-links">
 
-    <a href="index.html">
-      Home
-    </a>
+<a href="index.html">
+Home
+</a>
 
-    <a href="index.html">
-      Features
-    </a>
+<a href="features.html">
+Features
+</a>
 
-    <a href="leaderboard.html">
-      Leaderboard
-    </a>
+<a href="leaderboard.html">
+Leaderboard
+</a>
 
-    <a href="chat.html.html">
-      Community
-    </a>
+<a href="chat.html">
+Community
+</a>
 
-  </div>
+</div>
 
-  <div class="nav-right">
+<div class="profile">
 
-   <img
-  id="userPhoto"
-  class="user-photo"
-  src="https://ui-avatars.com/api/?name=User&background=0f172a&color=ffffff"
+<img
+id="userPhoto"
+class="user-photo"
+src="https://ui-avatars.com/api/?name=User"
 >
 
-  </div>
+</div>
 
 </nav>
 
@@ -685,21 +653,21 @@ body::before{
 
 <div class="hero">
 
-<div class="live-tag">
-🔥 ACTIVE LEARNER
-</div>
-
 <h1 id="welcomeName">
 Welcome back 👋
 </h1>
+
+<p id="myPublicId">
+Loading ID...
+</p>
 
 <p>
 Stay consistent. Small progress every day becomes huge results.
 </p>
 
-<div class="quick-stats">
+<div class="stats">
 
-<div class="quick-card">
+<div class="stat">
 
 <h2 id="points">
 0
@@ -711,7 +679,7 @@ Total Points
 
 </div>
 
-<div class="quick-card">
+<div class="stat">
 
 <h2 id="streak">
 0
@@ -723,7 +691,7 @@ Day Streak
 
 </div>
 
-<div class="quick-card">
+<div class="stat">
 
 <h2 id="friendCount">
 0
@@ -748,7 +716,7 @@ Friends
 <div class="card">
 
 <h2>
-⚡ Quick Navigation
+⚡ Navigation
 </h2>
 
 <div class="nav-grid">
@@ -761,46 +729,46 @@ class="nav-btn"
 🎮
 
 <h3>
-Play Quiz
+Quizzes
 </h3>
 
 </a>
 
 <a
-href="battle-mode.html"
+href="profile.html"
 class="nav-btn"
 >
 
-⚔
+👤
 
 <h3>
-Battle Mode
+Profile
 </h3>
 
 </a>
 
 <a
-href="leaderboard.html"
+href="teacher.html"
 class="nav-btn"
 >
 
-🏆
+🎓
 
 <h3>
-Leaderboard
+Teacher Zone
 </h3>
 
 </a>
 
 <a
-href="chat.html"
+href="https://learning-ai-2.streamlit.app/"
 class="nav-btn"
 >
 
-💬
+🤖
 
 <h3>
-Friends Chat
+AI Doubt Solver
 </h3>
 
 </a>
@@ -817,6 +785,21 @@ Friends Chat
 👥 Friends
 </h2>
 
+<div class="add-friend-box">
+
+<input
+id="friendInput"
+type="text"
+placeholder="Enter friend's ID and press Enter"
+onkeydown="handleFriendEnter(event)"
+>
+
+<button onclick="addFriend()">
++ Add Friend
+</button>
+
+</div>
+
 <div id="friendsList"></div>
 
 </div>
@@ -829,12 +812,16 @@ Friends Chat
 🚀 Motivation
 </h2>
 
-<div class="quote" id="quote">
-Loading quote...
+<div
+class="quote"
+id="quote"
+>
 </div>
 
-<div class="fact" id="fact">
-Loading fact...
+<div
+class="fact"
+id="fact"
+>
 </div>
 
 </div>
@@ -850,21 +837,22 @@ from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
 import {
 
-  getFirestore,
-  doc,
-  getDoc,
-  collection,
-  getDocs
+getFirestore,
+doc,
+getDoc,
+setDoc,
+collection,
+getDocs
 
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 import {
 
-  getAuth,
-  onAuthStateChanged,
-  browserLocalPersistence,
-  setPersistence
+getAuth,
+onAuthStateChanged,
+browserLocalPersistence,
+setPersistence
 
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -873,12 +861,17 @@ from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
 
- apiKey: "AIzaSyAltyInwHSCxX3Mi9LjjPUs1767uo70gDQ",
-  authDomain: "mentorloop-premiere.firebaseapp.com",
-  projectId: "mentorloop-premiere",
-  storageBucket: "mentorloop-premiere.firebasestorage.app",
-  messagingSenderId: "55345483492",
-  appId: "1:55345483492:web:47407fdbd92a2278aea6f1",
+apiKey:"YOUR_API_KEY",
+
+authDomain:"YOUR_AUTH_DOMAIN",
+
+projectId:"YOUR_PROJECT_ID",
+
+storageBucket:"YOUR_STORAGE_BUCKET",
+
+messagingSenderId:"YOUR_SENDER_ID",
+
+appId:"YOUR_APP_ID"
 
 };
 
@@ -891,42 +884,36 @@ getFirestore(app);
 const auth =
 getAuth(app);
 
-/* PERSISTENCE */
-
 await setPersistence(
-  auth,
-  browserLocalPersistence
+auth,
+browserLocalPersistence
 );
 
 /* QUOTES */
 
 const quotes = [
 
-  "Success is built from consistency, not motivation.",
+"Consistency beats intensity.",
 
-  "Every expert was once a beginner.",
+"Every expert started as a beginner.",
 
-  "Learning compounds like interest.",
+"Learning compounds daily.",
 
-  "Small progress daily beats perfection occasionally."
+"Small progress still matters."
 
 ];
-
-/* FACTS */
 
 const facts = [
 
-  "Your brain forms stronger neural connections when you practice consistently.",
+"Sleep improves memory retention.",
 
-  "Studying in short focused sessions improves memory retention.",
+"Teaching others improves learning.",
 
-  "Sleep helps your brain store what you learned.",
+"Short study sessions improve focus.",
 
-  "Teaching someone else is one of the best ways to learn."
+"Practice strengthens neural pathways."
 
 ];
-
-/* RANDOM CONTENT */
 
 document
 .getElementById("quote")
@@ -934,7 +921,7 @@ document
 
 quotes[
 Math.floor(
-Math.random() * quotes.length
+Math.random()*quotes.length
 )
 ];
 
@@ -944,189 +931,365 @@ document
 
 facts[
 Math.floor(
-Math.random() * facts.length
+Math.random()*facts.length
 )
 ];
+
+/* GLOBAL */
+
+let currentPublicId = null;
 
 /* AUTH */
 
 onAuthStateChanged(
-  auth,
-  async(user)=>{
+auth,
+async(user)=>{
 
-    console.log(
-      "AUTH STATE:",
-      user
-    );
+if(!user) return;
 
-    /* NO REDIRECT */
+/* PHOTO */
 
-    if(!user){
+const photo =
 
-      console.log(
-        "User not logged in"
-      );
+user.photoURL ||
 
-      return;
+"https://ui-avatars.com/api/?name=" +
 
-    }
+encodeURIComponent(
+user.displayName || "User"
+);
 
-    /* USER PHOTO */
+document
+.getElementById("userPhoto")
+.src = photo;
 
-    document
-    .getElementById("userPhoto")
-    .src =
+/* WELCOME */
 
-    user.photoURL || "";
+document
+.getElementById("welcomeName")
+.innerHTML =
 
-    /* WELCOME */
+`Welcome back,
+${user.displayName} 👋`;
 
-    document
-    .getElementById("welcomeName")
-    .innerHTML =
+/* PUBLIC ID */
 
-    `Welcome back,
-    ${user.displayName} 👋`;
+const mapSnap =
 
-    /* PUBLIC ID */
+await getDoc(
+doc(
+db,
+"user_map",
+user.uid
+)
+);
 
-    const mapSnap =
-    await getDoc(
+if(!mapSnap.exists()) return;
 
-      doc(
-        db,
-        "user_map",
-        user.uid
-      )
+currentPublicId =
 
-    );
+mapSnap.data().publicId;
 
-    if(!mapSnap.exists()){
+/* SHOW ID */
 
-      console.error(
-        "Public ID missing"
-      );
+document
+.getElementById("myPublicId")
+.innerHTML =
 
-      return;
+"🆔 Your Friend ID: <b>" +
 
-    }
+currentPublicId +
 
-    const publicId =
-    mapSnap.data().publicId;
+"</b>";
 
-    /* LEADERBOARD */
+/* LEADERBOARD */
 
-    const lbSnap =
-    await getDoc(
+const lbSnap =
 
-      doc(
-        db,
-        "leaderboard",
-        publicId
-      )
+await getDoc(
+doc(
+db,
+"leaderboard",
+currentPublicId
+)
+);
 
-    );
+if(lbSnap.exists()){
 
-    if(lbSnap.exists()){
+const data =
+lbSnap.data();
 
-      const data =
-      lbSnap.data();
+document
+.getElementById("points")
+.innerText =
 
-      document
-      .getElementById("points")
-      .innerText =
+data.points || 0;
 
-      data.points || 0;
+document
+.getElementById("streak")
+.innerText =
 
-      document
-      .getElementById("streak")
-      .innerText =
+data.streak || 0;
 
-      data.streak || 0;
+}
 
-    }
+/* FRIENDS */
 
-    /* FRIENDS */
+loadFriends();
 
-    const friendsRef =
-    collection(
-      db,
-      "users",
-      publicId,
-      "friends"
-    );
+}
+);
 
-    const friendsSnap =
-    await getDocs(
-      friendsRef
-    );
+/* LOAD FRIENDS */
 
-    document
-    .getElementById("friendCount")
-    .innerText =
+async function loadFriends(){
 
-    friendsSnap.size;
+const friendsList =
 
-    const friendsList =
-    document
-    .getElementById(
-      "friendsList"
-    );
+document.getElementById(
+"friendsList"
+);
 
-    friendsList.innerHTML = "";
+friendsList.innerHTML = "";
 
-    if(friendsSnap.empty){
+const friendsSnap =
 
-      friendsList.innerHTML =
+await getDocs(
 
-      `
-      <p style="
-      color:#94a3b8;
-      ">
-      No friends added yet.
-      </p>
-      `;
+collection(
+db,
+"users",
+currentPublicId,
+"friends"
+)
 
-    }
+);
 
-    else{
+document
+.getElementById("friendCount")
+.innerText =
 
-      friendsSnap.forEach(docu=>{
+friendsSnap.size;
 
-        const data =
-        docu.data();
+if(friendsSnap.empty){
 
-        const div =
-        document
-        .createElement("div");
+friendsList.innerHTML =
 
-        div.className =
-        "friend";
+`
+<p style="
+color:#94a3b8;
+">
+No friends yet.
+</p>
+`;
 
-        div.innerHTML =
+return;
 
-        `
-        <span>
-        ${data.name}
-        </span>
+}
 
-        <span class="online">
-        ● Online
-        </span>
-        `;
+friendsSnap.forEach(docu=>{
 
-        friendsList
-        .appendChild(div);
+const data =
+docu.data();
 
-      });
+const div =
+document.createElement("div");
 
-    }
+div.className =
+"friend";
 
-    console.log(
-      "Dashboard loaded successfully"
-    );
+div.innerHTML = `
+
+<div class="friend-left">
+
+<div class="friend-name">
+${data.name}
+</div>
+
+<div class="friend-id">
+ID: ${data.publicId}
+</div>
+
+</div>
+
+<span class="online">
+● Friend
+</span>
+
+`;
+
+friendsList.appendChild(div);
 
 });
+
+}
+
+/* ADD FRIEND */
+
+window.addFriend =
+async function(){
+
+const friendId =
+
+document
+.getElementById("friendInput")
+.value
+.trim();
+
+if(!friendId){
+
+alert(
+"Enter a public ID"
+);
+
+return;
+
+}
+
+if(friendId === currentPublicId){
+
+alert(
+"You cannot add yourself"
+);
+
+return;
+
+}
+
+try{
+
+const friendSnap =
+
+await getDoc(
+
+doc(
+db,
+"users",
+friendId
+)
+
+);
+
+if(!friendSnap.exists()){
+
+alert(
+"User not found"
+);
+
+return;
+
+}
+
+const friendData =
+friendSnap.data();
+
+const mySnap =
+
+await getDoc(
+
+doc(
+db,
+"users",
+currentPublicId
+)
+
+);
+
+const myData =
+mySnap.data();
+
+/* SAVE FOR ME */
+
+await setDoc(
+
+doc(
+db,
+"users",
+currentPublicId,
+"friends",
+friendId
+),
+
+{
+
+name:
+friendData.name,
+
+publicId:
+friendId,
+
+photo:
+friendData.photo || ""
+
+}
+
+);
+
+/* SAVE FOR FRIEND */
+
+await setDoc(
+
+doc(
+db,
+"users",
+friendId,
+"friends",
+currentPublicId
+),
+
+{
+
+name:
+myData.name,
+
+publicId:
+currentPublicId,
+
+photo:
+myData.photo || ""
+
+}
+
+);
+
+document
+.getElementById("friendInput")
+.value = "";
+
+loadFriends();
+
+alert(
+"Friend added successfully!"
+);
+
+}
+
+catch(err){
+
+console.error(err);
+
+alert(
+"Failed to add friend"
+);
+
+}
+
+}
+
+/* ENTER KEY */
+
+window.handleFriendEnter =
+function(event){
+
+if(event.key === "Enter"){
+
+event.preventDefault();
+
+addFriend();
+
+}
+
+}
 
 </script>
 
