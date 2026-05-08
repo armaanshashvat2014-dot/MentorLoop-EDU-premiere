@@ -1,11 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
 <title>MentorLoop Games</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+rel="stylesheet"
+>
 
 <style>
 
@@ -16,309 +26,563 @@ box-sizing:border-box;
 }
 
 body{
+
 font-family:'Inter',sans-serif;
+
 background:
 radial-gradient(circle at top left,#0891b2 0%,transparent 30%),
 radial-gradient(circle at bottom right,#8b5cf6 0%,transparent 30%),
 #020617;
+
 color:white;
+
 min-height:100vh;
+
 overflow-x:hidden;
+
 }
 
 body::before{
+
 content:'';
+
 position:fixed;
+
 inset:0;
+
 background-image:
 linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
 linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
 background-size:40px 40px;
+
 z-index:-2;
+
 }
 
+/* ORBS */
+
 .orb{
+
 position:fixed;
+
 border-radius:50%;
+
 filter:blur(90px);
-opacity:0.2;
+
+opacity:0.22;
+
 z-index:-1;
+
 animation:float 10s ease-in-out infinite;
+
 }
 
 .orb1{
+
 width:320px;
 height:320px;
+
 background:#22d3ee;
+
 top:-120px;
 left:-120px;
+
 }
 
 .orb2{
+
 width:320px;
 height:320px;
+
 background:#8b5cf6;
+
 bottom:-120px;
 right:-120px;
+
 }
 
 @keyframes float{
-0%{transform:translateY(0px);}
-50%{transform:translateY(30px);}
-100%{transform:translateY(0px);}
+
+0%{
+transform:translateY(0px);
 }
 
+50%{
+transform:translateY(30px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+/* NAVBAR */
+
 .navbar{
+
 position:fixed;
+
 top:0;
 left:0;
+
 width:100%;
+
 display:flex;
+
 justify-content:space-between;
+
 align-items:center;
+
 padding:20px 40px;
-background:rgba(15,23,42,0.72);
+
+background:
+rgba(15,23,42,0.72);
+
 backdrop-filter:blur(20px);
-border-bottom:1px solid rgba(255,255,255,0.06);
+
+border-bottom:
+1px solid rgba(255,255,255,0.06);
+
 z-index:999;
+
 }
 
 .logo{
+
 font-size:28px;
+
 font-weight:900;
+
 }
 
 .logo span{
-background:linear-gradient(90deg,#22d3ee,#8b5cf6);
+
+background:
+linear-gradient(
+90deg,
+#22d3ee,
+#8b5cf6
+);
+
 -webkit-background-clip:text;
+
 -webkit-text-fill-color:transparent;
+
 }
 
 .nav-links{
+
 display:flex;
+
 gap:32px;
+
 }
 
 .nav-links a{
+
 text-decoration:none;
+
 color:#cbd5e1;
+
 font-weight:600;
+
 transition:0.3s;
+
 }
 
 .nav-links a:hover{
 color:white;
 }
 
+/* MAIN */
+
 .main{
-padding:130px 30px 40px;
+
+padding:
+130px 30px 40px;
+
 max-width:1600px;
+
 margin:auto;
+
 }
 
+/* HERO */
+
 .hero{
+
 text-align:center;
+
 margin-bottom:50px;
+
 }
 
 .hero-badge{
+
 display:inline-flex;
+
 padding:12px 18px;
+
 border-radius:999px;
-background:rgba(34,211,238,0.08);
-border:1px solid rgba(34,211,238,0.14);
+
+background:
+rgba(34,211,238,0.08);
+
+border:
+1px solid rgba(34,211,238,0.14);
+
 color:#7dd3fc;
+
 font-weight:700;
+
 margin-bottom:26px;
+
 }
 
 .hero h1{
+
 font-size:72px;
+
 font-weight:900;
+
 line-height:0.95;
+
 }
 
 .hero h1 span{
-background:linear-gradient(90deg,#22d3ee,#8b5cf6);
+
+background:
+linear-gradient(
+90deg,
+#22d3ee,
+#8b5cf6
+);
+
 -webkit-background-clip:text;
+
 -webkit-text-fill-color:transparent;
+
 }
 
 .hero p{
+
 margin-top:24px;
+
 font-size:20px;
+
 line-height:1.8;
+
 color:#94a3b8;
+
 max-width:800px;
+
 margin-inline:auto;
+
 }
+
+/* GRID */
 
 .quiz-grid{
+
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+grid-template-columns:
+repeat(auto-fit,minmax(260px,1fr));
+
 gap:24px;
+
 }
 
+/* CARD */
+
 .quiz-card{
-background:rgba(15,23,42,0.72);
-border:1px solid rgba(255,255,255,0.08);
+
+background:
+rgba(15,23,42,0.72);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
 backdrop-filter:blur(20px);
+
 border-radius:32px;
+
 padding:30px;
+
 transition:0.35s;
-position:relative;
-overflow:hidden;
+
 cursor:pointer;
+
+position:relative;
+
+overflow:hidden;
+
 }
 
 .quiz-card::before{
+
 content:'';
+
 position:absolute;
+
 inset:0;
-background:linear-gradient(180deg,rgba(255,255,255,0.06),transparent);
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,0.05),
+transparent
+);
+
 }
 
 .quiz-card:hover{
-transform:translateY(-10px);
-box-shadow:0 24px 70px rgba(34,211,238,0.12);
+
+transform:
+translateY(-10px);
+
+box-shadow:
+0 24px 70px rgba(34,211,238,0.12);
+
 }
 
 .quiz-icon{
+
 font-size:54px;
+
 margin-bottom:18px;
+
 }
 
 .quiz-card h2{
+
 font-size:30px;
+
 }
 
 .quiz-card p{
+
 margin-top:14px;
+
 line-height:1.7;
+
 color:#94a3b8;
+
 }
 
+/* QUIZ AREA */
+
 .quiz-area{
+
 margin-top:40px;
-background:rgba(15,23,42,0.72);
-border:1px solid rgba(255,255,255,0.08);
+
+background:
+rgba(15,23,42,0.72);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
 backdrop-filter:blur(20px);
+
 border-radius:36px;
+
 padding:34px;
+
 display:none;
+
 }
 
 .question{
-font-size:32px;
-font-weight:800;
+
+font-size:34px;
+
+font-weight:900;
+
 margin-bottom:24px;
+
 }
 
 .options{
+
 display:grid;
+
 gap:16px;
+
 }
 
 .option-btn{
+
 padding:18px;
+
 border:none;
+
 border-radius:20px;
-background:rgba(255,255,255,0.05);
+
+background:
+rgba(255,255,255,0.05);
+
 color:white;
+
 font-size:16px;
+
 font-weight:700;
+
 cursor:pointer;
+
 transition:0.3s;
+
 }
 
 .option-btn:hover{
-background:rgba(34,211,238,0.1);
-transform:translateY(-4px);
+
+background:
+rgba(34,211,238,0.12);
+
+transform:
+translateY(-4px);
+
 }
 
 .score{
+
 margin-top:22px;
+
 font-size:20px;
+
 font-weight:700;
+
 color:#7dd3fc;
+
 }
 
+/* MEMORY */
+
 .memory-grid{
+
 display:grid;
-grid-template-columns:repeat(4,1fr);
+
+grid-template-columns:
+repeat(4,1fr);
+
 gap:14px;
+
 margin-top:30px;
+
 }
 
 .memory-card{
+
 aspect-ratio:1/1;
+
 border-radius:20px;
-background:rgba(255,255,255,0.06);
+
+background:
+rgba(255,255,255,0.06);
+
 display:flex;
+
 justify-content:center;
+
 align-items:center;
+
 font-size:42px;
+
 cursor:pointer;
+
 transition:0.3s;
+
 user-select:none;
+
 }
 
 .memory-card:hover{
+
 transform:scale(1.04);
+
 }
 
 .memory-card.flipped{
-background:linear-gradient(135deg,#22d3ee,#8b5cf6);
+
+background:
+linear-gradient(
+135deg,
+#22d3ee,
+#8b5cf6
+);
+
 }
 
 .memory-card.matched{
+
 background:#10b981;
+
 }
 
 .memory-stats{
+
 margin-top:20px;
+
 display:flex;
+
 gap:20px;
+
 font-weight:700;
+
 color:#cbd5e1;
+
 }
+
+/* MOBILE */
 
 @media(max-width:768px){
 
 .navbar{
+
 padding:18px 20px;
+
 }
 
 .nav-links{
+
 gap:18px;
+
 font-size:14px;
+
 }
 
 .main{
-padding:120px 18px 18px;
+
+padding:
+120px 18px 18px;
+
 }
 
 .hero h1{
-font-size:52px;
-}
 
-.memory-grid{
-grid-template-columns:repeat(4,1fr);
-gap:10px;
+font-size:52px;
+
 }
 
 .memory-card{
-font-size:30px;
+
+font-size:28px;
+
 }
 
 }
 
 </style>
+
 </head>
+
 <body>
 
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
+
+<!-- NAVBAR -->
 
 <nav class="navbar">
 
@@ -327,20 +591,35 @@ MentorLoop <span>EDU</span>
 </div>
 
 <div class="nav-links">
-<a href="home.html">Home</a>
-<a href="features.html">Features</a>
-<a href="leaderboard.html">Leaderboard</a>
-<a href="chat.html">Community</a>
+
+<a href="home.html">
+Home
+</a>
+
+<a href="features.html">
+Features
+</a>
+
+<a href="leaderboard.html">
+Leaderboard
+</a>
+
+<a href="chat.html">
+Community
+</a>
+
 </div>
 
 </nav>
+
+<!-- MAIN -->
 
 <div class="main">
 
 <div class="hero">
 
 <div class="hero-badge">
-🧠 10 Brain-Powered Challenges
+🧠 10 Brain Challenges
 </div>
 
 <h1>
@@ -348,74 +627,79 @@ Train Your <span>Mind</span>
 </h1>
 
 <p>
-Challenge yourself with quizzes across math, science, literature, geography, logic, coding, and more.
+Choose quizzes from Grade 1–12 across multiple subjects,
+or challenge yourself with the memory match game.
 </p>
 
 </div>
+
+<!-- QUIZ GRID -->
 
 <div class="quiz-grid">
 
 <div class="quiz-card" onclick="startQuiz('math')">
 <div class="quiz-icon">➗</div>
-<h2>Math Quiz</h2>
-<p>Test algebra, arithmetic, and problem-solving speed.</p>
+<h2>Math</h2>
+<p>Arithmetic, algebra, logic, and calculations.</p>
 </div>
 
 <div class="quiz-card" onclick="startQuiz('science')">
 <div class="quiz-icon">🧪</div>
-<h2>Science Quiz</h2>
-<p>Physics, chemistry, biology, and scientific thinking.</p>
+<h2>Science</h2>
+<p>Physics, biology, chemistry, and experiments.</p>
 </div>
 
 <div class="quiz-card" onclick="startQuiz('literature')">
 <div class="quiz-icon">📚</div>
-<h2>Literature Quiz</h2>
-<p>Books, authors, poetry, and literary classics.</p>
+<h2>Literature</h2>
+<p>Authors, books, poetry, and writing.</p>
 </div>
 
 <div class="quiz-card" onclick="startQuiz('history')">
 <div class="quiz-icon">🏛️</div>
-<h2>History Quiz</h2>
-<p>Empires, revolutions, inventions, and world history.</p>
+<h2>History</h2>
+<p>World wars, empires, revolutions, and inventions.</p>
 </div>
 
 <div class="quiz-card" onclick="startQuiz('geography')">
 <div class="quiz-icon">🌍</div>
-<h2>Geography Quiz</h2>
-<p>Countries, capitals, landmarks, and Earth facts.</p>
+<h2>Geography</h2>
+<p>Countries, capitals, maps, and landmarks.</p>
 </div>
 
 <div class="quiz-card" onclick="startQuiz('coding')">
 <div class="quiz-icon">💻</div>
-<h2>Coding Quiz</h2>
-<p>Programming logic, HTML, JS, and algorithms.</p>
+<h2>Coding</h2>
+<p>Programming logic, HTML, JavaScript, and more.</p>
 </div>
 
 <div class="quiz-card" onclick="startQuiz('space')">
 <div class="quiz-icon">🚀</div>
-<h2>Space Quiz</h2>
-<p>Planets, galaxies, astronauts, and the universe.</p>
+<h2>Space</h2>
+<p>Planets, galaxies, astronauts, and missions.</p>
 </div>
 
 <div class="quiz-card" onclick="startQuiz('sports')">
 <div class="quiz-icon">⚽</div>
-<h2>Sports Quiz</h2>
-<p>Football, cricket, Olympics, and sports legends.</p>
+<h2>Sports</h2>
+<p>Football, cricket, Olympics, and athletes.</p>
 </div>
 
 <div class="quiz-card" onclick="startQuiz('logic')">
 <div class="quiz-icon">🧩</div>
-<h2>Logic Quiz</h2>
-<p>Patterns, riddles, and critical thinking puzzles.</p>
+<h2>Logic</h2>
+<p>Critical thinking, puzzles, and patterns.</p>
 </div>
 
 <div class="quiz-card" onclick="openMemoryGame()">
 <div class="quiz-icon">🃏</div>
 <h2>Memory Match</h2>
-<p>Match all 16 shuffled cards in the shortest time possible.</p>
+<p>Match all 16 shuffled cards before time runs out.</p>
 </div>
 
 </div>
+
+<!-- QUIZ AREA -->
 
 <div id="quizArea" class="quiz-area">
 
@@ -427,19 +711,37 @@ Challenge yourself with quizzes across math, science, literature, geography, log
 
 </div>
 
+<!-- MEMORY AREA -->
+
 <div id="memoryArea" class="quiz-area">
 
-<h2 style="font-size:38px;">
-🧠 Memory Match Challenge
+<h2 style="font-size:40px;">
+🧠 Memory Match
 </h2>
 
-<p style="margin-top:16px;color:#94a3b8;line-height:1.7;">
-Match all pairs. Card order is randomized every game.
+<p
+style="
+margin-top:16px;
+color:#94a3b8;
+line-height:1.7;
+"
+>
+
+Find all matching pairs.
+Every game is randomized.
+
 </p>
 
 <div class="memory-stats">
-<div id="moves">Moves: 0</div>
-<div id="matches">Matches: 0/8</div>
+
+<div id="moves">
+Moves: 0
+</div>
+
+<div id="matches">
+Matches: 0/8
+</div>
+
 </div>
 
 <div id="memoryGrid" class="memory-grid"></div>
@@ -456,7 +758,7 @@ const quizzes = {
 
 math:{
 
-1:[
+"1":[
 
 {
 q:"What is 2 + 3?",
@@ -490,7 +792,7 @@ correct:1
 
 ],
 
-2:[
+"2":[
 
 {
 q:"What is 12 + 8?",
@@ -537,12 +839,8 @@ logic:{}
 
 };
 
-/* GLOBALS */
-
 let currentQuiz = [];
-
 let currentIndex = 0;
-
 let currentScore = 0;
 
 /* START QUIZ */
@@ -555,12 +853,16 @@ const grade = prompt(
 );
 
 const selectedGrade =
-parseInt(grade);
+grade.trim();
 
 if(
+
 isNaN(selectedGrade) ||
+
 selectedGrade < 1 ||
+
 selectedGrade > 12
+
 ){
 
 alert(
@@ -571,45 +873,30 @@ return;
 
 }
 
-/* HIDE MEMORY */
-
 document
 .getElementById("memoryArea")
 .style.display = "none";
 
-/* SHOW QUIZ */
+document
+.getElementById("quizArea")
+.style.display = "block";
 
-const quizArea =
-
-document.getElementById(
-"quizArea"
-);
-
-quizArea.style.display =
-"block";
-
-/* CATEGORY EXISTS? */
-
-if(!quizzes[type]){
-
-alert(
-"Quiz category missing"
-);
-
-return;
-
-}
-
-/* GRADE EXISTS? */
+/* REAL QUESTIONS */
 
 if(
+
+quizzes[type] &&
+
 quizzes[type][selectedGrade]
+
 ){
 
 currentQuiz =
 
 generate15Questions(
+
 quizzes[type][selectedGrade]
+
 );
 
 }
@@ -628,7 +915,6 @@ selectedGrade
 }
 
 currentIndex = 0;
-
 currentScore = 0;
 
 showQuestion();
@@ -677,21 +963,104 @@ const fallback = [];
 
 for(let i=1;i<=15;i++){
 
-fallback.push({
+let question;
+let answers;
+let correct;
 
-q:`${type.toUpperCase()} Grade ${grade} Question ${i}`,
+/* MATH */
 
-a:[
+if(type === "math"){
+
+const a =
+Math.floor(Math.random()*20)+1;
+
+const b =
+Math.floor(Math.random()*20)+1;
+
+question =
+`What is ${a} + ${b}?`;
+
+const real =
+a+b;
+
+answers = [
+
+real,
+real+2,
+real-1,
+real+5
+
+].sort(()=>Math.random()-0.5);
+
+correct =
+answers.indexOf(real);
+
+}
+
+/* SCIENCE */
+
+else if(type === "science"){
+
+const scienceQuestions = [
+
+{
+q:"What planet is known as the Red Planet?",
+a:["Mars","Earth","Venus","Saturn"],
+c:0
+},
+
+{
+q:"What gas do plants absorb?",
+a:["Oxygen","Carbon Dioxide","Nitrogen","Hydrogen"],
+c:1
+},
+
+{
+q:"What force keeps us on Earth?",
+a:["Gravity","Magnetism","Electricity","Wind"],
+c:0
+}
+
+];
+
+const random =
+
+scienceQuestions[
+Math.floor(
+Math.random()*scienceQuestions.length
+)
+];
+
+question = random.q;
+answers = random.a;
+correct = random.c;
+
+}
+
+/* DEFAULT */
+
+else{
+
+question =
+`${type.toUpperCase()} Challenge ${i}`;
+
+answers = [
 "Option A",
 "Option B",
 "Option C",
 "Option D"
-],
+];
 
-correct:
-Math.floor(
-Math.random()*4
-)
+correct =
+Math.floor(Math.random()*4);
+
+}
+
+fallback.push({
+
+q:question,
+a:answers,
+correct:correct
 
 });
 
@@ -708,26 +1077,12 @@ function showQuestion(){
 const q =
 currentQuiz[currentIndex];
 
-const question =
-
-document.getElementById(
-"question"
-);
+document
+.getElementById("question")
+.innerText = q.q;
 
 const options =
-
-document.getElementById(
-"options"
-);
-
-const score =
-
-document.getElementById(
-"score"
-);
-
-question.innerText =
-q.q;
+document.getElementById("options");
 
 options.innerHTML = "";
 
@@ -755,35 +1110,12 @@ options.appendChild(btn);
 }
 );
 
-score.innerText =
+document
+.getElementById("score")
+.innerText =
 
 `Score:
-${currentScore}`;
-
-/* QUESTION NUMBER */
-
-const progress =
-
-document.createElement("div");
-
-progress.style.marginTop =
-"18px";
-
-progress.style.color =
-"#94a3b8";
-
-progress.style.fontWeight =
-"700";
-
-progress.innerText =
-
-`Question ${
-currentIndex + 1
-} / ${
-currentQuiz.length
-}`;
-
-options.appendChild(progress);
+${currentScore}/${currentQuiz.length}`;
 
 }
 
@@ -832,7 +1164,7 @@ showQuestion();
 
 }
 
-/* MEMORY GAME */
+/* MEMORY */
 
 const emojis = [
 
@@ -848,9 +1180,7 @@ const emojis = [
 ];
 
 let flippedCards = [];
-
 let matchedPairs = 0;
-
 let moveCount = 0;
 
 /* SHUFFLE */
@@ -899,17 +1229,12 @@ document.getElementById(
 memoryGrid.innerHTML = "";
 
 flippedCards = [];
-
 matchedPairs = 0;
-
 moveCount = 0;
 
 updateMemoryStats();
 
-/* RANDOM ORDER */
-
 const shuffled =
-
 shuffle([...emojis]);
 
 shuffled.forEach(
@@ -926,9 +1251,6 @@ card.className =
 card.dataset.emoji =
 emoji;
 
-card.dataset.index =
-index;
-
 card.innerHTML = "?";
 
 card.onclick =
@@ -938,15 +1260,6 @@ memoryGrid.appendChild(card);
 
 }
 );
-
-window.scrollTo({
-
-top:
-document.body.scrollHeight,
-
-behavior:'smooth'
-
-});
 
 }
 
@@ -1010,7 +1323,7 @@ if(matchedPairs === 8){
 setTimeout(()=>{
 
 alert(
-`🎉 You completed the memory game in ${moveCount} moves!`
+`🎉 Completed in ${moveCount} moves!`
 );
 
 },300);
@@ -1032,7 +1345,6 @@ second.classList.remove(
 );
 
 first.innerHTML = "?";
-
 second.innerHTML = "?";
 
 flippedCards = [];
@@ -1069,4 +1381,3 @@ ${matchedPairs}/8`;
 
 </body>
 </html>
-```
