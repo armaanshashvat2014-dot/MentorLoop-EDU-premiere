@@ -1,18 +1,25 @@
-# MentorLoop EDU X — Real Firebase Dashboard Upgrade
-
-Replace your current dashboard with this upgraded structure and connect the marked Firebase sections to your existing collections.
-
-```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MentorLoop EDU X</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<head>
+
+<meta charset="UTF-8"/>
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+/>
+
+<title>MentorLoop Dashboard</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+rel="stylesheet"
+/>
 
 <style>
+
+/* RESET */
 
 *{
   margin:0;
@@ -21,108 +28,198 @@ Replace your current dashboard with this upgraded structure and connect the mark
 }
 
 :root{
+
   --bg:#020617;
-  --card:rgba(15,23,42,0.72);
-  --border:rgba(255,255,255,0.08);
+
+  --card:
+  rgba(15,23,42,0.72);
+
+  --border:
+  rgba(255,255,255,0.08);
+
   --cyan:#22d3ee;
+
   --purple:#8b5cf6;
+
   --green:#10b981;
+
   --text:#ffffff;
+
   --muted:#94a3b8;
+
 }
 
+/* BODY */
+
 body{
+
   font-family:'Inter',sans-serif;
+
   background:
   radial-gradient(circle at top left,#0891b2 0%,transparent 30%),
   radial-gradient(circle at bottom right,#8b5cf6 0%,transparent 30%),
   var(--bg);
+
   color:white;
+
   min-height:100vh;
+
   overflow-x:hidden;
+
   display:flex;
+
 }
 
+/* GRID */
+
 body::before{
+
   content:'';
+
   position:fixed;
+
   inset:0;
+
   background-image:
   linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
   linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
   background-size:40px 40px;
+
   z-index:-2;
+
 }
 
+/* ORBS */
+
 .orb{
+
   position:fixed;
+
   border-radius:50%;
+
   filter:blur(90px);
+
   opacity:0.25;
+
   z-index:-1;
+
   animation:float 10s infinite ease-in-out;
+
 }
 
 .orb1{
-  width:320px;
-  height:320px;
+
+  width:300px;
+  height:300px;
+
   background:#22d3ee;
+
   top:-100px;
   left:-100px;
+
 }
 
 .orb2{
-  width:320px;
-  height:320px;
+
+  width:300px;
+  height:300px;
+
   background:#8b5cf6;
+
   bottom:-100px;
   right:-100px;
+
 }
 
 @keyframes float{
-  0%{transform:translateY(0px);}
-  50%{transform:translateY(30px);}
-  100%{transform:translateY(0px);}
+
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(30px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
+
 }
 
+/* SIDEBAR */
+
 .sidebar{
+
   width:90px;
+
   height:100vh;
+
   position:fixed;
-  overflow-y:auto;
-  background:rgba(15,23,42,0.82);
+
+  background:
+  rgba(15,23,42,0.82);
+
   backdrop-filter:blur(20px);
-  border-right:1px solid rgba(255,255,255,0.06);
+
+  border-right:
+  1px solid rgba(255,255,255,0.06);
+
   padding:18px;
+
   transition:0.35s;
+
+  overflow-y:auto;
+
   z-index:999;
+
 }
 
 .sidebar.expanded{
-  width:290px;
+  width:280px;
 }
 
 .sidebar::-webkit-scrollbar{
   width:0;
 }
 
+/* TOGGLE */
+
 .toggle-btn{
+
   width:54px;
   height:54px;
+
   border:none;
+
   border-radius:18px;
-  background:rgba(255,255,255,0.08);
+
+  background:
+  rgba(255,255,255,0.08);
+
   color:white;
+
   font-size:22px;
+
   cursor:pointer;
+
   margin-bottom:18px;
+
 }
 
+/* LOGO */
+
 .logo{
+
   font-size:28px;
+
   font-weight:900;
+
   opacity:0;
+
   transition:0.3s;
+
 }
 
 .sidebar.expanded .logo{
@@ -130,18 +227,33 @@ body::before{
 }
 
 .logo span{
-  background:linear-gradient(90deg,var(--cyan),var(--purple));
+
+  background:
+  linear-gradient(
+    90deg,
+    var(--cyan),
+    var(--purple)
+  );
+
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+
 }
 
+/* LINKS */
+
 .sidebar h4{
+
   margin-top:24px;
+
   margin-bottom:10px;
+
   color:#64748b;
+
   font-size:12px;
+
   opacity:0;
-  transition:0.3s;
+
 }
 
 .sidebar.expanded h4{
@@ -149,164 +261,376 @@ body::before{
 }
 
 .sidebar a{
+
   display:flex;
+
   align-items:center;
+
   gap:14px;
+
   text-decoration:none;
+
   color:#cbd5e1;
+
   padding:14px;
+
   border-radius:18px;
+
   transition:0.3s;
+
   margin-bottom:10px;
+
   white-space:nowrap;
+
 }
 
 .sidebar a:hover{
-  background:rgba(34,211,238,0.12);
-  transform:translateX(6px);
+
+  background:
+  rgba(34,211,238,0.12);
+
+  transform:
+  translateX(6px);
+
   color:white;
+
 }
 
+/* MAIN */
+
 .main{
+
   margin-left:90px;
+
   width:100%;
+
   padding:30px;
+
   transition:0.35s;
+
 }
 
 .sidebar.expanded + .main{
-  margin-left:290px;
+  margin-left:280px;
 }
 
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:20px;
-  margin-bottom:24px;
-}
+/* HERO */
 
-.hero-card{
+.hero{
+
   background:var(--card);
-  border:1px solid var(--border);
+
+  border:
+  1px solid var(--border);
+
   backdrop-filter:blur(20px);
+
   border-radius:32px;
-  padding:30px;
-  width:100%;
-}
 
-.hero-card h1{
-  font-size:44px;
-  font-weight:900;
-}
+  padding:35px;
 
-.hero-card p{
-  margin-top:12px;
-  color:#94a3b8;
-}
+  position:relative;
 
-.xp-bar{
-  width:100%;
-  height:14px;
-  background:rgba(255,255,255,0.08);
-  border-radius:999px;
   overflow:hidden;
-  margin-top:18px;
+
 }
 
-.xp-fill{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#22d3ee,#8b5cf6);
+.hero::before{
+
+  content:'';
+
+  position:absolute;
+
+  width:320px;
+  height:320px;
+
+  border-radius:50%;
+
+  background:
+  rgba(255,255,255,0.03);
+
+  top:-140px;
+  right:-140px;
+
+}
+
+.live-tag{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  padding:10px 16px;
+
   border-radius:999px;
-  transition:1s;
+
+  background:
+  rgba(34,211,238,0.1);
+
+  border:
+  1px solid rgba(34,211,238,0.2);
+
+  color:#7dd3fc;
+
+  font-size:14px;
+
+  font-weight:700;
+
+  margin-bottom:20px;
+
 }
 
-.dashboard-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-  margin-top:24px;
+.hero h1{
+
+  font-size:52px;
+
+  font-weight:900;
+
+  line-height:1.1;
+
 }
+
+.hero p{
+
+  margin-top:14px;
+
+  color:#94a3b8;
+
+  font-size:18px;
+
+}
+
+/* QUICK STATS */
+
+.quick-stats{
+
+  margin-top:28px;
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(180px,1fr));
+
+  gap:18px;
+
+}
+
+.quick-card{
+
+  background:
+  rgba(255,255,255,0.05);
+
+  border:
+  1px solid rgba(255,255,255,0.08);
+
+  border-radius:24px;
+
+  padding:24px;
+
+  transition:0.3s;
+
+}
+
+.quick-card:hover{
+
+  transform:
+  translateY(-6px);
+
+  box-shadow:
+  0 18px 50px rgba(34,211,238,0.12);
+
+}
+
+.quick-card h2{
+
+  font-size:42px;
+
+  font-weight:900;
+
+}
+
+.quick-card span{
+
+  color:#94a3b8;
+
+}
+
+/* GRID */
+
+.grid{
+
+  margin-top:24px;
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(300px,1fr));
+
+  gap:20px;
+
+}
+
+/* CARDS */
 
 .card{
+
   background:var(--card);
-  border:1px solid var(--border);
+
+  border:
+  1px solid var(--border);
+
   backdrop-filter:blur(20px);
+
   border-radius:28px;
-  padding:24px;
+
+  padding:26px;
+
   transition:0.35s;
+
 }
 
 .card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 20px 60px rgba(34,211,238,0.12);
+
+  transform:
+  translateY(-8px);
+
+  box-shadow:
+  0 20px 60px rgba(34,211,238,0.12);
+
 }
 
-.stat-number{
-  font-size:52px;
-  font-weight:900;
+.card h2{
+
+  margin-bottom:18px;
+
+  font-size:24px;
+
 }
 
-.stat-label{
-  color:#94a3b8;
-  margin-top:10px;
+/* NAV BUTTONS */
+
+.nav-grid{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(2,1fr);
+
+  gap:14px;
+
 }
 
-.badges{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  margin-top:16px;
-}
+.nav-btn{
 
-.badge{
-  padding:10px 16px;
-  border-radius:999px;
-  background:rgba(255,255,255,0.08);
-}
+  text-decoration:none;
 
-.badge.unlocked{
-  background:linear-gradient(90deg,#10b981,#22d3ee);
-}
+  background:
+  rgba(255,255,255,0.05);
 
-#wheel{
-  width:240px;
-  height:240px;
-  border-radius:50%;
-  margin:auto;
-  transition:transform 4s cubic-bezier(.17,.67,.21,1);
-}
+  border:
+  1px solid rgba(255,255,255,0.08);
 
-.spin-btn{
-  margin-top:18px;
-  padding:16px 24px;
-  border:none;
-  border-radius:18px;
-  background:linear-gradient(90deg,#22d3ee,#8b5cf6);
+  border-radius:22px;
+
+  padding:20px;
+
   color:white;
-  font-weight:700;
-  cursor:pointer;
+
+  transition:0.3s;
+
 }
 
-.toast{
-  position:fixed;
-  bottom:30px;
-  right:30px;
-  background:rgba(15,23,42,0.95);
-  border:1px solid rgba(255,255,255,0.08);
-  padding:18px 24px;
-  border-radius:20px;
-  z-index:99999;
+.nav-btn:hover{
+
+  transform:
+  scale(1.04);
+
+  background:
+  rgba(34,211,238,0.12);
+
 }
+
+.nav-btn h3{
+
+  margin-top:12px;
+
+}
+
+/* FRIENDS */
+
+.friend{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:14px;
+
+  border-radius:18px;
+
+  background:
+  rgba(255,255,255,0.04);
+
+  margin-top:12px;
+
+}
+
+.online{
+
+  color:#10b981;
+
+  font-size:14px;
+
+  font-weight:700;
+
+}
+
+/* QUOTE */
+
+.quote{
+
+  font-size:20px;
+
+  line-height:1.7;
+
+  color:#e2e8f0;
+
+}
+
+.fact{
+
+  margin-top:18px;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  background:
+  rgba(34,211,238,0.08);
+
+  border:
+  1px solid rgba(34,211,238,0.12);
+
+  line-height:1.6;
+
+}
+
+/* MOBILE */
 
 @media(max-width:768px){
 
   .sidebar{
+
     left:-100%;
+
     width:85%;
+
     max-width:320px;
+
   }
 
   .sidebar.expanded{
@@ -315,11 +639,10 @@ body::before{
 
   .main{
     margin-left:0 !important;
-    padding-bottom:100px;
   }
 
-  .hero-card h1{
-    font-size:34px;
+  .hero h1{
+    font-size:38px;
   }
 
 }
@@ -332,9 +655,14 @@ body::before{
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 
+<!-- SIDEBAR -->
+
 <div class="sidebar" id="sidebar">
 
-<button class="toggle-btn" onclick="toggleSidebar()">
+<button
+class="toggle-btn"
+onclick="toggleSidebar()"
+>
 ☰
 </button>
 
@@ -342,79 +670,194 @@ body::before{
 MentorLoop <span>EDU</span>
 </div>
 
-<h4>CORE</h4>
-<a href="#">🏠 Dashboard</a>
-<a href="profile.html">👤 Profile</a>
-<a href="leaderboard.html">🏆 Leaderboard</a>
+<h4>MAIN</h4>
 
-<h4>LEARNING</h4>
-<a href="games.html">🧠 Quizzes</a>
-<a href="battle-mode.html">⚔ Battle Mode</a>
-<a href="progress.html">📈 Progress</a>
+<a href="#">
+🏠 Dashboard
+</a>
 
-<h4>AI</h4>
-<a href="https://learning-ai-2.streamlit.app/">🤖 AI Tutor</a>
+<a href="games.html">
+🧠 Quizzes
+</a>
+
+<a href="leaderboard.html">
+🏆 Leaderboard
+</a>
+
+<a href="chat.html">
+💬 Friends
+</a>
+
+<a href="profile.html">
+👤 Profile
+</a>
+
+<a href="teacher.html">
+🎓 Teacher
+</a>
 
 </div>
 
+<!-- MAIN -->
+
 <div class="main">
 
-<div class="topbar">
+<!-- HERO -->
 
-<div class="hero-card">
+<div class="hero">
+
+<div class="live-tag">
+🔥 ACTIVE LEARNER
+</div>
 
 <h1 id="welcomeName">
 Welcome back 👋
 </h1>
 
 <p>
-You're climbing the leaderboard fast today.
+Stay consistent. Small progress every day becomes huge results.
 </p>
 
-<div class="xp-bar">
-<div class="xp-fill" id="xpFill"></div>
+<div class="quick-stats">
+
+<div class="quick-card">
+
+<h2 id="points">
+0
+</h2>
+
+<span>
+Total Points
+</span>
+
 </div>
 
-<p style="margin-top:10px;color:#94a3b8;">
-<span id="currentXP">0</span> XP
-</p>
+<div class="quick-card">
+
+<h2 id="streak">
+0
+</h2>
+
+<span>
+Day Streak
+</span>
+
+</div>
+
+<div class="quick-card">
+
+<h2 id="friendCount">
+0
+</h2>
+
+<span>
+Friends
+</span>
 
 </div>
 
 </div>
 
-<div class="dashboard-grid">
+</div>
+
+<!-- GRID -->
+
+<div class="grid">
+
+<!-- NAVIGATION -->
 
 <div class="card">
-<div class="stat-number" id="points">0</div>
-<div class="stat-label">Total Points</div>
+
+<h2>
+⚡ Quick Navigation
+</h2>
+
+<div class="nav-grid">
+
+<a
+href="games.html"
+class="nav-btn"
+>
+
+🎮
+
+<h3>
+Play Quiz
+</h3>
+
+</a>
+
+<a
+href="battle-mode.html"
+class="nav-btn"
+>
+
+⚔
+
+<h3>
+Battle Mode
+</h3>
+
+</a>
+
+<a
+href="leaderboard.html"
+class="nav-btn"
+>
+
+🏆
+
+<h3>
+Leaderboard
+</h3>
+
+</a>
+
+<a
+href="chat.html"
+class="nav-btn"
+>
+
+💬
+
+<h3>
+Friends Chat
+</h3>
+
+</a>
+
 </div>
+
+</div>
+
+<!-- FRIENDS -->
 
 <div class="card">
-<div class="stat-number" id="streak">0</div>
-<div class="stat-label">Daily Streak</div>
+
+<h2>
+👥 Friends
+</h2>
+
+<div id="friendsList"></div>
+
 </div>
+
+<!-- MOTIVATION -->
 
 <div class="card">
-<h2>🧠 AI Insights</h2>
-<p id="studyTip" style="margin-top:14px;color:#94a3b8;line-height:1.7;">
-Loading insights...
-</p>
+
+<h2>
+🚀 Motivation
+</h2>
+
+<div class="quote" id="quote">
+Loading quote...
 </div>
 
-<div class="card">
-<h2>🏆 Badges</h2>
-<div class="badges" id="badges"></div>
+<div class="fact" id="fact">
+Loading fact...
 </div>
 
-<div class="card" style="text-align:center;">
-<h2>🎡 Mega Wheel</h2>
-<br>
-<canvas id="wheel" width="240" height="240"></canvas>
-<br>
-<button class="spin-btn" onclick="spin()">
-SPIN NOW
-</button>
 </div>
 
 </div>
@@ -427,59 +870,55 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
 import {
+
   getFirestore,
   doc,
   getDoc,
-  setDoc,
-  onSnapshot
+  collection,
+  getDocs
+
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 import {
+
   getAuth,
   onAuthStateChanged
+
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+/* FIREBASE */
 
 const firebaseConfig = {
 
   apiKey:"YOUR_API_KEY",
+
   authDomain:"YOUR_AUTH_DOMAIN",
+
   projectId:"YOUR_PROJECT_ID",
+
   storageBucket:"YOUR_STORAGE_BUCKET",
+
   messagingSenderId:"YOUR_SENDER_ID",
+
   appId:"YOUR_APP_ID"
 
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
+const app =
+initializeApp(firebaseConfig);
 
-let points = 0;
-let streak = 0;
-let publicId = null;
-let spinning = false;
+const db =
+getFirestore(app);
 
-const rewards = [10,20,30,50,100,"RARE",15,25];
+const auth =
+getAuth(app);
 
-function showToast(message){
+/* SIDEBAR */
 
-  const toast = document.createElement("div");
-
-  toast.className = "toast";
-
-  toast.innerHTML = message;
-
-  document.body.appendChild(toast);
-
-  setTimeout(()=>{
-    toast.remove();
-  },3000);
-
-}
-
-window.toggleSidebar = function(){
+window.toggleSidebar =
+function(){
 
   document
   .getElementById("sidebar")
@@ -488,271 +927,197 @@ window.toggleSidebar = function(){
 
 }
 
-async function getPublicId(user){
+/* QUOTES */
 
-  const snap = await getDoc(
-    doc(db,"user_map",user.uid)
-  );
+const quotes = [
 
-  return snap.exists()
-    ? snap.data().publicId
-    : null;
+  "Success is built from consistency, not motivation.",
 
-}
+  "Every expert was once a beginner.",
 
-async function loadUserData(){
+  "Learning compounds like interest.",
 
-  const snap = await getDoc(
-    doc(db,"leaderboard",publicId)
-  );
+  "Small progress daily beats perfection occasionally."
 
-  if(!snap.exists()) return;
+];
 
-  const data = snap.data();
+/* FACTS */
 
-  points = data.points || 0;
-  streak = data.streak || 0;
+const facts = [
 
-  document
-  .getElementById("points")
-  .innerText = points;
+  "Your brain forms stronger neural connections when you practice consistently.",
 
-  document
-  .getElementById("streak")
-  .innerText = streak;
+  "Studying in short focused sessions improves memory retention.",
 
-  document
-  .getElementById("currentXP")
-  .innerText = points;
+  "Sleep helps your brain store what you learned.",
 
-  const xpPercent = Math.min(
-    (points % 1000) / 10,
-    100
-  );
+  "Teaching someone else is one of the best ways to learn."
 
-  document
-  .getElementById("xpFill")
-  .style.width = xpPercent + "%";
+];
 
-  renderBadges();
-  renderAIInsights();
+/* RANDOM CONTENT */
 
-}
+document
+.getElementById("quote")
+.innerText =
 
-function renderAIInsights(){
+quotes[
+Math.floor(
+Math.random() * quotes.length
+)
+];
 
-  let tip = "Keep learning consistently.";
+document
+.getElementById("fact")
+.innerText =
 
-  if(points < 100){
-    tip = "Start quizzes daily to build your XP fast.";
-  }
-  else if(points < 500){
-    tip = "Your science performance is improving quickly.";
-  }
-  else{
-    tip = "You're among the strongest active learners this week.";
-  }
+facts[
+Math.floor(
+Math.random() * facts.length
+)
+];
 
-  document
-  .getElementById("studyTip")
-  .innerText = tip;
+/* LOAD USER */
 
-}
+onAuthStateChanged(
+  auth,
+  async(user)=>{
 
-function renderBadges(){
+    if(!user){
 
-  const box =
-  document.getElementById("badges");
+      location.href =
+      "index.html";
 
-  box.innerHTML = "";
-
-  [100,250,500,1000,2000]
-  .forEach(level=>{
-
-    const badge =
-    document.createElement("div");
-
-    badge.className = "badge";
-
-    if(points >= level){
-
-      badge.classList.add("unlocked");
-      badge.innerHTML = `🏆 ${level}`;
-
-    }
-
-    else{
-
-      badge.innerHTML = `🔒 ${level}`;
-
-    }
-
-    box.appendChild(badge);
-
-  });
-
-}
-
-async function savePoints(){
-
-  await setDoc(
-    doc(db,"leaderboard",publicId),
-    {
-      points,
-      streak
-    },
-    {merge:true}
-  );
-
-}
-
-const canvas =
-document.getElementById("wheel");
-
-const ctx =
-canvas.getContext("2d");
-
-function drawWheel(){
-
-  const colors = [
-    "#22d3ee",
-    "#8b5cf6",
-    "#10b981",
-    "#0ea5e9"
-  ];
-
-  let angle = 0;
-
-  for(let i=0;i<8;i++){
-
-    ctx.beginPath();
-
-    ctx.moveTo(120,120);
-
-    ctx.arc(
-      120,
-      120,
-      120,
-      angle,
-      angle + Math.PI/4
-    );
-
-    ctx.fillStyle =
-    colors[i % colors.length];
-
-    ctx.fill();
-
-    ctx.save();
-
-    ctx.translate(120,120);
-
-    ctx.rotate(angle + Math.PI/8);
-
-    ctx.fillStyle = "white";
-
-    ctx.font = "bold 14px Inter";
-
-    ctx.fillText(rewards[i],70,10);
-
-    ctx.restore();
-
-    angle += Math.PI/4;
-
-  }
-
-}
-
-drawWheel();
-
-window.spin = async function(){
-
-  if(spinning) return;
-
-  spinning = true;
-
-  const rewardIndex =
-  Math.floor(
-    Math.random() * rewards.length
-  );
-
-  const reward =
-  rewards[rewardIndex];
-
-  const deg =
-  360 * 6 + rewardIndex * 45;
-
-  canvas.style.transform =
-  `rotate(${deg}deg)`;
-
-  setTimeout(async()=>{
-
-    if(reward === "RARE"){
-
-      points += 500;
-
-      showToast(
-        "🔥 RARE DROP! +500 XP"
-      );
-
-    }
-
-    else{
-
-      points += reward;
-
-      showToast(
-        `⚡ +${reward} XP`
-      );
+      return;
 
     }
 
     document
-    .getElementById("points")
-    .innerText = points;
+    .getElementById("welcomeName")
+    .innerHTML =
 
-    await savePoints();
+    `Welcome back,
+    ${user.displayName} 👋`;
 
-    renderBadges();
+    /* PUBLIC ID */
 
-    spinning = false;
+    const mapSnap =
+    await getDoc(
+      doc(
+        db,
+        "user_map",
+        user.uid
+      )
+    );
 
-  },4000);
+    if(!mapSnap.exists()) return;
 
-}
+    const publicId =
+    mapSnap.data().publicId;
 
-onAuthStateChanged(auth, async(user)=>{
+    /* LEADERBOARD DATA */
 
-  if(!user){
+    const lbSnap =
+    await getDoc(
+      doc(
+        db,
+        "leaderboard",
+        publicId
+      )
+    );
 
-    location.replace("index.html");
+    if(lbSnap.exists()){
 
-    return;
+      const data =
+      lbSnap.data();
 
-  }
+      document
+      .getElementById("points")
+      .innerText =
 
-  document
-  .getElementById("welcomeName")
-  .innerHTML =
-  `Welcome back, ${user.displayName} 👋`;
+      data.points || 0;
 
-  publicId = await getPublicId(user);
+      document
+      .getElementById("streak")
+      .innerText =
 
-  if(!publicId){
+      data.streak || 0;
 
-    showToast("Profile missing");
-
-    return;
-
-  }
-
-  await loadUserData();
-
-  onSnapshot(
-    doc(db,"leaderboard",publicId),
-    ()=>{
-      loadUserData();
     }
-  );
+
+    /* FRIENDS */
+
+    const friendsRef =
+    collection(
+      db,
+      "users",
+      publicId,
+      "friends"
+    );
+
+    const friendsSnap =
+    await getDocs(
+      friendsRef
+    );
+
+    document
+    .getElementById("friendCount")
+    .innerText =
+
+    friendsSnap.size;
+
+    const friendsList =
+    document
+    .getElementById(
+      "friendsList"
+    );
+
+    if(friendsSnap.empty){
+
+      friendsList.innerHTML =
+
+      `
+      <p style="
+      color:#94a3b8;
+      ">
+      No friends added yet.
+      </p>
+      `;
+
+    }
+
+    else{
+
+      friendsSnap.forEach(docu=>{
+
+        const data =
+        docu.data();
+
+        const div =
+        document
+        .createElement("div");
+
+        div.className =
+        "friend";
+
+        div.innerHTML =
+
+        `
+        <span>
+        ${data.name}
+        </span>
+
+        <span class="online">
+        ● Online
+        </span>
+        `;
+
+        friendsList
+        .appendChild(div);
+
+      });
+
+    }
 
 });
 
@@ -760,4 +1125,3 @@ onAuthStateChanged(auth, async(user)=>{
 
 </body>
 </html>
-```
