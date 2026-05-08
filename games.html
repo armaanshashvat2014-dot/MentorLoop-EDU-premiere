@@ -8,14 +8,14 @@
 <meta
 name="viewport"
 content="width=device-width, initial-scale=1.0"
->
+/>
 
 <title>MentorLoop Games</title>
 
 <link
 href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
 rel="stylesheet"
->
+/>
 
 <style>
 
@@ -42,6 +42,8 @@ overflow-x:hidden;
 
 }
 
+/* GRID */
+
 body::before{
 
 content:'';
@@ -60,7 +62,7 @@ z-index:-2;
 
 }
 
-/* ORBS */
+/* GLOW ORBS */
 
 .orb{
 
@@ -68,7 +70,7 @@ position:fixed;
 
 border-radius:50%;
 
-filter:blur(90px);
+filter:blur(100px);
 
 opacity:0.22;
 
@@ -215,13 +217,17 @@ margin:auto;
 
 text-align:center;
 
-margin-bottom:50px;
+margin-bottom:60px;
 
 }
 
 .hero-badge{
 
 display:inline-flex;
+
+align-items:center;
+
+gap:10px;
 
 padding:12px 18px;
 
@@ -243,7 +249,7 @@ margin-bottom:26px;
 
 .hero h1{
 
-font-size:72px;
+font-size:78px;
 
 font-weight:900;
 
@@ -276,7 +282,7 @@ line-height:1.8;
 
 color:#94a3b8;
 
-max-width:800px;
+max-width:850px;
 
 margin-inline:auto;
 
@@ -376,7 +382,7 @@ color:#94a3b8;
 
 .quiz-area{
 
-margin-top:40px;
+margin-top:50px;
 
 background:
 rgba(15,23,42,0.72);
@@ -388,7 +394,7 @@ backdrop-filter:blur(20px);
 
 border-radius:36px;
 
-padding:34px;
+padding:36px;
 
 display:none;
 
@@ -400,7 +406,9 @@ font-size:34px;
 
 font-weight:900;
 
-margin-bottom:24px;
+line-height:1.4;
+
+margin-bottom:26px;
 
 }
 
@@ -476,7 +484,7 @@ margin-top:30px;
 
 aspect-ratio:1/1;
 
-border-radius:20px;
+border-radius:22px;
 
 background:
 rgba(255,255,255,0.06);
@@ -499,7 +507,7 @@ user-select:none;
 
 .memory-card:hover{
 
-transform:scale(1.04);
+transform:scale(1.05);
 
 }
 
@@ -534,41 +542,66 @@ color:#cbd5e1;
 
 }
 
+/* LOADER */
+
+.loader{
+
+width:60px;
+height:60px;
+
+border-radius:50%;
+
+border:5px solid rgba(255,255,255,0.1);
+
+border-top:
+5px solid #22d3ee;
+
+animation:spin 1s linear infinite;
+
+margin:30px auto;
+
+}
+
+@keyframes spin{
+
+100%{
+transform:rotate(360deg);
+}
+
+}
+
 /* MOBILE */
 
 @media(max-width:768px){
 
 .navbar{
-
 padding:18px 20px;
-
 }
 
 .nav-links{
-
 gap:18px;
-
 font-size:14px;
-
 }
 
 .main{
-
 padding:
 120px 18px 18px;
-
 }
 
 .hero h1{
-
 font-size:52px;
+}
 
+.hero p{
+font-size:17px;
 }
 
 .memory-card{
-
 font-size:28px;
+}
 
+.question{
+font-size:26px;
 }
 
 }
@@ -616,19 +649,21 @@ Community
 
 <div class="main">
 
+<!-- HERO -->
+
 <div class="hero">
 
 <div class="hero-badge">
-🧠 10 Brain Challenges
+🧠 Unlimited Smart Quizzes
 </div>
 
 <h1>
-Train Your <span>Mind</span>
+Train Your <span>Brain</span>
 </h1>
 
 <p>
-Choose quizzes from Grade 1–12 across multiple subjects,
-or challenge yourself with the memory match game.
+Fresh trivia quizzes every time across multiple subjects,
+plus a fully randomized memory challenge.
 </p>
 
 </div>
@@ -637,58 +672,58 @@ or challenge yourself with the memory match game.
 
 <div class="quiz-grid">
 
-<div class="quiz-card" onclick="startQuiz('math')">
+<div class="quiz-card" onclick="startTriviaQuiz(19,'Math')">
 <div class="quiz-icon">➗</div>
 <h2>Math</h2>
 <p>Arithmetic, algebra, logic, and calculations.</p>
 </div>
 
-<div class="quiz-card" onclick="startQuiz('science')">
+<div class="quiz-card" onclick="startTriviaQuiz(17,'Science')">
 <div class="quiz-icon">🧪</div>
 <h2>Science</h2>
 <p>Physics, biology, chemistry, and experiments.</p>
 </div>
 
-<div class="quiz-card" onclick="startQuiz('literature')">
+<div class="quiz-card" onclick="startTriviaQuiz(10,'Literature')">
 <div class="quiz-icon">📚</div>
 <h2>Literature</h2>
-<p>Authors, books, poetry, and writing.</p>
+<p>Books, authors, poetry, and storytelling.</p>
 </div>
 
-<div class="quiz-card" onclick="startQuiz('history')">
+<div class="quiz-card" onclick="startTriviaQuiz(23,'History')">
 <div class="quiz-icon">🏛️</div>
 <h2>History</h2>
-<p>World wars, empires, revolutions, and inventions.</p>
+<p>Wars, empires, revolutions, and discoveries.</p>
 </div>
 
-<div class="quiz-card" onclick="startQuiz('geography')">
+<div class="quiz-card" onclick="startTriviaQuiz(22,'Geography')">
 <div class="quiz-icon">🌍</div>
 <h2>Geography</h2>
 <p>Countries, capitals, maps, and landmarks.</p>
 </div>
 
-<div class="quiz-card" onclick="startQuiz('coding')">
+<div class="quiz-card" onclick="startTriviaQuiz(18,'Coding')">
 <div class="quiz-icon">💻</div>
 <h2>Coding</h2>
-<p>Programming logic, HTML, JavaScript, and more.</p>
+<p>Programming, computers, and algorithms.</p>
 </div>
 
-<div class="quiz-card" onclick="startQuiz('space')">
+<div class="quiz-card" onclick="startTriviaQuiz(17,'Space')">
 <div class="quiz-icon">🚀</div>
 <h2>Space</h2>
-<p>Planets, galaxies, astronauts, and missions.</p>
+<p>Planets, astronauts, galaxies, and missions.</p>
 </div>
 
-<div class="quiz-card" onclick="startQuiz('sports')">
+<div class="quiz-card" onclick="startTriviaQuiz(21,'Sports')">
 <div class="quiz-icon">⚽</div>
 <h2>Sports</h2>
 <p>Football, cricket, Olympics, and athletes.</p>
 </div>
 
-<div class="quiz-card" onclick="startQuiz('logic')">
+<div class="quiz-card" onclick="startTriviaQuiz(9,'Logic')">
 <div class="quiz-icon">🧩</div>
 <h2>Logic</h2>
-<p>Critical thinking, puzzles, and patterns.</p>
+<p>Critical thinking and reasoning challenges.</p>
 </div>
 
 <div class="quiz-card" onclick="openMemoryGame()">
@@ -702,6 +737,14 @@ or challenge yourself with the memory match game.
 <!-- QUIZ AREA -->
 
 <div id="quizArea" class="quiz-area">
+
+<h2
+id="quizTitle"
+style="
+font-size:42px;
+margin-bottom:20px;
+"
+></h2>
 
 <div id="question" class="question"></div>
 
@@ -727,8 +770,8 @@ line-height:1.7;
 "
 >
 
-Find all matching pairs.
 Every game is randomized.
+Find all matching pairs to win.
 
 </p>
 
@@ -752,126 +795,17 @@ Matches: 0/8
 
 <script>
 
-/* QUIZZES */
-
-const quizzes = {
-
-math:{
-
-"1":[
-
-{
-q:"What is 2 + 3?",
-a:["5","6","4","7"],
-correct:0
-},
-
-{
-q:"What is 10 - 4?",
-a:["5","6","7","8"],
-correct:1
-},
-
-{
-q:"How many sides does a square have?",
-a:["3","4","5","6"],
-correct:1
-},
-
-{
-q:"What is 5 + 5?",
-a:["8","9","10","11"],
-correct:2
-},
-
-{
-q:"What comes after 19?",
-a:["18","20","21","22"],
-correct:1
-}
-
-],
-
-"2":[
-
-{
-q:"What is 12 + 8?",
-a:["18","20","22","24"],
-correct:1
-},
-
-{
-q:"What is 6 × 2?",
-a:["10","11","12","13"],
-correct:2
-},
-
-{
-q:"What is half of 20?",
-a:["8","9","10","11"],
-correct:2
-},
-
-{
-q:"How many months are in a year?",
-a:["10","11","12","13"],
-correct:2
-},
-
-{
-q:"What is 15 - 7?",
-a:["6","7","8","9"],
-correct:2
-}
-
-]
-
-},
-
-science:{},
-literature:{},
-history:{},
-geography:{},
-coding:{},
-space:{},
-sports:{},
-logic:{}
-
-};
+/* QUIZ GLOBALS */
 
 let currentQuiz = [];
+
 let currentIndex = 0;
+
 let currentScore = 0;
 
 /* START QUIZ */
 
-function startQuiz(type){
-
-const grade = prompt(
-"Choose Grade (1-12)",
-"1"
-);
-
-const selectedGrade =
-grade.trim();
-
-if(
-
-isNaN(selectedGrade) ||
-
-selectedGrade < 1 ||
-
-selectedGrade > 12
-
-){
-
-alert(
-"Enter a valid grade from 1-12"
-);
-
-return;
-
-}
+async function startTriviaQuiz(category,title){
 
 document
 .getElementById("memoryArea")
@@ -881,40 +815,47 @@ document
 .getElementById("quizArea")
 .style.display = "block";
 
-/* REAL QUESTIONS */
+document
+.getElementById("quizTitle")
+.innerText =
+title + " Quiz";
 
-if(
+document
+.getElementById("question")
+.innerHTML =
 
-quizzes[type] &&
+'<div class="loader"></div>';
 
-quizzes[type][selectedGrade]
+document
+.getElementById("options")
+.innerHTML = "";
 
-){
+try{
 
-currentQuiz =
+const response =
 
-generate15Questions(
+await fetch(
 
-quizzes[type][selectedGrade]
+`https://opentdb.com/api.php?amount=5&type=multiple`
 
+);
+
+const data =
+await response.json();
+
+if(!data.results.length){
+
+throw new Error(
+"No questions found"
 );
 
 }
 
-/* FALLBACK */
-
-else{
-
 currentQuiz =
-
-generateFallbackQuiz(
-type,
-selectedGrade
-);
-
-}
+data.results;
 
 currentIndex = 0;
+
 currentScore = 0;
 
 showQuestion();
@@ -930,143 +871,17 @@ behavior:'smooth'
 
 }
 
-/* GENERATE 15 */
+catch(err){
 
-function generate15Questions(baseQuestions){
+console.error(err);
 
-const generated = [];
+document
+.getElementById("question")
+.innerText =
 
-for(let i=0;i<15;i++){
-
-const random =
-
-baseQuestions[
-Math.floor(
-Math.random() *
-baseQuestions.length
-)
-];
-
-generated.push({...random});
+"Failed to load quiz.";
 
 }
-
-return generated;
-
-}
-
-/* FALLBACK */
-
-function generateFallbackQuiz(type,grade){
-
-const fallback = [];
-
-for(let i=1;i<=15;i++){
-
-let question;
-let answers;
-let correct;
-
-/* MATH */
-
-if(type === "math"){
-
-const a =
-Math.floor(Math.random()*20)+1;
-
-const b =
-Math.floor(Math.random()*20)+1;
-
-question =
-`What is ${a} + ${b}?`;
-
-const real =
-a+b;
-
-answers = [
-
-real,
-real+2,
-real-1,
-real+5
-
-].sort(()=>Math.random()-0.5);
-
-correct =
-answers.indexOf(real);
-
-}
-
-/* SCIENCE */
-
-else if(type === "science"){
-
-const scienceQuestions = [
-
-{
-q:"What planet is known as the Red Planet?",
-a:["Mars","Earth","Venus","Saturn"],
-c:0
-},
-
-{
-q:"What gas do plants absorb?",
-a:["Oxygen","Carbon Dioxide","Nitrogen","Hydrogen"],
-c:1
-},
-
-{
-q:"What force keeps us on Earth?",
-a:["Gravity","Magnetism","Electricity","Wind"],
-c:0
-}
-
-];
-
-const random =
-
-scienceQuestions[
-Math.floor(
-Math.random()*scienceQuestions.length
-)
-];
-
-question = random.q;
-answers = random.a;
-correct = random.c;
-
-}
-
-/* DEFAULT */
-
-else{
-
-question =
-`${type.toUpperCase()} Challenge ${i}`;
-
-answers = [
-"Option A",
-"Option B",
-"Option C",
-"Option D"
-];
-
-correct =
-Math.floor(Math.random()*4);
-
-}
-
-fallback.push({
-
-q:question,
-a:answers,
-correct:correct
-
-});
-
-}
-
-return fallback;
 
 }
 
@@ -1077,19 +892,48 @@ function showQuestion(){
 const q =
 currentQuiz[currentIndex];
 
+if(!q) return;
+
+const question =
+
+decodeHTML(
+q.question
+);
+
 document
 .getElementById("question")
-.innerText = q.q;
+.innerHTML =
 
-const options =
-document.getElementById("options");
-
-options.innerHTML = "";
+question;
 
 /* OPTIONS */
 
-q.a.forEach(
-(answer,index)=>{
+const optionsDiv =
+
+document.getElementById(
+"options"
+);
+
+optionsDiv.innerHTML = "";
+
+/* ANSWERS */
+
+const answers = [
+
+...q.incorrect_answers,
+q.correct_answer
+
+];
+
+/* SHUFFLE */
+
+answers.sort(
+()=>Math.random()-0.5
+);
+
+/* BUTTONS */
+
+answers.forEach(answer=>{
 
 const btn =
 document.createElement(
@@ -1099,34 +943,39 @@ document.createElement(
 btn.className =
 "option-btn";
 
-btn.innerText =
-answer;
+btn.innerHTML =
+decodeHTML(answer);
 
 btn.onclick =
-()=>checkAnswer(index);
+()=>checkAnswer(answer);
 
-options.appendChild(btn);
+optionsDiv.appendChild(btn);
 
-}
-);
+});
+
+/* SCORE */
 
 document
 .getElementById("score")
 .innerText =
 
-`Score:
-${currentScore}/${currentQuiz.length}`;
+`Question ${
+currentIndex + 1
+}/${
+currentQuiz.length
+}
+• Score ${currentScore}`;
 
 }
 
-/* CHECK */
+/* CHECK ANSWER */
 
-function checkAnswer(index){
+function checkAnswer(answer){
 
-if(
-index ===
-currentQuiz[currentIndex].correct
-){
+const q =
+currentQuiz[currentIndex];
+
+if(answer === q.correct_answer){
 
 currentScore++;
 
@@ -1134,16 +983,13 @@ currentScore++;
 
 currentIndex++;
 
-if(
-currentIndex >=
-currentQuiz.length
-){
+if(currentIndex >= currentQuiz.length){
 
 document
 .getElementById("question")
-.innerText =
+.innerHTML =
 
-"🎉 Quiz Complete!";
+`🎉 Quiz Complete!`;
 
 document
 .getElementById("options")
@@ -1151,7 +997,7 @@ document
 
 document
 .getElementById("score")
-.innerText =
+.innerHTML =
 
 `Final Score:
 ${currentScore}/${currentQuiz.length}`;
@@ -1164,7 +1010,22 @@ showQuestion();
 
 }
 
-/* MEMORY */
+/* HTML DECODE */
+
+function decodeHTML(html){
+
+const txt =
+document.createElement(
+"textarea"
+);
+
+txt.innerHTML = html;
+
+return txt.value;
+
+}
+
+/* MEMORY GAME */
 
 const emojis = [
 
@@ -1180,7 +1041,9 @@ const emojis = [
 ];
 
 let flippedCards = [];
+
 let matchedPairs = 0;
+
 let moveCount = 0;
 
 /* SHUFFLE */
@@ -1229,16 +1092,21 @@ document.getElementById(
 memoryGrid.innerHTML = "";
 
 flippedCards = [];
+
 matchedPairs = 0;
+
 moveCount = 0;
 
 updateMemoryStats();
 
+/* RANDOMIZE */
+
 const shuffled =
+
 shuffle([...emojis]);
 
 shuffled.forEach(
-(emoji,index)=>{
+emoji=>{
 
 const card =
 document.createElement(
@@ -1260,6 +1128,15 @@ memoryGrid.appendChild(card);
 
 }
 );
+
+window.scrollTo({
+
+top:
+document.body.scrollHeight,
+
+behavior:'smooth'
+
+});
 
 }
 
@@ -1323,7 +1200,7 @@ if(matchedPairs === 8){
 setTimeout(()=>{
 
 alert(
-`🎉 Completed in ${moveCount} moves!`
+`🎉 You completed the memory game in ${moveCount} moves!`
 );
 
 },300);
@@ -1345,6 +1222,7 @@ second.classList.remove(
 );
 
 first.innerHTML = "?";
+
 second.innerHTML = "?";
 
 flippedCards = [];
@@ -1357,7 +1235,7 @@ flippedCards = [];
 
 }
 
-/* MEMORY STATS */
+/* STATS */
 
 function updateMemoryStats(){
 
