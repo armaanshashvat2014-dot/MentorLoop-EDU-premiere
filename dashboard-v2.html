@@ -47,6 +47,8 @@ rel="stylesheet"
 
 }
 
+/* BODY */
+
 body{
 
   font-family:'Inter',sans-serif;
@@ -62,9 +64,9 @@ body{
 
   overflow-x:hidden;
 
-  display:flex;
-
 }
+
+/* GRID */
 
 body::before{
 
@@ -83,6 +85,8 @@ body::before{
   z-index:-2;
 
 }
+
+/* ORBS */
 
 .orb{
 
@@ -140,63 +144,38 @@ body::before{
 
 }
 
-/* SIDEBAR */
+/* NAVBAR */
 
-.sidebar{
-
-  width:90px;
-
-  height:100vh;
+.navbar{
 
   position:fixed;
 
+  top:0;
+  left:0;
+
+  width:100%;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:18px 40px;
+
   background:
-  rgba(15,23,42,0.82);
+  rgba(15,23,42,0.75);
 
   backdrop-filter:blur(20px);
 
-  border-right:
+  border-bottom:
   1px solid rgba(255,255,255,0.06);
 
-  padding:18px;
-
-  transition:0.35s;
-
-  overflow-y:auto;
-
-  z-index:999;
+  z-index:9999;
 
 }
 
-.sidebar.expanded{
-  width:280px;
-}
-
-.sidebar::-webkit-scrollbar{
-  width:0;
-}
-
-.toggle-btn{
-
-  width:54px;
-  height:54px;
-
-  border:none;
-
-  border-radius:18px;
-
-  background:
-  rgba(255,255,255,0.08);
-
-  color:white;
-
-  font-size:22px;
-
-  cursor:pointer;
-
-  margin-bottom:18px;
-
-}
+/* LOGO */
 
 .logo{
 
@@ -204,14 +183,6 @@ body::before{
 
   font-weight:900;
 
-  opacity:0;
-
-  transition:0.3s;
-
-}
-
-.sidebar.expanded .logo{
-  opacity:1;
 }
 
 .logo span{
@@ -219,66 +190,87 @@ body::before{
   background:
   linear-gradient(
     90deg,
-    var(--cyan),
-    var(--purple)
+    #22d3ee,
+    #8b5cf6
   );
 
   -webkit-background-clip:text;
+
   -webkit-text-fill-color:transparent;
 
 }
 
-.sidebar h4{
+/* NAV LINKS */
 
-  margin-top:24px;
-
-  margin-bottom:10px;
-
-  color:#64748b;
-
-  font-size:12px;
-
-  opacity:0;
-
-}
-
-.sidebar.expanded h4{
-  opacity:1;
-}
-
-.sidebar a{
+.nav-center{
 
   display:flex;
 
-  align-items:center;
+  gap:34px;
 
-  gap:14px;
+}
+
+.nav-center a{
 
   text-decoration:none;
 
   color:#cbd5e1;
 
-  padding:14px;
-
-  border-radius:18px;
+  font-weight:600;
 
   transition:0.3s;
 
-  margin-bottom:10px;
-
-  white-space:nowrap;
+  position:relative;
 
 }
 
-.sidebar a:hover{
-
-  background:
-  rgba(34,211,238,0.12);
-
-  transform:
-  translateX(6px);
+.nav-center a:hover{
 
   color:white;
+
+}
+
+.nav-center a::after{
+
+  content:'';
+
+  position:absolute;
+
+  left:0;
+  bottom:-8px;
+
+  width:0%;
+
+  height:2px;
+
+  background:
+  linear-gradient(
+    90deg,
+    #22d3ee,
+    #8b5cf6
+  );
+
+  transition:0.3s;
+
+}
+
+.nav-center a:hover::after{
+
+  width:100%;
+
+}
+
+/* USER PHOTO */
+
+.user-photo{
+
+  width:46px;
+  height:46px;
+
+  border-radius:50%;
+
+  border:
+  2px solid rgba(255,255,255,0.15);
 
 }
 
@@ -286,18 +278,11 @@ body::before{
 
 .main{
 
-  margin-left:90px;
-
   width:100%;
 
-  padding:30px;
+  padding:
+  120px 30px 30px;
 
-  transition:0.35s;
-
-}
-
-.sidebar.expanded + .main{
-  margin-left:280px;
 }
 
 /* HERO */
@@ -609,26 +594,37 @@ body::before{
 
 @media(max-width:768px){
 
-  .sidebar{
+  .navbar{
 
-    left:-100%;
-
-    width:85%;
-
-    max-width:320px;
+    padding:18px 20px;
 
   }
 
-  .sidebar.expanded{
-    left:0;
+  .nav-center{
+
+    gap:18px;
+
+    font-size:14px;
+
   }
 
-  .main{
-    margin-left:0 !important;
+  .logo{
+
+    font-size:22px;
+
   }
 
   .hero h1{
     font-size:38px;
+  }
+
+  .main{
+    padding:
+    110px 18px 18px;
+  }
+
+  .nav-grid{
+    grid-template-columns:1fr;
   }
 
 }
@@ -641,48 +637,45 @@ body::before{
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 
-<!-- SIDEBAR -->
+<!-- NAVBAR -->
 
-<div class="sidebar" id="sidebar">
+<nav class="navbar">
 
-<button
-class="toggle-btn"
-onclick="toggleSidebar()"
->
-☰
-</button>
+  <div class="logo">
+    MentorLoop <span>EDU</span>
+  </div>
 
-<div class="logo">
-MentorLoop <span>EDU</span>
-</div>
+  <div class="nav-center">
 
-<h4>MAIN</h4>
+    <a href="index.html">
+      Home
+    </a>
 
-<a href="#">
-🏠 Dashboard
-</a>
+    <a href="features.html">
+      Features
+    </a>
 
-<a href="games.html">
-🧠 Quizzes
-</a>
+    <a href="leaderboard.html">
+      Leaderboard
+    </a>
 
-<a href="leaderboard.html">
-🏆 Leaderboard
-</a>
+    <a href="community.html">
+      Community
+    </a>
 
-<a href="chat.html">
-💬 Friends
-</a>
+  </div>
 
-<a href="profile.html">
-👤 Profile
-</a>
+  <div class="nav-right">
 
-<a href="teacher.html">
-🎓 Teacher
-</a>
+    <img
+      id="userPhoto"
+      class="user-photo"
+      src=""
+    >
 
-</div>
+  </div>
+
+</nav>
 
 <!-- MAIN -->
 
@@ -869,7 +862,9 @@ from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import {
 
   getAuth,
-  onAuthStateChanged
+  onAuthStateChanged,
+  browserLocalPersistence,
+  setPersistence
 
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -901,17 +896,12 @@ getFirestore(app);
 const auth =
 getAuth(app);
 
-/* SIDEBAR */
+/* PERSISTENCE */
 
-window.toggleSidebar =
-function(){
-
-  document
-  .getElementById("sidebar")
-  .classList
-  .toggle("expanded");
-
-}
+await setPersistence(
+  auth,
+  browserLocalPersistence
+);
 
 /* QUOTES */
 
@@ -965,166 +955,181 @@ Math.random() * facts.length
 
 /* AUTH */
 
-let authLoaded = false;
-
 onAuthStateChanged(
   auth,
   async(user)=>{
 
-    if(authLoaded) return;
+    console.log(
+      "AUTH STATE:",
+      user
+    );
 
-    authLoaded = true;
+    /* NO REDIRECT */
 
-    setTimeout(async()=>{
-
-      if(!auth.currentUser){
-
-        location.href =
-        "index.html";
-
-        return;
-
-      }
-
-      const currentUser =
-      auth.currentUser;
-
-      /* WELCOME */
-
-      document
-      .getElementById("welcomeName")
-      .innerHTML =
-
-      `Welcome back,
-      ${currentUser.displayName} 👋`;
-
-      /* PUBLIC ID */
-
-      const mapSnap =
-      await getDoc(
-        doc(
-          db,
-          "user_map",
-          currentUser.uid
-        )
-      );
-
-      if(!mapSnap.exists()) return;
-
-      const publicId =
-      mapSnap.data().publicId;
-
-      /* LEADERBOARD */
-
-      const lbSnap =
-      await getDoc(
-        doc(
-          db,
-          "leaderboard",
-          publicId
-        )
-      );
-
-      if(lbSnap.exists()){
-
-        const data =
-        lbSnap.data();
-
-        document
-        .getElementById("points")
-        .innerText =
-
-        data.points || 0;
-
-        document
-        .getElementById("streak")
-        .innerText =
-
-        data.streak || 0;
-
-      }
-
-      /* FRIENDS */
-
-      const friendsRef =
-      collection(
-        db,
-        "users",
-        publicId,
-        "friends"
-      );
-
-      const friendsSnap =
-      await getDocs(
-        friendsRef
-      );
-
-      document
-      .getElementById("friendCount")
-      .innerText =
-
-      friendsSnap.size;
-
-      const friendsList =
-      document
-      .getElementById(
-        "friendsList"
-      );
-
-      friendsList.innerHTML = "";
-
-      if(friendsSnap.empty){
-
-        friendsList.innerHTML =
-
-        `
-        <p style="
-        color:#94a3b8;
-        ">
-        No friends added yet.
-        </p>
-        `;
-
-      }
-
-      else{
-
-        friendsSnap.forEach(docu=>{
-
-          const data =
-          docu.data();
-
-          const div =
-          document
-          .createElement("div");
-
-          div.className =
-          "friend";
-
-          div.innerHTML =
-
-          `
-          <span>
-          ${data.name}
-          </span>
-
-          <span class="online">
-          ● Online
-          </span>
-          `;
-
-          friendsList
-          .appendChild(div);
-
-        });
-
-      }
+    if(!user){
 
       console.log(
-        "Dashboard loaded successfully"
+        "User not logged in"
       );
 
-    },800);
+      return;
+
+    }
+
+    /* USER PHOTO */
+
+    document
+    .getElementById("userPhoto")
+    .src =
+
+    user.photoURL || "";
+
+    /* WELCOME */
+
+    document
+    .getElementById("welcomeName")
+    .innerHTML =
+
+    `Welcome back,
+    ${user.displayName} 👋`;
+
+    /* PUBLIC ID */
+
+    const mapSnap =
+    await getDoc(
+
+      doc(
+        db,
+        "user_map",
+        user.uid
+      )
+
+    );
+
+    if(!mapSnap.exists()){
+
+      console.error(
+        "Public ID missing"
+      );
+
+      return;
+
+    }
+
+    const publicId =
+    mapSnap.data().publicId;
+
+    /* LEADERBOARD */
+
+    const lbSnap =
+    await getDoc(
+
+      doc(
+        db,
+        "leaderboard",
+        publicId
+      )
+
+    );
+
+    if(lbSnap.exists()){
+
+      const data =
+      lbSnap.data();
+
+      document
+      .getElementById("points")
+      .innerText =
+
+      data.points || 0;
+
+      document
+      .getElementById("streak")
+      .innerText =
+
+      data.streak || 0;
+
+    }
+
+    /* FRIENDS */
+
+    const friendsRef =
+    collection(
+      db,
+      "users",
+      publicId,
+      "friends"
+    );
+
+    const friendsSnap =
+    await getDocs(
+      friendsRef
+    );
+
+    document
+    .getElementById("friendCount")
+    .innerText =
+
+    friendsSnap.size;
+
+    const friendsList =
+    document
+    .getElementById(
+      "friendsList"
+    );
+
+    friendsList.innerHTML = "";
+
+    if(friendsSnap.empty){
+
+      friendsList.innerHTML =
+
+      `
+      <p style="
+      color:#94a3b8;
+      ">
+      No friends added yet.
+      </p>
+      `;
+
+    }
+
+    else{
+
+      friendsSnap.forEach(docu=>{
+
+        const data =
+        docu.data();
+
+        const div =
+        document
+        .createElement("div");
+
+        div.className =
+        "friend";
+
+        div.innerHTML =
+
+        `
+        <span>
+        ${data.name}
+        </span>
+
+        <span class="online">
+        ● Online
+        </span>
+        `;
+
+        friendsList
+        .appendChild(div);
+
+      });
+
+    }
+
+    console.log(
+      "Dashboard loaded successfully"
+    );
 
 });
 
