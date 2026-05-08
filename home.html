@@ -42,6 +42,8 @@ overflow-x:hidden;
 
 }
 
+/* GRID */
+
 body::before{
 
 content:'';
@@ -57,6 +59,64 @@ linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
 background-size:40px 40px;
 
 z-index:-2;
+
+}
+
+/* GLOW ORBS */
+
+.orb{
+
+position:fixed;
+
+border-radius:50%;
+
+filter:blur(90px);
+
+opacity:0.22;
+
+z-index:-1;
+
+animation:float 10s ease-in-out infinite;
+
+}
+
+.orb1{
+
+width:300px;
+height:300px;
+
+background:#22d3ee;
+
+top:-100px;
+left:-100px;
+
+}
+
+.orb2{
+
+width:300px;
+height:300px;
+
+background:#8b5cf6;
+
+bottom:-100px;
+right:-100px;
+
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(30px);
+}
+
+100%{
+transform:translateY(0px);
+}
 
 }
 
@@ -132,10 +192,72 @@ font-weight:600;
 
 transition:0.3s;
 
+position:relative;
+
 }
 
 .nav-links a:hover{
 color:white;
+}
+
+.nav-links a::after{
+
+content:'';
+
+position:absolute;
+
+left:0;
+bottom:-8px;
+
+width:0%;
+
+height:2px;
+
+background:
+linear-gradient(
+90deg,
+#22d3ee,
+#8b5cf6
+);
+
+transition:0.3s;
+
+}
+
+.nav-links a:hover::after{
+width:100%;
+}
+
+/* PROFILE */
+
+.profile{
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+}
+
+.profile img{
+
+width:48px;
+height:48px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+border:
+2px solid rgba(255,255,255,0.08);
+
+}
+
+.profile span{
+
+font-weight:700;
+
 }
 
 /* MAIN */
@@ -151,21 +273,49 @@ margin:auto;
 
 }
 
+/* HERO */
+
 .hero{
 
 text-align:center;
 
-margin-bottom:40px;
+margin-bottom:60px;
+
+}
+
+.hero-badge{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:10px;
+
+padding:12px 18px;
+
+border-radius:999px;
+
+background:
+rgba(34,211,238,0.08);
+
+border:
+1px solid rgba(34,211,238,0.16);
+
+color:#7dd3fc;
+
+font-weight:700;
+
+margin-bottom:26px;
 
 }
 
 .hero h1{
 
-font-size:72px;
+font-size:78px;
 
 font-weight:900;
 
-line-height:1;
+line-height:0.95;
 
 }
 
@@ -186,11 +336,98 @@ linear-gradient(
 
 .hero p{
 
-margin-top:20px;
+margin-top:24px;
 
 font-size:20px;
 
 color:#94a3b8;
+
+line-height:1.8;
+
+max-width:850px;
+
+margin-inline:auto;
+
+}
+
+/* HERO BUTTONS */
+
+.hero-buttons{
+
+display:flex;
+
+justify-content:center;
+
+gap:16px;
+
+margin-top:38px;
+
+flex-wrap:wrap;
+
+}
+
+.primary-btn{
+
+padding:18px 28px;
+
+border-radius:20px;
+
+background:
+linear-gradient(
+90deg,
+#22d3ee,
+#8b5cf6
+);
+
+text-decoration:none;
+
+color:white;
+
+font-weight:700;
+
+transition:0.3s;
+
+}
+
+.primary-btn:hover{
+
+transform:
+translateY(-6px);
+
+box-shadow:
+0 20px 60px rgba(34,211,238,0.25);
+
+}
+
+.secondary-btn{
+
+padding:18px 28px;
+
+border-radius:20px;
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+background:
+rgba(255,255,255,0.04);
+
+text-decoration:none;
+
+color:white;
+
+font-weight:700;
+
+transition:0.3s;
+
+}
+
+.secondary-btn:hover{
+
+transform:
+translateY(-6px);
+
+background:
+rgba(255,255,255,0.08);
 
 }
 
@@ -235,6 +472,8 @@ position:relative;
 
 overflow:hidden;
 
+isolation:isolate;
+
 }
 
 .card::before{
@@ -243,16 +482,18 @@ content:'';
 
 position:absolute;
 
-width:220px;
-height:220px;
+inset:0;
 
 background:
-rgba(255,255,255,0.03);
+linear-gradient(
+180deg,
+rgba(255,255,255,0.06),
+transparent
+);
 
-border-radius:50%;
+opacity:0.6;
 
-top:-120px;
-right:-120px;
+z-index:-1;
 
 }
 
@@ -292,48 +533,12 @@ color:#94a3b8;
 
 }
 
-/* PROFILE */
-
-.profile{
-
-position:fixed;
-
-top:18px;
-right:40px;
-
-display:flex;
-
-align-items:center;
-
-gap:14px;
-
-z-index:9999;
-
-}
-
-.profile img{
-
-width:48px;
-height:48px;
-
-border-radius:50%;
-
-object-fit:cover;
-
-}
-
-.profile span{
-
-font-weight:700;
-
-}
-
 /* MOBILE */
 
 @media(max-width:768px){
 
 .hero h1{
-font-size:48px;
+font-size:52px;
 }
 
 .navbar{
@@ -345,8 +550,13 @@ gap:18px;
 font-size:14px;
 }
 
-.profile{
-right:20px;
+.main{
+padding:
+120px 18px 18px;
+}
+
+.hero p{
+font-size:17px;
 }
 
 }
@@ -356,6 +566,11 @@ right:20px;
 
 <body>
 
+<!-- GLOW -->
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
 <!-- NAVBAR -->
 
 <nav class="navbar">
@@ -364,7 +579,25 @@ right:20px;
 MentorLoop <span>EDU</span>
 </div>
 
+<div class="nav-links">
 
+<a href="#">
+Home
+</a>
+
+<a href="#">
+Features
+</a>
+
+<a href="leaderboard.html">
+Leaderboard
+</a>
+
+<a href="chat.html">
+Community
+</a>
+
+</div>
 
 <!-- PROFILE -->
 
@@ -372,7 +605,7 @@ MentorLoop <span>EDU</span>
 
 <img
 id="userPhoto"
-src="https://ui-avatars.com/api/?name=User"
+src="https://ui-avatars.com/api/?name=MentorLoop"
 >
 
 <span id="userName">
@@ -381,21 +614,44 @@ User
 
 </div>
 
+</nav>
+
 <!-- MAIN -->
 
 <div class="main">
 
+<!-- HERO -->
+
 <div class="hero">
+
+<div class="hero-badge">
+🔥 12,000+ Students Learning Daily
+</div>
 
 <h1>
 Choose Your <span>Journey</span>
 </h1>
 
 <p>
-Learn smarter, compete globally, and build your future.
+Learn smarter, compete globally, solve doubts instantly,
+and level up your future with AI-powered education.
 </p>
 
+<div class="hero-buttons">
+
+<a href="games.html" class="primary-btn">
+Start Learning →
+</a>
+
+<a href="dashboard.html" class="secondary-btn">
+Open Dashboard
+</a>
+
 </div>
+
+</div>
+
+<!-- GRID -->
 
 <div class="grid">
 
@@ -474,6 +730,7 @@ Get instant AI-powered help for math, science, coding, and more.
 </p>
 
 </a>
+
 <a
 href="dashboard.html"
 class="card"
@@ -488,8 +745,11 @@ Dashboard
 </h2>
 
 <p>
-Navigate everywhere and anywhere
+Access stats, friends, streaks, and your learning hub.
+</p>
+
 </a>
+
 </div>
 
 </div>
@@ -512,7 +772,7 @@ apiKey: "AIzaSyAltyInwHSCxX3Mi9LjjPUs1767uo70gDQ",
   projectId: "mentorloop-premiere",
   storageBucket: "mentorloop-premiere.firebasestorage.app",
   messagingSenderId: "55345483492",
-  appId: "1:55345483492:web:47407fdbd92a2278aea6f1"
+  appId: "1:55345483492:web:47407fdbd92a2278aea6f1",
 
 };
 
@@ -528,22 +788,44 @@ auth,
 
 if(!user) return;
 
+/* LOCAL NAME */
+
+const localName =
+
+localStorage.getItem(
+"mentorloop_name"
+);
+
+/* LOCAL PHOTO */
+
+const localPhoto =
+
+localStorage.getItem(
+"mentorloop_photo"
+);
+
 document
 .getElementById("userName")
 .innerText =
 
-user.displayName || "User";
+localName ||
+user.displayName ||
+"User";
 
 document
 .getElementById("userPhoto")
 .src =
+
+localPhoto ||
 
 user.photoURL ||
 
 "https://ui-avatars.com/api/?name=" +
 
 encodeURIComponent(
-user.displayName || "User"
+localName ||
+user.displayName ||
+"MentorLoop"
 );
 
 }
