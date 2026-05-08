@@ -19,8 +19,6 @@ rel="stylesheet"
 
 <style>
 
-/* RESET */
-
 *{
   margin:0;
   padding:0;
@@ -49,8 +47,6 @@ rel="stylesheet"
 
 }
 
-/* BODY */
-
 body{
 
   font-family:'Inter',sans-serif;
@@ -70,8 +66,6 @@ body{
 
 }
 
-/* GRID */
-
 body::before{
 
   content:'';
@@ -89,8 +83,6 @@ body::before{
   z-index:-2;
 
 }
-
-/* ORBS */
 
 .orb{
 
@@ -184,8 +176,6 @@ body::before{
   width:0;
 }
 
-/* TOGGLE */
-
 .toggle-btn{
 
   width:54px;
@@ -207,8 +197,6 @@ body::before{
   margin-bottom:18px;
 
 }
-
-/* LOGO */
 
 .logo{
 
@@ -239,8 +227,6 @@ body::before{
   -webkit-text-fill-color:transparent;
 
 }
-
-/* LINKS */
 
 .sidebar h4{
 
@@ -402,7 +388,7 @@ body::before{
 
 }
 
-/* QUICK STATS */
+/* STATS */
 
 .quick-stats{
 
@@ -472,7 +458,7 @@ body::before{
 
 }
 
-/* CARDS */
+/* CARD */
 
 .card{
 
@@ -977,147 +963,168 @@ Math.random() * facts.length
 )
 ];
 
-/* LOAD USER */
+/* AUTH */
+
+let authLoaded = false;
 
 onAuthStateChanged(
   auth,
   async(user)=>{
 
-    if(!user){
+    if(authLoaded) return;
 
-      location.href =
-      "index.html";
+    authLoaded = true;
 
-      return;
+    setTimeout(async()=>{
 
-    }
+      if(!auth.currentUser){
 
-    document
-    .getElementById("welcomeName")
-    .innerHTML =
+        location.href =
+        "index.html";
 
-    `Welcome back,
-    ${user.displayName} 👋`;
+        return;
 
-    /* PUBLIC ID */
+      }
 
-    const mapSnap =
-    await getDoc(
-      doc(
-        db,
-        "user_map",
-        user.uid
-      )
-    );
+      const currentUser =
+      auth.currentUser;
 
-    if(!mapSnap.exists()) return;
-
-    const publicId =
-    mapSnap.data().publicId;
-
-    /* LEADERBOARD DATA */
-
-    const lbSnap =
-    await getDoc(
-      doc(
-        db,
-        "leaderboard",
-        publicId
-      )
-    );
-
-    if(lbSnap.exists()){
-
-      const data =
-      lbSnap.data();
+      /* WELCOME */
 
       document
-      .getElementById("points")
-      .innerText =
+      .getElementById("welcomeName")
+      .innerHTML =
 
-      data.points || 0;
+      `Welcome back,
+      ${currentUser.displayName} 👋`;
 
-      document
-      .getElementById("streak")
-      .innerText =
+      /* PUBLIC ID */
 
-      data.streak || 0;
+      const mapSnap =
+      await getDoc(
+        doc(
+          db,
+          "user_map",
+          currentUser.uid
+        )
+      );
 
-    }
+      if(!mapSnap.exists()) return;
 
-    /* FRIENDS */
+      const publicId =
+      mapSnap.data().publicId;
 
-    const friendsRef =
-    collection(
-      db,
-      "users",
-      publicId,
-      "friends"
-    );
+      /* LEADERBOARD */
 
-    const friendsSnap =
-    await getDocs(
-      friendsRef
-    );
+      const lbSnap =
+      await getDoc(
+        doc(
+          db,
+          "leaderboard",
+          publicId
+        )
+      );
 
-    document
-    .getElementById("friendCount")
-    .innerText =
-
-    friendsSnap.size;
-
-    const friendsList =
-    document
-    .getElementById(
-      "friendsList"
-    );
-
-    if(friendsSnap.empty){
-
-      friendsList.innerHTML =
-
-      `
-      <p style="
-      color:#94a3b8;
-      ">
-      No friends added yet.
-      </p>
-      `;
-
-    }
-
-    else{
-
-      friendsSnap.forEach(docu=>{
+      if(lbSnap.exists()){
 
         const data =
-        docu.data();
+        lbSnap.data();
 
-        const div =
         document
-        .createElement("div");
+        .getElementById("points")
+        .innerText =
 
-        div.className =
-        "friend";
+        data.points || 0;
 
-        div.innerHTML =
+        document
+        .getElementById("streak")
+        .innerText =
+
+        data.streak || 0;
+
+      }
+
+      /* FRIENDS */
+
+      const friendsRef =
+      collection(
+        db,
+        "users",
+        publicId,
+        "friends"
+      );
+
+      const friendsSnap =
+      await getDocs(
+        friendsRef
+      );
+
+      document
+      .getElementById("friendCount")
+      .innerText =
+
+      friendsSnap.size;
+
+      const friendsList =
+      document
+      .getElementById(
+        "friendsList"
+      );
+
+      friendsList.innerHTML = "";
+
+      if(friendsSnap.empty){
+
+        friendsList.innerHTML =
 
         `
-        <span>
-        ${data.name}
-        </span>
-
-        <span class="online">
-        ● Online
-        </span>
+        <p style="
+        color:#94a3b8;
+        ">
+        No friends added yet.
+        </p>
         `;
 
-        friendsList
-        .appendChild(div);
+      }
 
-      });
+      else{
 
-    }
+        friendsSnap.forEach(docu=>{
+
+          const data =
+          docu.data();
+
+          const div =
+          document
+          .createElement("div");
+
+          div.className =
+          "friend";
+
+          div.innerHTML =
+
+          `
+          <span>
+          ${data.name}
+          </span>
+
+          <span class="online">
+          ● Online
+          </span>
+          `;
+
+          friendsList
+          .appendChild(div);
+
+        });
+
+      }
+
+      console.log(
+        "Dashboard loaded successfully"
+      );
+
+    },800);
 
 });
 
