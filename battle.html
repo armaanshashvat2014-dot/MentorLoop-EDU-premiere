@@ -1684,55 +1684,82 @@ initializeApp(firebaseConfig);
 
 const db =
 getFirestore(app);
+async function finishRace(){
+
+clearInterval(
+timerInterval
+);
+
+document
+.getElementById(
+"winner"
+).style.display =
+"flex";
+
+const sorted =
+[...players]
+
+.sort((a,b)=>
+b.score-a.score
+);
+
+const winner =
+sorted[0];
+
+const youWon =
+winner.name === "YOU";
 
 /* TRACK */
 
-async function trackActivity(type,value=1){
-
-const userId =
-localStorage.getItem(
-"mentorloop_public_id"
+await finishRaceTracking(
+youWon
 );
 
-if(!userId) return;
+/* WINNER UI */
 
-await setDoc(
-
-doc(db,"activity",userId),
-
-{
-
-[type]: increment(value),
-
-lastUpdated: Date.now()
-
-},
-
-{ merge:true }
-
+const title =
+document.getElementById(
+"winnerText"
 );
+
+const desc =
+document.getElementById(
+"winnerDesc"
+);
+
+if(youWon){
+
+title.innerText =
+"🥇 You Won!";
 
 }
 
-/* FINISH RACE */
+else{
 
-window.finishRaceTracking =
-async function(won){
-
-await trackActivity(
-"battleRaces"
-);
-
-if(won){
-
-await trackActivity(
-"battleWins"
-);
+title.innerText =
+`💀 ${winner.name} Won`;
 
 }
 
-};
+desc.innerHTML =
 
+sorted.map((p,index)=>`
+
+<div style="
+margin-top:10px;
+font-size:18px;
+">
+
+${index+1}.
+${p.name}
+—
+${p.score} pts
+
+</div>
+
+`).join("");
+
+}
 </script>
 </body>
 </html>
