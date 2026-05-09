@@ -1384,6 +1384,100 @@ ${matchedPairs}/8`;
 initializeToken();
 
 </script>
+<script type="module">
 
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+import {
+
+getFirestore,
+doc,
+setDoc,
+increment
+
+}
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyAltyInwHSCxX3Mi9LjjPUs1767uo70gDQ",
+
+authDomain:
+"mentorloop-premiere.firebaseapp.com",
+
+projectId:
+"mentorloop-premiere",
+
+storageBucket:
+"mentorloop-premiere.firebasestorage.app",
+
+messagingSenderId:
+"55345483492",
+
+appId:
+"1:55345483492:web:47407fdbd92a2278aea6f1",
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+/* TRACK */
+
+window.trackActivity =
+async function(type,value=1){
+
+const userId =
+localStorage.getItem(
+"mentorloop_public_id"
+);
+
+if(!userId) return;
+
+await setDoc(
+
+doc(db,"activity",userId),
+
+{
+
+[type]: increment(value),
+
+lastUpdated: Date.now()
+
+},
+
+{ merge:true }
+
+);
+
+};
+
+/* QUIZ COMPLETE */
+
+window.quizCompleted =
+function(){
+
+trackActivity(
+"quizzesCompleted"
+);
+
+};
+
+/* MEMORY GAME */
+
+window.memoryGameWon =
+function(){
+
+trackActivity(
+"memoryGames"
+);
+
+};
+
+</script>
 </body>
 </html>
