@@ -62,7 +62,7 @@ z-index:-2;
 
 }
 
-/* GLOW ORBS */
+/* GLOW */
 
 .orb{
 
@@ -465,6 +465,35 @@ color:#7dd3fc;
 
 }
 
+/* LOADER */
+
+.loader{
+
+width:70px;
+height:70px;
+
+border-radius:50%;
+
+border:
+6px solid rgba(255,255,255,0.08);
+
+border-top:
+6px solid #22d3ee;
+
+animation:spin 1s linear infinite;
+
+margin:30px auto;
+
+}
+
+@keyframes spin{
+
+100%{
+transform:rotate(360deg);
+}
+
+}
+
 /* MEMORY */
 
 .memory-grid{
@@ -542,34 +571,6 @@ color:#cbd5e1;
 
 }
 
-/* LOADER */
-
-.loader{
-
-width:60px;
-height:60px;
-
-border-radius:50%;
-
-border:5px solid rgba(255,255,255,0.1);
-
-border-top:
-5px solid #22d3ee;
-
-animation:spin 1s linear infinite;
-
-margin:30px auto;
-
-}
-
-@keyframes spin{
-
-100%{
-transform:rotate(360deg);
-}
-
-}
-
 /* MOBILE */
 
 @media(max-width:768px){
@@ -615,8 +616,6 @@ font-size:26px;
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 
-<!-- NAVBAR -->
-
 <nav class="navbar">
 
 <div class="logo">
@@ -645,11 +644,7 @@ Community
 
 </nav>
 
-<!-- MAIN -->
-
 <div class="main">
-
-<!-- HERO -->
 
 <div class="hero">
 
@@ -658,60 +653,52 @@ Community
 </div>
 
 <h1>
-Train Your <span>Brain</span>
+Train Your <span>Mind</span>
 </h1>
 
 <p>
-Fresh trivia quizzes every time across multiple subjects,
+Unlimited quizzes with anti-repeat protection
 plus a fully randomized memory challenge.
 </p>
 
 </div>
-
-<!-- QUIZ GRID -->
 
 <div class="quiz-grid">
 
 <div class="quiz-card" onclick="startTriviaQuiz(19,'Math')">
 <div class="quiz-icon">➗</div>
 <h2>Math</h2>
-<p>Arithmetic, algebra, logic, and calculations.</p>
+<p>Equations, algebra, logic, and calculations.</p>
 </div>
 
 <div class="quiz-card" onclick="startTriviaQuiz(17,'Science')">
 <div class="quiz-icon">🧪</div>
 <h2>Science</h2>
-<p>Physics, biology, chemistry, and experiments.</p>
+<p>Physics, chemistry, biology, and nature.</p>
 </div>
 
 <div class="quiz-card" onclick="startTriviaQuiz(10,'Literature')">
 <div class="quiz-icon">📚</div>
 <h2>Literature</h2>
-<p>Books, authors, poetry, and storytelling.</p>
+<p>Books, poetry, storytelling, and authors.</p>
 </div>
 
 <div class="quiz-card" onclick="startTriviaQuiz(23,'History')">
 <div class="quiz-icon">🏛️</div>
 <h2>History</h2>
-<p>Wars, empires, revolutions, and discoveries.</p>
+<p>Empires, wars, revolutions, and discoveries.</p>
 </div>
 
 <div class="quiz-card" onclick="startTriviaQuiz(22,'Geography')">
 <div class="quiz-icon">🌍</div>
 <h2>Geography</h2>
-<p>Countries, capitals, maps, and landmarks.</p>
+<p>Countries, maps, capitals, and landmarks.</p>
 </div>
 
 <div class="quiz-card" onclick="startTriviaQuiz(18,'Coding')">
 <div class="quiz-icon">💻</div>
 <h2>Coding</h2>
-<p>Programming, computers, and algorithms.</p>
-</div>
-
-<div class="quiz-card" onclick="startTriviaQuiz(17,'Space')">
-<div class="quiz-icon">🚀</div>
-<h2>Space</h2>
-<p>Planets, astronauts, galaxies, and missions.</p>
+<p>Programming, algorithms, and computers.</p>
 </div>
 
 <div class="quiz-card" onclick="startTriviaQuiz(21,'Sports')">
@@ -720,10 +707,16 @@ plus a fully randomized memory challenge.
 <p>Football, cricket, Olympics, and athletes.</p>
 </div>
 
-<div class="quiz-card" onclick="startTriviaQuiz(9,'Logic')">
-<div class="quiz-icon">🧩</div>
-<h2>Logic</h2>
-<p>Critical thinking and reasoning challenges.</p>
+<div class="quiz-card" onclick="startTriviaQuiz(9,'General Knowledge')">
+<div class="quiz-icon">🧠</div>
+<h2>General Knowledge</h2>
+<p>Mixed intelligent trivia challenges.</p>
+</div>
+
+<div class="quiz-card" onclick="startTriviaQuiz(24,'Politics')">
+<div class="quiz-icon">🏛️</div>
+<h2>Politics</h2>
+<p>World leaders, systems, and governments.</p>
 </div>
 
 <div class="quiz-card" onclick="openMemoryGame()">
@@ -754,7 +747,7 @@ margin-bottom:20px;
 
 </div>
 
-<!-- MEMORY AREA -->
+<!-- MEMORY -->
 
 <div id="memoryArea" class="quiz-area">
 
@@ -769,10 +762,8 @@ color:#94a3b8;
 line-height:1.7;
 "
 >
-
 Every game is randomized.
 Find all matching pairs to win.
-
 </p>
 
 <div class="memory-stats">
@@ -795,6 +786,10 @@ Matches: 0/8
 
 <script>
 
+/* TOKEN */
+
+let triviaToken = null;
+
 /* QUIZ GLOBALS */
 
 let currentQuiz = [];
@@ -802,6 +797,42 @@ let currentQuiz = [];
 let currentIndex = 0;
 
 let currentScore = 0;
+
+/* GET TOKEN */
+
+async function initializeToken(){
+
+try{
+
+const response =
+
+await fetch(
+"https://opentdb.com/api_token.php?command=request"
+);
+
+const data =
+await response.json();
+
+triviaToken =
+data.token;
+
+console.log(
+"Trivia Token Ready:",
+triviaToken
+);
+
+}
+
+catch(err){
+
+console.error(
+"Token Error:",
+err
+);
+
+}
+
+}
 
 /* START QUIZ */
 
@@ -823,36 +854,60 @@ title + " Quiz";
 document
 .getElementById("question")
 .innerHTML =
-
 '<div class="loader"></div>';
 
 document
 .getElementById("options")
 .innerHTML = "";
 
+document
+.getElementById("score")
+.innerHTML =
+"Loading questions...";
+
 try{
 
+const url =
+
+`https://opentdb.com/api.php?
+amount=15
+&category=${category}
+&difficulty=medium
+&type=multiple
+&token=${triviaToken}`
+
+.replace(/\s/g,'');
+
 const response =
-
-await fetch(
-
-`https://opentdb.com/api.php?amount=5&type=multiple`
-
-);
+await fetch(url);
 
 const data =
 await response.json();
 
-if(!data.results.length){
+/* TOKEN EMPTY */
 
-throw new Error(
-"No questions found"
+if(data.response_code === 4){
+
+await resetToken();
+
+return startTriviaQuiz(
+category,
+title
 );
 
 }
 
+/* FILTER BAD QUESTIONS */
+
 currentQuiz =
-data.results;
+data.results.filter(q=>
+
+isRelevant(
+q.question,
+title
+)
+
+);
 
 currentIndex = 0;
 
@@ -877,9 +932,89 @@ console.error(err);
 
 document
 .getElementById("question")
-.innerText =
+.innerHTML =
 
-"Failed to load quiz.";
+"⚠️ Failed to load quiz.";
+
+document
+.getElementById("options")
+.innerHTML = "";
+
+document
+.getElementById("score")
+.innerHTML =
+
+"Check internet connection.";
+
+}
+
+}
+
+/* FILTER */
+
+function isRelevant(question,subject){
+
+const text =
+question.toLowerCase();
+
+if(subject === "Science"){
+
+return (
+
+text.includes("science") ||
+text.includes("planet") ||
+text.includes("gravity") ||
+text.includes("atom") ||
+text.includes("biology") ||
+text.includes("physics") ||
+text.includes("chemistry")
+
+);
+
+}
+
+if(subject === "Math"){
+
+return (
+
+text.includes("equation") ||
+text.includes("number") ||
+text.includes("solve") ||
+text.includes("algebra") ||
+text.includes("triangle")
+
+);
+
+}
+
+return true;
+
+}
+
+/* RESET TOKEN */
+
+async function resetToken(){
+
+try{
+
+await fetch(
+
+`https://opentdb.com/api_token.php?
+command=reset
+&token=${triviaToken}`
+
+.replace(/\s/g,'')
+
+);
+
+}
+
+catch(err){
+
+console.error(
+"Reset Error:",
+err
+);
 
 }
 
@@ -894,19 +1029,13 @@ currentQuiz[currentIndex];
 
 if(!q) return;
 
-const question =
-
-decodeHTML(
-q.question
-);
-
 document
 .getElementById("question")
 .innerHTML =
 
-question;
-
-/* OPTIONS */
+decodeHTML(
+q.question
+);
 
 const optionsDiv =
 
@@ -915,8 +1044,6 @@ document.getElementById(
 );
 
 optionsDiv.innerHTML = "";
-
-/* ANSWERS */
 
 const answers = [
 
@@ -957,7 +1084,7 @@ optionsDiv.appendChild(btn);
 
 document
 .getElementById("score")
-.innerText =
+.innerHTML =
 
 `Question ${
 currentIndex + 1
@@ -968,7 +1095,7 @@ currentQuiz.length
 
 }
 
-/* CHECK ANSWER */
+/* CHECK */
 
 function checkAnswer(answer){
 
@@ -989,7 +1116,7 @@ document
 .getElementById("question")
 .innerHTML =
 
-`🎉 Quiz Complete!`;
+"🎉 Quiz Complete!";
 
 document
 .getElementById("options")
@@ -1010,7 +1137,7 @@ showQuestion();
 
 }
 
-/* HTML DECODE */
+/* HTML FIX */
 
 function decodeHTML(html){
 
@@ -1098,8 +1225,6 @@ matchedPairs = 0;
 moveCount = 0;
 
 updateMemoryStats();
-
-/* RANDOMIZE */
 
 const shuffled =
 
@@ -1222,7 +1347,6 @@ second.classList.remove(
 );
 
 first.innerHTML = "?";
-
 second.innerHTML = "?";
 
 flippedCards = [];
@@ -1235,7 +1359,7 @@ flippedCards = [];
 
 }
 
-/* STATS */
+/* UPDATE */
 
 function updateMemoryStats(){
 
@@ -1254,6 +1378,10 @@ document
 ${matchedPairs}/8`;
 
 }
+
+/* INIT */
+
+initializeToken();
 
 </script>
 
