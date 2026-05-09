@@ -634,7 +634,8 @@ import {
 getFirestore,
 doc,
 getDoc,
-setDoc
+setDoc,
+increment
 
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
@@ -686,58 +687,137 @@ const missions = [
 {
 id:"quiz1",
 title:"Complete 1 Quiz",
-description:"Finish any quiz in Games.",
-reward:50
+reward:50,
+check:data=>
+(data.quizzesCompleted || 0) >= 1
 },
 
 {
 id:"memory",
 title:"Play Memory Match",
-description:"Complete one memory game.",
-reward:40
+reward:40,
+check:data=>
+(data.memoryGames || 0) >= 1
 },
 
 {
 id:"ai",
 title:"Use AI Doubt Solver",
-description:"Ask one educational question.",
-reward:60
+reward:60,
+check:data=>
+(data.aiQuestions || 0) >= 1
 },
 
 {
-id:"streak",
-title:"Maintain Your Streak",
-description:"Log in daily to continue your streak.",
-reward:75
+id:"battle",
+title:"Play Battle Race",
+reward:70,
+check:data=>
+(data.battleRaces || 0) >= 1
+},
+
+{
+id:"win",
+title:"Win One Battle",
+reward:120,
+check:data=>
+(data.battleWins || 0) >= 1
 },
 
 {
 id:"friend",
 title:"Add a Friend",
-description:"Add one friend to your network.",
-reward:45
+reward:45,
+check:data=>
+(data.friendsAdded || 0) >= 1
+},
+
+{
+id:"streak",
+title:"Daily Login",
+reward:75,
+check:data=>
+(data.dailyLogin || 0) >= 1
 }
 
 ];
 
 let currentPublicId = null;
+
 let completedToday = [];
+
 let totalPoints = 0;
+
+let activityData = {};
 
 /* AUTH */
 
 onAuthStateChanged(
+
 auth,
+
 async(user)=>{
 
 if(!user) return;
 
 currentPublicId =
+
 localStorage.getItem(
 "mentorloop_public_id"
 );
 
 if(!currentPublicId) return;
+
+await initializePoints();
+
+}
+
+);
+
+/* INIT */
+
+async function initializePoints(){
+
+await loadActivity();
+
+await loadLeaderboard();
+
+await autoCompleteMissions();
+
+renderMissions();
+
+updatePointsUI();
+
+updateProgress();
+
+}
+
+/* LOAD ACTIVITY */
+
+async function loadActivity(){
+
+const activityRef =
+
+doc(
+db,
+"activity",
+currentPublicId
+);
+
+const snap =
+await getDoc(activityRef);
+
+activityData =
+
+snap.exists()
+? snap.data()
+: {};
+
+}
+
+/* LOAD LEADERBOARD */
+
+async function loadLeaderboard(){
 
 const leaderboardRef =
 
@@ -763,18 +843,87 @@ data.completedMissions || [];
 
 }
 
-updatePointsUI();
-renderMissions();
-updateProgress();
+}
+
+/* COMPLETE */
+
+async function autoCompleteMissions(){
+
+let changed = false;
+
+for(const mission of missions){
+
+const eligible =
+
+mission.check(activityData);
+
+const alreadyDone =
+
+completedToday.includes(
+mission.id
+);
+
+if(
+eligible &&
+!alreadyDone
+){
+
+completedToday.push(
+mission.id
+);
+
+totalPoints +=
+mission.reward;
+
+changed = true;
 
 }
+
+}
+
+if(changed){
+
+await saveProgress();
+
+}
+
+}
+
+/* SAVE */
+
+async function saveProgress(){
+
+await setDoc(
+
+doc(
+db,
+"leaderboard",
+currentPublicId
+),
+
+{
+
+points:totalPoints,
+
+completedMissions:
+completedToday,
+
+updatedAt:Date.now()
+
+},
+
+{ merge:true }
+
 );
+
+}
 
 /* RENDER */
 
 function renderMissions(){
 
 const container =
+
 document.getElementById(
 "missionsContainer"
 );
@@ -784,6 +933,7 @@ container.innerHTML = "";
 missions.forEach(mission=>{
 
 const done =
+
 completedToday.includes(
 mission.id
 );
@@ -809,15 +959,30 @@ ${mission.title}
 </div>
 
 <p>
-${mission.description}
+
+${done
+
+? 'Mission completed automatically.'
+
+: 'Complete this task in MentorLoop.'
+
+}
+
 </p>
 
 <button
 class="complete-btn ${done ? 'completed' : ''}"
-${done ? 'disabled' : ''}
-onclick="completeMission('${mission.id}')"
+disabled
 >
-${done ? 'Completed ✅' : 'Complete Mission'}
+
+${done
+
+? 'Completed ✅'
+
+: 'Not Completed'
+
+}
+
 </button>
 
 `;
@@ -828,72 +993,16 @@ container.appendChild(div);
 
 }
 
-/* COMPLETE */
-
-window.completeMission =
-async function(missionId){
-
-if(
-completedToday.includes(
-missionId
-)
-)return;
-
-const mission =
-missions.find(m=>
-m.id === missionId
-);
-
-if(!mission) return;
-
-completedToday.push(missionId);
-
-totalPoints +=
-mission.reward;
-
-/* SAVE */
-
-await setDoc(
-
-doc(
-db,
-"leaderboard",
-currentPublicId
-),
-
-{
-points:totalPoints,
-completedMissions:completedToday
-
-},
-
-{ merge:true }
-
-);
-
-updatePointsUI();
-renderMissions();
-updateProgress();
-
-/* BONUS */
-
-if(completedToday.length === missions.length){
-
-alert(
-"🔥 Daily missions completed! Bonus learner status achieved!"
-);
-
-}
-
-}
-
-/* POINTS UI */
+/* UI */
 
 function updatePointsUI(){
 
 document
-.getElementById("pointsDisplay")
+.getElementById(
+"pointsDisplay"
+)
 .innerText =
+
 totalPoints;
 
 }
@@ -902,24 +1011,35 @@ totalPoints;
 
 function updateProgress(){
 
+const completed =
+completedToday.length;
+
+const total =
+missions.length;
+
 const percent =
-(completedToday.length / missions.length) * 100;
+
+(completed / total) * 100;
 
 document
-.getElementById("progressFill")
+.getElementById(
+"progressFill"
+)
 .style.width =
+
 percent + "%";
 
 document
-.getElementById("progressText")
+.getElementById(
+"progressText"
+)
 .innerText =
 
-`${completedToday.length} / ${missions.length} missions completed`;
+`${completed} / ${total} missions completed`;
 
 }
 
 </script>
-
 </body>
 </html>
 ```
