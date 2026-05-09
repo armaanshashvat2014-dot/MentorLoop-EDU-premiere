@@ -1424,6 +1424,138 @@ addFriend();
 }
 
 </script>
+<script type="module">
 
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+import {
+
+getFirestore,
+doc,
+setDoc,
+getDoc,
+increment
+
+}
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+import {
+
+getAuth,
+onAuthStateChanged
+
+}
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyAltyInwHSCxX3Mi9LjjPUs1767uo70gDQ",
+
+authDomain:
+"mentorloop-premiere.firebaseapp.com",
+
+projectId:
+"mentorloop-premiere",
+
+storageBucket:
+"mentorloop-premiere.firebasestorage.app",
+
+messagingSenderId:
+"55345483492",
+
+appId:
+"1:55345483492:web:47407fdbd92a2278aea6f1",
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+const auth =
+getAuth(app);
+
+/* TRACK */
+
+async function trackActivity(type,value=1){
+
+const userId =
+localStorage.getItem(
+"mentorloop_public_id"
+);
+
+if(!userId) return;
+
+await setDoc(
+
+doc(db,"activity",userId),
+
+{
+
+[type]: increment(value),
+
+lastUpdated: Date.now()
+
+},
+
+{ merge:true }
+
+);
+
+}
+
+/* AUTH */
+
+onAuthStateChanged(
+auth,
+async(user)=>{
+
+if(!user) return;
+
+const publicId =
+
+localStorage.getItem(
+"mentorloop_public_id"
+);
+
+const leaderboardRef =
+
+doc(
+db,
+"leaderboard",
+publicId
+);
+
+const snap =
+await getDoc(leaderboardRef);
+
+let points = 0;
+
+if(snap.exists()){
+
+points =
+snap.data().points || 0;
+
+}
+
+document
+.getElementById("xpDisplay")
+.innerText =
+points;
+
+/* DAILY LOGIN */
+
+trackActivity(
+"dailyLogin"
+);
+
+});
+
+</script>
 </body>
 </html>
