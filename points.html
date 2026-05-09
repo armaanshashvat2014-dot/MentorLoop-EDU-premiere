@@ -1,0 +1,926 @@
+# points.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+/>
+
+<title>MentorLoop Points</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+rel="stylesheet"
+/>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:'Inter',sans-serif;
+
+background:
+radial-gradient(circle at top left,#0891b2 0%,transparent 30%),
+radial-gradient(circle at bottom right,#8b5cf6 0%,transparent 30%),
+#020617;
+
+color:white;
+
+min-height:100vh;
+
+overflow-x:hidden;
+
+}
+
+body::before{
+
+content:'';
+
+position:fixed;
+
+inset:0;
+
+background-image:
+linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
+background-size:40px 40px;
+
+z-index:-2;
+
+}
+
+.orb{
+
+position:fixed;
+
+border-radius:50%;
+
+filter:blur(100px);
+
+opacity:0.22;
+
+z-index:-1;
+
+animation:float 10s ease-in-out infinite;
+
+}
+
+.orb1{
+
+width:320px;
+height:320px;
+
+background:#22d3ee;
+
+top:-120px;
+left:-120px;
+
+}
+
+.orb2{
+
+width:320px;
+height:320px;
+
+background:#8b5cf6;
+
+bottom:-120px;
+right:-120px;
+
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(30px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+.navbar{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:20px 40px;
+
+background:
+rgba(15,23,42,0.72);
+
+backdrop-filter:blur(20px);
+
+border-bottom:
+1px solid rgba(255,255,255,0.06);
+
+z-index:999;
+
+}
+
+.logo{
+
+font-size:28px;
+
+font-weight:900;
+
+}
+
+.logo span{
+
+background:
+linear-gradient(
+90deg,
+#22d3ee,
+#8b5cf6
+);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+}
+
+.nav-links{
+
+display:flex;
+
+gap:30px;
+
+}
+
+.nav-links a{
+
+text-decoration:none;
+
+color:#cbd5e1;
+
+font-weight:700;
+
+transition:0.3s;
+
+}
+
+.nav-links a:hover{
+color:white;
+}
+
+.main{
+
+padding:
+130px 30px 40px;
+
+max-width:1500px;
+
+margin:auto;
+
+}
+
+.hero{
+
+background:
+rgba(15,23,42,0.72);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+backdrop-filter:blur(20px);
+
+border-radius:36px;
+
+padding:40px;
+
+}
+
+.hero h1{
+
+font-size:64px;
+
+font-weight:900;
+
+}
+
+.hero h1 span{
+
+background:
+linear-gradient(
+90deg,
+#22d3ee,
+#8b5cf6
+);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+}
+
+.hero p{
+
+margin-top:18px;
+
+color:#94a3b8;
+
+line-height:1.8;
+
+font-size:18px;
+
+}
+
+.points-box{
+
+margin-top:28px;
+
+display:inline-flex;
+
+align-items:center;
+
+gap:12px;
+
+padding:18px 24px;
+
+border-radius:24px;
+
+background:
+rgba(34,211,238,0.08);
+
+border:
+1px solid rgba(34,211,238,0.16);
+
+font-size:28px;
+
+font-weight:900;
+
+color:#7dd3fc;
+
+}
+
+.grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(340px,1fr));
+
+gap:24px;
+
+margin-top:30px;
+
+}
+
+.card{
+
+background:
+rgba(15,23,42,0.72);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+backdrop-filter:blur(20px);
+
+border-radius:32px;
+
+padding:30px;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.card::before{
+
+content:'';
+
+position:absolute;
+
+inset:0;
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,0.05),
+transparent
+);
+
+}
+
+.card h2{
+
+font-size:32px;
+
+margin-bottom:22px;
+
+position:relative;
+
+z-index:1;
+
+}
+
+.mission{
+
+position:relative;
+
+z-index:1;
+
+background:
+rgba(255,255,255,0.05);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+border-radius:24px;
+
+padding:22px;
+
+margin-top:18px;
+
+}
+
+.mission-top{
+
+display:flex;
+
+justify-content:space-between;
+
+gap:16px;
+
+align-items:center;
+
+}
+
+.mission-title{
+
+font-size:20px;
+
+font-weight:800;
+
+}
+
+.reward{
+
+color:#facc15;
+
+font-weight:900;
+
+}
+
+.mission p{
+
+margin-top:12px;
+
+color:#94a3b8;
+
+line-height:1.7;
+
+}
+
+.complete-btn{
+
+margin-top:18px;
+
+padding:14px 18px;
+
+border:none;
+
+border-radius:18px;
+
+background:
+linear-gradient(
+90deg,
+#22d3ee,
+#8b5cf6
+);
+
+color:white;
+
+font-weight:800;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+.complete-btn:hover{
+
+transform:translateY(-4px);
+
+}
+
+.complete-btn.completed{
+
+background:#10b981;
+
+cursor:not-allowed;
+
+}
+
+.progress-bar{
+
+margin-top:18px;
+
+height:18px;
+
+background:
+rgba(255,255,255,0.06);
+
+border-radius:999px;
+
+overflow:hidden;
+
+}
+
+.progress-fill{
+
+height:100%;
+
+width:0%;
+
+background:
+linear-gradient(
+90deg,
+#22d3ee,
+#8b5cf6
+);
+
+transition:0.4s;
+
+}
+
+.progress-text{
+
+margin-top:12px;
+
+color:#cbd5e1;
+
+font-weight:700;
+
+}
+
+@media(max-width:768px){
+
+.navbar{
+padding:18px 20px;
+}
+
+.nav-links{
+gap:16px;
+font-size:14px;
+}
+
+.main{
+padding:
+120px 18px 18px;
+}
+
+.hero h1{
+font-size:44px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<nav class="navbar">
+
+<div class="logo">
+MentorLoop <span>EDU</span>
+</div>
+
+<div class="nav-links">
+
+<a href="dashboard.html">
+Dashboard
+</a>
+
+<a href="games.html">
+Games
+</a>
+
+<a href="leaderboard.html">
+Leaderboard
+</a>
+
+<a href="chat.html">
+Community
+</a>
+
+</div>
+
+</nav>
+
+<div class="main">
+
+<div class="hero">
+
+<h1>
+Earn <span>Points</span>
+</h1>
+
+<p>
+Complete daily learning missions, maintain streaks,
+and climb the MentorLoop leaderboard.
+</p>
+
+<div class="points-box">
+🏆
+<span id="pointsDisplay">
+0
+</span>
+Points
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<h2>
+🔥 Daily Missions
+</h2>
+
+<div id="missionsContainer"></div>
+
+</div>
+
+<div class="card">
+
+<h2>
+📈 Daily Progress
+</h2>
+
+<div class="progress-bar">
+<div
+id="progressFill"
+class="progress-fill"
+></div>
+</div>
+
+<div
+id="progressText"
+class="progress-text"
+>
+0 / 5 missions completed
+</div>
+
+<div
+style="
+margin-top:28px;
+line-height:1.9;
+color:#94a3b8;
+"
+>
+
+✅ Complete quizzes<br>
+✅ Use the AI doubt solver<br>
+✅ Practice consistently<br>
+✅ Earn streak bonuses<br>
+✅ Unlock leaderboard rewards
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+import {
+
+getFirestore,
+doc,
+getDoc,
+setDoc
+
+}
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+import {
+
+getAuth,
+onAuthStateChanged
+
+}
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyAltyInwHSCxX3Mi9LjjPUs1767uo70gDQ",
+
+authDomain:
+"mentorloop-premiere.firebaseapp.com",
+
+projectId:
+"mentorloop-premiere",
+
+storageBucket:
+"mentorloop-premiere.firebasestorage.app",
+
+messagingSenderId:
+"55345483492",
+
+appId:
+"1:55345483492:web:47407fdbd92a2278aea6f1",
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+const auth =
+getAuth(app);
+
+/* MISSIONS */
+
+const missions = [
+
+{
+id:"quiz1",
+title:"Complete 1 Quiz",
+description:"Finish any quiz in Games.",
+reward:50
+},
+
+{
+id:"memory",
+title:"Play Memory Match",
+description:"Complete one memory game.",
+reward:40
+},
+
+{
+id:"ai",
+title:"Use AI Doubt Solver",
+description:"Ask one educational question.",
+reward:60
+},
+
+{
+id:"streak",
+title:"Maintain Your Streak",
+description:"Log in daily to continue your streak.",
+reward:75
+},
+
+{
+id:"friend",
+title:"Add a Friend",
+description:"Add one friend to your network.",
+reward:45
+}
+
+];
+
+let currentPublicId = null;
+let completedToday = [];
+let totalPoints = 0;
+
+/* AUTH */
+
+onAuthStateChanged(
+auth,
+async(user)=>{
+
+if(!user) return;
+
+currentPublicId =
+localStorage.getItem(
+"mentorloop_public_id"
+);
+
+if(!currentPublicId) return;
+
+const leaderboardRef =
+
+doc(
+db,
+"leaderboard",
+currentPublicId
+);
+
+const snap =
+await getDoc(leaderboardRef);
+
+if(snap.exists()){
+
+const data =
+snap.data();
+
+totalPoints =
+data.points || 0;
+
+completedToday =
+data.completedMissions || [];
+
+}
+
+updatePointsUI();
+renderMissions();
+updateProgress();
+
+}
+);
+
+/* RENDER */
+
+function renderMissions(){
+
+const container =
+document.getElementById(
+"missionsContainer"
+);
+
+container.innerHTML = "";
+
+missions.forEach(mission=>{
+
+const done =
+completedToday.includes(
+mission.id
+);
+
+const div =
+document.createElement("div");
+
+div.className =
+"mission";
+
+div.innerHTML = `
+
+<div class="mission-top">
+
+<div class="mission-title">
+${mission.title}
+</div>
+
+<div class="reward">
++${mission.reward} XP
+</div>
+
+</div>
+
+<p>
+${mission.description}
+</p>
+
+<button
+class="complete-btn ${done ? 'completed' : ''}"
+${done ? 'disabled' : ''}
+onclick="completeMission('${mission.id}')"
+>
+${done ? 'Completed ✅' : 'Complete Mission'}
+</button>
+
+`;
+
+container.appendChild(div);
+
+});
+
+}
+
+/* COMPLETE */
+
+window.completeMission =
+async function(missionId){
+
+if(
+completedToday.includes(
+missionId
+)
+)return;
+
+const mission =
+missions.find(m=>
+m.id === missionId
+);
+
+if(!mission) return;
+
+completedToday.push(missionId);
+
+totalPoints +=
+mission.reward;
+
+/* SAVE */
+
+await setDoc(
+
+doc(
+db,
+"leaderboard",
+currentPublicId
+),
+
+{
+points:totalPoints,
+completedMissions:completedToday
+
+},
+
+{ merge:true }
+
+);
+
+updatePointsUI();
+renderMissions();
+updateProgress();
+
+/* BONUS */
+
+if(completedToday.length === missions.length){
+
+alert(
+"🔥 Daily missions completed! Bonus learner status achieved!"
+);
+
+}
+
+}
+
+/* POINTS UI */
+
+function updatePointsUI(){
+
+document
+.getElementById("pointsDisplay")
+.innerText =
+totalPoints;
+
+}
+
+/* PROGRESS */
+
+function updateProgress(){
+
+const percent =
+(completedToday.length / missions.length) * 100;
+
+document
+.getElementById("progressFill")
+.style.width =
+percent + "%";
+
+document
+.getElementById("progressText")
+.innerText =
+
+`${completedToday.length} / ${missions.length} missions completed`;
+
+}
+
+</script>
+
+</body>
+</html>
+```
+
