@@ -968,6 +968,8 @@ id="fact"
 
 </div>
 
+<!-- REPLACE YOUR ENTIRE onAuthStateChanged BLOCK WITH THIS -->
+
 <script type="module">
 
 import { initializeApp }
@@ -1000,11 +1002,21 @@ from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 const firebaseConfig = {
 
 apiKey: "AIzaSyAltyInwHSCxX3Mi9LjjPUs1767uo70gDQ",
-  authDomain: "mentorloop-premiere.firebaseapp.com",
-  projectId: "mentorloop-premiere",
-  storageBucket: "mentorloop-premiere.firebasestorage.app",
-  messagingSenderId: "55345483492",
-  appId: "1:55345483492:web:47407fdbd92a2278aea6f1",
+
+authDomain:
+"mentorloop-premiere.firebaseapp.com",
+
+projectId:
+"mentorloop-premiere",
+
+storageBucket:
+"mentorloop-premiere.firebasestorage.app",
+
+messagingSenderId:
+"55345483492",
+
+appId:
+"1:55345483492:web:47407fdbd92a2278aea6f1",
 
 };
 
@@ -1131,7 +1143,7 @@ localStorage.getItem(
 "mentorloop_public_id"
 );
 
-/* FALLBACK */
+/* FIRESTORE FALLBACK */
 
 if(!currentPublicId){
 
@@ -1172,34 +1184,119 @@ currentPublicId +
 
 /* LEADERBOARD */
 
-const lbSnap =
+const lbRef =
 
-await getDoc(
 doc(
 db,
 "leaderboard",
 currentPublicId
-)
 );
+
+const lbSnap =
+await getDoc(lbRef);
+
+/* DEFAULTS */
+
+let points = 0;
+let streak = 1;
+
+const today =
+new Date()
+.toDateString();
+
+/* EXISTING USER */
 
 if(lbSnap.exists()){
 
 const data =
 lbSnap.data();
 
+points =
+data.points || 0;
+
+const lastLogin =
+data.lastLogin || null;
+
+streak =
+data.streak || 1;
+
+/* CHECK LOGIN */
+
+if(lastLogin){
+
+const last =
+new Date(lastLogin);
+
+const now =
+new Date(today);
+
+const diff = Math.floor(
+
+(now - last) /
+
+(1000*60*60*24)
+
+);
+
+/* NEXT DAY */
+
+if(diff === 1){
+
+streak++;
+
+}
+
+/* MISSED */
+
+else if(diff > 1){
+
+streak = 1;
+
+}
+
+}
+
+/* FIRST LOGIN */
+
+else{
+
+streak = 1;
+
+}
+
+}
+
+/* SAVE UPDATED DATA */
+
+await setDoc(
+
+lbRef,
+
+{
+
+points:points,
+
+streak:streak,
+
+lastLogin:today
+
+},
+
+{ merge:true }
+
+);
+
+/* SHOW UI */
+
 document
 .getElementById("points")
 .innerText =
-
-data.points || 0;
+points;
 
 document
 .getElementById("streak")
 .innerText =
-
-data.streak || 0;
-
-}
+streak;
 
 /* LOAD FRIENDS */
 
@@ -1460,6 +1557,5 @@ addFriend();
 }
 
 </script>
-
 </body>
 </html>
