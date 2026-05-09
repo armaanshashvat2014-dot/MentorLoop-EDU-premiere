@@ -8,14 +8,14 @@
 <meta
 name="viewport"
 content="width=device-width, initial-scale=1.0"
->
+/>
 
 <title>MentorLoop Dashboard</title>
 
 <link
 href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
 rel="stylesheet"
->
+/>
 
 <style>
 
@@ -192,40 +192,10 @@ font-weight:600;
 
 transition:0.3s;
 
-position:relative;
-
 }
 
 .nav-links a:hover{
 color:white;
-}
-
-.nav-links a::after{
-
-content:'';
-
-position:absolute;
-
-left:0;
-bottom:-8px;
-
-width:0%;
-
-height:2px;
-
-background:
-linear-gradient(
-90deg,
-#22d3ee,
-#8b5cf6
-);
-
-transition:0.3s;
-
-}
-
-.nav-links a:hover::after{
-width:100%;
 }
 
 /* PROFILE */
@@ -283,29 +253,6 @@ border-radius:36px;
 
 padding:42px;
 
-position:relative;
-
-overflow:hidden;
-
-}
-
-.hero::before{
-
-content:'';
-
-position:absolute;
-
-width:260px;
-height:260px;
-
-border-radius:50%;
-
-background:
-rgba(255,255,255,0.03);
-
-top:-120px;
-right:-120px;
-
 }
 
 .hero-badge{
@@ -355,8 +302,6 @@ line-height:1.8;
 color:#94a3b8;
 
 }
-
-/* USER ID */
 
 #myPublicId{
 
@@ -475,31 +420,6 @@ border-radius:32px;
 
 padding:30px;
 
-position:relative;
-
-overflow:hidden;
-
-isolation:isolate;
-
-}
-
-.card::before{
-
-content:'';
-
-position:absolute;
-
-inset:0;
-
-background:
-linear-gradient(
-180deg,
-rgba(255,255,255,0.05),
-transparent
-);
-
-z-index:-1;
-
 }
 
 /* NAVIGATION */
@@ -611,13 +531,6 @@ transition:0.3s;
 
 }
 
-.add-friend-box button:hover{
-
-transform:
-translateY(-4px);
-
-}
-
 .friend{
 
 display:flex;
@@ -640,21 +553,9 @@ border:
 
 }
 
-.friend-left{
-
-display:flex;
-
-flex-direction:column;
-
-gap:4px;
-
-}
-
 .friend-name{
 
 font-weight:700;
-
-font-size:16px;
 
 }
 
@@ -664,15 +565,7 @@ font-size:13px;
 
 color:#94a3b8;
 
-}
-
-.online{
-
-color:#10b981;
-
-font-size:14px;
-
-font-weight:700;
+margin-top:4px;
 
 }
 
@@ -737,6 +630,7 @@ grid-template-columns:1fr;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -775,7 +669,7 @@ Community
 <img
 id="userPhoto"
 class="user-photo"
-src="https://ui-avatars.com/api/?name=MentorLoop"
+src=""
 >
 
 </div>
@@ -855,6 +749,8 @@ class="stat"
 ⚡ Navigation
 </h2>
 
+<br>
+
 <div class="nav-grid">
 
 <a
@@ -919,17 +815,19 @@ AI Doubt Solver
 👥 Friends
 </h2>
 
+<br>
+
 <div class="add-friend-box">
 
 <input
 id="friendInput"
 type="text"
-placeholder="Enter friend's ID"
+placeholder="Enter Friend ID"
 onkeydown="handleFriendEnter(event)"
 >
 
 <button onclick="addFriend()">
-+ Add Friend
++ Add
 </button>
 
 </div>
@@ -943,6 +841,8 @@ onkeydown="handleFriendEnter(event)"
 <h2>
 🚀 Motivation
 </h2>
+
+<br>
 
 <div
 class="quote"
@@ -961,6 +861,559 @@ id="fact"
 </div>
 
 </div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+import {
+
+getFirestore,
+doc,
+getDoc,
+setDoc,
+collection,
+getDocs
+
+}
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+import {
+
+getAuth,
+onAuthStateChanged,
+browserLocalPersistence,
+setPersistence
+
+}
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyAltyInwHSCxX3Mi9LjjPUs1767uo70gDQ",
+
+authDomain:
+"mentorloop-premiere.firebaseapp.com",
+
+projectId:
+"mentorloop-premiere",
+
+storageBucket:
+"mentorloop-premiere.firebasestorage.app",
+
+messagingSenderId:
+"55345483492",
+
+appId:
+"1:55345483492:web:47407fdbd92a2278aea6f1",
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+const auth =
+getAuth(app);
+
+await setPersistence(
+auth,
+browserLocalPersistence
+);
+
+/* QUOTES */
+
+const quotes = [
+
+"Consistency beats intensity.",
+
+"Every expert started as a beginner.",
+
+"Learning compounds daily.",
+
+"Small progress still matters."
+
+];
+
+const facts = [
+
+"Sleep improves memory retention.",
+
+"Teaching others improves learning.",
+
+"Short study sessions improve focus.",
+
+"Practice strengthens neural pathways."
+
+];
+
+document
+.getElementById("quote")
+.innerText =
+
+quotes[
+Math.floor(
+Math.random()*quotes.length
+)
+];
+
+document
+.getElementById("fact")
+.innerText =
+
+facts[
+Math.floor(
+Math.random()*facts.length
+)
+];
+
+let currentPublicId = null;
+
+/* AUTH */
+
+onAuthStateChanged(
+auth,
+async(user)=>{
+
+if(!user) return;
+
+/* USER */
+
+const localPhoto =
+
+localStorage.getItem(
+"mentorloop_photo"
+);
+
+const localName =
+
+localStorage.getItem(
+"mentorloop_name"
+);
+
+document
+.getElementById("userPhoto")
+.src =
+
+localPhoto ||
+user.photoURL ||
+"https://ui-avatars.com/api/?name=MentorLoop";
+
+document
+.getElementById("welcomeName")
+.innerHTML =
+
+`Welcome back,
+${localName ||
+user.displayName ||
+"User"} 👋`;
+
+/* PUBLIC ID */
+
+currentPublicId =
+
+localStorage.getItem(
+"mentorloop_public_id"
+);
+
+if(!currentPublicId){
+
+const mapSnap =
+
+await getDoc(
+doc(
+db,
+"user_map",
+user.uid
+)
+);
+
+if(!mapSnap.exists()) return;
+
+currentPublicId =
+mapSnap.data().publicId;
+
+localStorage.setItem(
+"mentorloop_public_id",
+currentPublicId
+);
+
+}
+
+document
+.getElementById("myPublicId")
+.innerHTML =
+
+"🆔 Your Friend ID: <b>" +
+currentPublicId +
+"</b>";
+
+/* LEADERBOARD */
+
+const lbRef =
+
+doc(
+db,
+"leaderboard",
+currentPublicId
+);
+
+const lbSnap =
+await getDoc(lbRef);
+
+let points = 0;
+let streak = 1;
+
+const today =
+new Date().toDateString();
+
+if(lbSnap.exists()){
+
+const data =
+lbSnap.data();
+
+points =
+data.points || 0;
+
+streak =
+data.streak || 1;
+
+const lastLogin =
+data.lastLogin || null;
+
+if(lastLogin){
+
+const last =
+new Date(lastLogin);
+
+const now =
+new Date(today);
+
+const diff = Math.floor(
+
+(now - last) /
+
+(1000*60*60*24)
+
+);
+
+if(diff === 1){
+
+streak++;
+
+}
+
+else if(diff > 1){
+
+streak = 1;
+
+}
+
+}
+
+}
+
+/* SAVE */
+
+await setDoc(
+
+lbRef,
+
+{
+
+points:points,
+
+streak:streak,
+
+lastLogin:today
+
+},
+
+{ merge:true }
+
+);
+
+/* UI */
+
+document
+.getElementById("points")
+.innerText =
+points;
+
+document
+.getElementById("streak")
+.innerText =
+streak;
+
+/* FRIENDS */
+
+loadFriends();
+
+}
+);
+
+/* LOAD FRIENDS */
+
+async function loadFriends(){
+
+const friendsList =
+
+document.getElementById(
+"friendsList"
+);
+
+friendsList.innerHTML = "";
+
+const friendsSnap =
+
+await getDocs(
+
+collection(
+db,
+"users",
+currentPublicId,
+"friends"
+)
+
+);
+
+document
+.getElementById("friendCount")
+.innerText =
+
+friendsSnap.size;
+
+if(friendsSnap.empty){
+
+friendsList.innerHTML =
+
+`
+<p style="
+color:#94a3b8;
+">
+No friends yet.
+</p>
+`;
+
+return;
+
+}
+
+friendsSnap.forEach(docu=>{
+
+const data =
+docu.data();
+
+const div =
+document.createElement("div");
+
+div.className =
+"friend";
+
+div.innerHTML =
+
+`
+
+<div>
+
+<div class="friend-name">
+${data.name}
+</div>
+
+<div class="friend-id">
+ID: ${data.publicId}
+</div>
+
+</div>
+
+<div style="
+color:#10b981;
+font-weight:700;
+">
+● Friend
+</div>
+
+`;
+
+friendsList.appendChild(div);
+
+});
+
+}
+
+/* ADD FRIEND */
+
+window.addFriend =
+async function(){
+
+const friendId =
+
+document
+.getElementById("friendInput")
+.value
+.trim();
+
+if(!friendId){
+
+alert(
+"Enter a Friend ID"
+);
+
+return;
+
+}
+
+if(friendId === currentPublicId){
+
+alert(
+"You cannot add yourself"
+);
+
+return;
+
+}
+
+try{
+
+const friendSnap =
+
+await getDoc(
+
+doc(
+db,
+"users",
+friendId
+)
+
+);
+
+if(!friendSnap.exists()){
+
+alert(
+"User not found"
+);
+
+return;
+
+}
+
+const friendData =
+friendSnap.data();
+
+const mySnap =
+
+await getDoc(
+
+doc(
+db,
+"users",
+currentPublicId
+)
+
+);
+
+const myData =
+mySnap.data();
+
+/* SAVE FOR ME */
+
+await setDoc(
+
+doc(
+db,
+"users",
+currentPublicId,
+"friends",
+friendId
+),
+
+{
+
+name:
+friendData.name,
+
+publicId:
+friendId,
+
+photo:
+friendData.photo || ""
+
+}
+
+);
+
+/* SAVE FOR FRIEND */
+
+await setDoc(
+
+doc(
+db,
+"users",
+friendId,
+"friends",
+currentPublicId
+),
+
+{
+
+name:
+myData.name,
+
+publicId:
+currentPublicId,
+
+photo:
+myData.photo || ""
+
+}
+
+);
+
+document
+.getElementById("friendInput")
+.value = "";
+
+loadFriends();
+
+alert(
+"Friend added successfully!"
+);
+
+}
+
+catch(err){
+
+console.error(err);
+
+alert(
+"Failed to add friend"
+);
+
+}
+
+}
+
+/* ENTER */
+
+window.handleFriendEnter =
+function(event){
+
+if(event.key === "Enter"){
+
+event.preventDefault();
+
+addFriend();
+
+}
+
+}
+
+</script>
 
 </body>
 </html>
